@@ -1,8 +1,9 @@
 import React from 'react';
+import { TextField } from '@mui/material';
 
 const Register = () => {
     return (
-        <h2>hahahaha MAI hahahahahha</h2>
+        <TextField>AMITOFO</TextField>
     )
 };
 
