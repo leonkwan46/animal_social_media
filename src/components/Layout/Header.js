@@ -1,11 +1,13 @@
 import React from 'react'
-import "./Footer.css";
+import "./Header.css";
+
+// Logo, Home Button, Profile, Notifications, Chat.
 
 const Header = () => {
   return (
-    <footer className = "">
+    <header className = "">
       
-    </footer>
+    </header>
   )
 }
 
