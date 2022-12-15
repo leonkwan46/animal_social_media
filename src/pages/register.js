@@ -1,9 +1,40 @@
 import React from 'react';
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import { Form, Formik, Field } from 'formik';
+import { Box } from '@mui/system';
 
 const Register = () => {
+
     return (
-        <TextField>AMITOFO</TextField>
+        <Formik
+            initialValues={{username: "", password: "", confirm_password: ""}}
+            onSubmit = { async (values) => {
+                alert(JSON.stringify(values))
+            }}
+        >
+            {({values, handleChange}) => (
+            <Form>
+                <Box>
+                    <Field 
+                    onChange={handleChange} 
+                    value={values.username}
+                    id = 'username'
+                    label = 'Username'
+                    />
+                </Box>
+                <Box>
+                    <Field 
+                    onChange={handleChange} 
+                    value={values.password}
+                    id = 'password'
+                    label = 'Password'
+                    />
+                </Box>
+
+                <Button>Submit</Button>
+            </Form>
+            )}
+        </Formik>
     )
 };
 
