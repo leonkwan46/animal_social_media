@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import Header from '../components/Layout/Header';
 
-const homepage = () => {
+const Homepage = () => {
   return (
     <div className = "homepage">
         <Header/>
@@ -11,4 +11,4 @@ const homepage = () => {
   )
 }
 
-export default homepage
+export default Homepage
