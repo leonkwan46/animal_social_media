@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 const homepage = () => {
   return (
-    <div>homepage</div>
+    <div></div>
   )
 }
 
