@@ -1,3 +1,1 @@
-import React from 'react'
-
-Aloha
+<h1>hello</h1>
