@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Header.css";
+import "./header.css";
 
 // Logo, Home Button, Profile, Notifications, Chat.
 
