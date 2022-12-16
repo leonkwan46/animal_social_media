@@ -27,51 +27,51 @@ const Register = () => {
                     >
                         {({ values, handleChange, handleBlur, touched, errors, handleSubmit }) => (
                             <Form>
-                                    <Box padding={1}>
-                                        <TextField
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.username}
-                                            id='username'
-                                            label='Username' 
-                                            error={checkError(touched.username, errors.username)}
-                                            helperText={
-                                                checkError(touched.username, errors.username) ? errors.username
-                                                :""
-                                            }
-                                            />
-                                    </Box>
-                                    <Box padding={1}>
-                                        <TextField
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.password}
-                                            id='password'
-                                            label='Password'
-                                            type='password'
-                                            error={checkError(touched.password, errors.password)}
-                                            helperText={
-                                                checkError(touched.password, errors.password) ? errors.password
-                                                :""
-                                            }                                    />
-                                    </Box>
-                                    <Box padding={1}>
-                                        <TextField
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.confirm_password}
-                                            id='confirm_password'
-                                            label='Confirm Password'
-                                            type='password'
-                                            error={checkError(touched.confirm_password, errors.confirm_password)}
-                                            helperText={
-                                                checkError(touched.confirm_password, errors.confirm_password) ? errors.confirm_password
-                                                :""
-                                            }                                    />
-                                    </Box>
-                                    <Box padding={1}>
-                                        <Button variant='contained' size='large' onClick={handleSubmit} >Register</Button>
-                                    </Box>
+                                <Box padding={1}>
+                                    <TextField
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.username}
+                                        id='username'
+                                        label='Username' 
+                                        error={checkError(touched.username, errors.username)}
+                                        helperText={
+                                            checkError(touched.username, errors.username) ? errors.username
+                                            :""
+                                        }
+                                        />
+                                </Box>
+                                <Box padding={1}>
+                                    <TextField
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                        id='password'
+                                        label='Password'
+                                        type='password'
+                                        error={checkError(touched.password, errors.password)}
+                                        helperText={
+                                            checkError(touched.password, errors.password) ? errors.password
+                                            :""
+                                        }                                    />
+                                </Box>
+                                <Box padding={1}>
+                                    <TextField
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.confirm_password}
+                                        id='confirm_password'
+                                        label='Confirm Password'
+                                        type='password'
+                                        error={checkError(touched.confirm_password, errors.confirm_password)}
+                                        helperText={
+                                            checkError(touched.confirm_password, errors.confirm_password) ? errors.confirm_password
+                                            :""
+                                        }                                    />
+                                </Box>
+                                <Box padding={1}>
+                                    <Button variant='contained' size='large' onClick={handleSubmit} >Register</Button>
+                                </Box>
                             </Form>
                         )}
                     </Formik>
