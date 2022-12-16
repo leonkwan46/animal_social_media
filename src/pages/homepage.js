@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Header from '../components/Layout/header';
+import Header from '../components/layout/header';
 
 const Homepage = () => {
   return (
