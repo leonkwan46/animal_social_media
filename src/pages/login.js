@@ -31,9 +31,17 @@ return (
       alignItems: 'center',
     }}
     onSubmit={formik.handleSubmit}>
-      <TextField required id = "username" label="Username" />;
-      <TextField required id = "password" label="Password" type="password" />
-      <Button variant='contained' type='submit'> submit </Button>
+      <TextField required id = "username" 
+        label="Username" 
+        onChange={formik.handleChange} 
+        error={formik.touched.username && Boolean(formik.errors.username)}
+        helperText={formik.touched.username && formik.errors.username}/>
+      <br/>
+      <TextField required id = "password" label="Password" type="password" onChange={formik.handleChange} 
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password} />
+      <br/>
+      <Button variant='contained' type='submit'> Submit </Button>
     </Box>
 
     </Container>
