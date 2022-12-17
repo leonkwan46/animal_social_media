@@ -12,7 +12,7 @@ const Login = () =>{
     },
     validationSchema: loginValidation,
     onSubmit: values => {
-    alert(console.log);
+    alert(JSON.stringify(values));
     },
   });
 return (
@@ -27,7 +27,7 @@ return (
       <Typography component="h2" variant='h4'> Please login before using!</Typography>  
     </Box>
     <Box sx={{
-      marginTop: 4,
+      marginTop: 8,
       alignItems: 'center',
     }}
     onSubmit={formik.handleSubmit}>
