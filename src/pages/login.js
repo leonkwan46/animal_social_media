@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, TextField, Typography} from '@mui/material';
+import {Button, TextField, Typography,InputAdornment} from '@mui/material';
 import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/loginValidation'
+import { AccountCircle, Key } from '@mui/icons-material';
 
 const Login = () => (
   <Formik
@@ -34,11 +35,21 @@ const Login = () => (
     }}>
       <TextField required onChange={handleChange} onBlur={handleBlur}
         id = "username" 
-        label="Username" 
+        label="Username"
+        startAdornment={
+          <InputAdornment position="start">
+            <AccountCircle />
+          </InputAdornment>
+        } 
         error={touched.username && errors.username}
         helperText={(touched.username && errors.username) ? errors.username : ""}/>
       <br/>
-      <TextField required onChange={handleChange} onBlur={handleBlur} id = "password" label="Password" type="password" 
+      <TextField required onChange={handleChange} onBlur={handleBlur} id = "password" label="Password" type="password"
+      startAdornment={
+        <InputAdornment position="start">
+          <Key />
+        </InputAdornment>
+      } 
         error={touched.password && errors.password}
         helperText={(touched.password && errors.password) ? errors.password : ""} />
       <br/>
