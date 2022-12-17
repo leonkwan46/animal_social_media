@@ -15,7 +15,7 @@ const Login = () => (
       alert(JSON.stringify(values));
     }}
   >
-  {({errors, touched, handleSubmit}) => (
+  {({errors, touched, handleSubmit,handleChange,handleBlur}) => (
   <Container maxWidth="sm">
     <Box sx={{
             marginTop: 8,
@@ -30,12 +30,13 @@ const Login = () => (
       marginTop: 8,
       alignItems: 'center',
     }}>
-      <TextField required id = "username" 
+      <TextField required onChange={handleChange} onBlur={handleBlur}
+        id = "username" 
         label="Username" 
         error={touched.username && errors.username}
         helperText={(touched.username && errors.username) ? errors.username : ""}/>
       <br/>
-      <TextField required id = "password" label="Password" type="password" 
+      <TextField required onChange={handleChange} onBlur={handleBlur} id = "password" label="Password" type="password" 
         error={touched.password && errors.password}
         helperText={(touched.password && errors.password) ? errors.password : ""} />
       <br/>
