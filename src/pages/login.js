@@ -12,7 +12,7 @@ const Login = () => (
     }}
     validationSchema= {loginValidation}
     onSubmit= {values => {
-      console.log(values);
+      alert(JSON.stringify(values));
     }}
   >
   {({errors, touched}) => (
@@ -33,11 +33,11 @@ const Login = () => (
       <TextField required id = "username" 
         label="Username" 
         error={touched.username && errors.username}
-        helperText={touched.username && errors.username}/>
+        helperText={(touched.username && errors.username) ? errors.username : ""}/>
       <br/>
       <TextField required id = "password" label="Password" type="password" 
         error={touched.password && errors.password}
-        helperText={touched.password && errors.password} />
+        helperText={(touched.password && errors.password) ? errors.password : ""} />
       <br/>
       <Button variant='contained' type='submit'> Submit </Button>
     </Box>
