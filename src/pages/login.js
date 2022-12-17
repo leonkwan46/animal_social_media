@@ -10,9 +10,9 @@ const Login = () =>{
       username: '',
       password: '',
     },
-    validationSchema: loginValidation,
+    validationSchema: {loginValidation},
     onSubmit: values => {
-    alert(JSON.stringify(values));
+    alert(JSON.stringify(values, null, 2));
     },
   });
 return (
@@ -34,10 +34,12 @@ return (
       <TextField required id = "username" 
         label="Username" 
         onChange={formik.handleChange} 
+        value={formik.values.username}
         error={formik.touched.username && Boolean(formik.errors.username)}
         helperText={formik.touched.username && formik.errors.username}/>
       <br/>
-      <TextField required id = "password" label="Password" type="password" onChange={formik.handleChange} 
+      <TextField required id = "password" label="Password" type="password" onChange={formik.handleChange}
+      value={formik.values.password} 
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password} />
       <br/>
