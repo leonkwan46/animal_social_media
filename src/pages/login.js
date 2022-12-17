@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/loginValidation'
 
-const LoginForm = () =>{
+const Login = () =>{
   const formik = useFormik({
     initialValues:{
       username: '',
@@ -41,4 +41,4 @@ return (
 }
 
 
-export default LoginForm;
+export default Login;
