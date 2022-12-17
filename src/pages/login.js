@@ -1,21 +1,21 @@
 import React from 'react';
 import {Button, TextField, Typography} from '@mui/material';
-import { useFormik } from 'formik';
+import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/loginValidation'
 
-const Login = () =>{
-  const formik = useFormik({
-    initialValues:{
+export const Login = () => (
+  <Formik
+    initialValues={{
       username: '',
       password: '',
-    },
-    validationSchema: {loginValidation},
-    onSubmit: values => {
-    alert(JSON.stringify(values, null, 2));
-    },
-  });
-return (
+    }}
+    validationSchema= {loginValidation}
+    onSubmit= {values => {
+      console.log(values);
+    }}
+  >
+  {({errors, touched}) => (
   <Container maxWidth="sm">
     <Box sx={{
             marginTop: 8,
@@ -29,26 +29,23 @@ return (
     <Box sx={{
       marginTop: 8,
       alignItems: 'center',
-    }}
-    onSubmit={formik.handleSubmit}>
+    }}>
       <TextField required id = "username" 
         label="Username" 
-        onChange={formik.handleChange} 
-        value={formik.values.username}
-        error={formik.touched.username && Boolean(formik.errors.username)}
-        helperText={formik.touched.username && formik.errors.username}/>
+        error={touched.username && errors.username}
+        helperText={touched.username && errors.username}/>
       <br/>
-      <TextField required id = "password" label="Password" type="password" onChange={formik.handleChange}
-      value={formik.values.password} 
-        error={formik.touched.password && Boolean(formik.errors.password)}
-        helperText={formik.touched.password && formik.errors.password} />
+      <TextField required id = "password" label="Password" type="password" 
+        error={touched.password && errors.password}
+        helperText={touched.password && errors.password} />
       <br/>
       <Button variant='contained' type='submit'> Submit </Button>
     </Box>
-
+    
     </Container>
-  );
-}
+)}
+    </Formik>
+); 
 
 
-export default Login;
+
