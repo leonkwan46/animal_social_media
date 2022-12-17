@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/loginValidation'
 
-export const Login = () => (
+const Login = () => (
   <Formik
     initialValues={{
       username: '',
@@ -47,5 +47,5 @@ export const Login = () => (
     </Formik>
 ); 
 
-
+export default Login
 
