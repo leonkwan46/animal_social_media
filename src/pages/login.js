@@ -15,7 +15,7 @@ const Login = () => (
       alert(JSON.stringify(values));
     }}
   >
-  {({errors, touched}) => (
+  {({errors, touched, handleSubmit}) => (
   <Container maxWidth="sm">
     <Box sx={{
             marginTop: 8,
@@ -39,7 +39,7 @@ const Login = () => (
         error={touched.password && errors.password}
         helperText={(touched.password && errors.password) ? errors.password : ""} />
       <br/>
-      <Button variant='contained' type='submit'> Submit </Button>
+      <Button variant='contained' type='submit' onClick={handleSubmit}> Submit </Button>
     </Box>
     
     </Container>
