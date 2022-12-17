@@ -41,4 +41,4 @@ return (
 }
 
 
-export {LoginForm};
+export default LoginForm;
