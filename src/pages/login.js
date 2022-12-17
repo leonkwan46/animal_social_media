@@ -33,16 +33,17 @@ const Login = () => (
       flexDirection: 'column',
       alignItems: 'center',
     }}>
-      <InputAdornment position="start"><AccountCircle /></InputAdornment>
+      
       <TextField required fullWidth onChange={handleChange} onBlur={handleBlur}
         id = "username" 
         label="Username"
+        InputProps={{startAdornment:<InputAdornment position="start"><AccountCircle /></InputAdornment>,}} 
         error={touched.username && errors.username}
         helperText={(touched.username && errors.username) ? errors.username : ""}/>
       <br/>
-      <InputAdornment position="start"><Key /></InputAdornment>
+      
       <TextField required fullWidth onChange={handleChange} onBlur={handleBlur} id = "password" label="Password" type="password"
- //       InputProps={{startAdornment:,}} 
+        InputProps={{startAdornment:<InputAdornment position="start"><Key /></InputAdornment>,}} 
         error={touched.password && errors.password}
         helperText={(touched.password && errors.password) ? errors.password : ""} />
       <br/>
