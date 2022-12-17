@@ -28,6 +28,8 @@ const Login = () => (
     </Box>
     <Box sx={{
       marginTop: 8,
+      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
     }}>
       <TextField required onChange={handleChange} onBlur={handleBlur}
