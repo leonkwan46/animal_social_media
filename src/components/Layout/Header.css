@@ -1,15 +1,12 @@
-/* hex number
-    #628912
-    #7f601f
-    #fcc085
-    #e86c38
-    #6c7c7c
-*/
+
 
 .header {
     height: 80px;
     background-color: #fcc085;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo-container{
@@ -18,4 +15,12 @@
 
 .logo {
     height: 100%;
+}
+
+.button-group{
+    margin: 0 20px;
+    width: 20%;
+    max-width: 200px;
+    display: flex;
+    justify-content: space-between;
 }
