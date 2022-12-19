@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, TextField, Typography,InputAdornment} from '@mui/material';
 import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
-import { loginValidation } from '../../src/validations/loginValidation'
+import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 
 const Login = () => (

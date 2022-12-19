@@ -12,4 +12,9 @@ const registerValidation = yup.object().shape({
     confirm_password,
 })
 
-  export {registerValidation};
+const loginValidation = yup.object().shape({
+  username,
+  password,
+})
+
+export {loginValidation, registerValidation};
