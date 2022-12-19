@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import FacebookLogin from 'react-facebook-login';
+import { AccountCircle, Key } from '@mui/icons-material';
 
 const Register = () => {
 
@@ -48,11 +49,13 @@ const Register = () => {
                             />   */}
                                 <Box padding={1}>
                                     <TextField
+                                        required
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.username}
                                         id='username'
-                                        label='Username' 
+                                        label='Username'
+                                        prefix = "<AccountCircle />" 
                                         error={checkError(touched.username, errors.username)}
                                         helperText={
                                             checkError(touched.username, errors.username) ? errors.username
@@ -62,6 +65,7 @@ const Register = () => {
                                 </Box>
                                 <Box padding={1}>
                                     <TextField
+                                        required
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.password}
@@ -76,6 +80,7 @@ const Register = () => {
                                 </Box>
                                 <Box padding={1}>
                                     <TextField
+                                        required
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.confirm_password}
