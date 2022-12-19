@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
-import { registerValidation } from '../../src/validations/registerValidation'
+import { registerValidation } from '../validations/validation'
 import FacebookLogin from 'react-facebook-login';
 
 const Register = () => {
