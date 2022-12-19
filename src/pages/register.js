@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../../src/validations/registerValidation'
+import FacebookLogin from 'react-facebook-login';
 
 const Register = () => {
+
+    // let [registered, setRegistered] = useState();
+
+    // const responseFacebook = (response) => {
+    //     // console.log(response);
+    //     setRegistered(true);
+    //   }
+
+    // const componentClicked = (data) => {
+    //     console.warn(data);
+    // }
 
     const checkError = (touched, errors) => {
         if (touched && errors) {
@@ -16,7 +28,7 @@ const Register = () => {
     return (
         <Container>
             <Grid container justifyContent={"center"} textAlign={'center'}>
-                <Grid paddingTop={30}>
+                <Grid padding={30}>
                     <Formik
                         initialValues={{ username: "", password: "", confirm_password: "" }}
                         onSubmit={async (values) => {
@@ -27,6 +39,13 @@ const Register = () => {
                     >
                         {({ values, handleChange, handleBlur, touched, errors, handleSubmit }) => (
                             <Form>
+                           {/* <FacebookLogin
+                            appId="682929963233249"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            onClick={componentClicked}
+                            callback={responseFacebook} 
+                            />   */}
                                 <Box padding={1}>
                                     <TextField
                                         onChange={handleChange}
@@ -70,7 +89,7 @@ const Register = () => {
                                         }                                    />
                                 </Box>
                                 <Box padding={1}>
-                                    <Button variant='contained' size='large' onClick={handleSubmit} >Register</Button>
+                                    <Button fullWidth variant='contained' size='large' onClick={handleSubmit} >Register</Button>
                                 </Box>
                             </Form>
                         )}
