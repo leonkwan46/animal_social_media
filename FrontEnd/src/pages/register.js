@@ -18,6 +18,19 @@ const Register = () => {
     // const componentClicked = (data) => {
     //     console.warn(data);
     // }
+    
+    const collectData = async(values) => {
+        const [username, password, confirm_password] = values;
+        var result = await fetch("http://localhost:5000/register", {
+            method:'post',
+            body: JSON.stringify({username, password, confirm_password}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        result = await result.json();
+        alert(result)
+    }
 
     const checkError = (touched, errors) => {
         if (touched && errors) {
@@ -34,7 +47,16 @@ const Register = () => {
                         initialValues={{ username: "", password: "", confirm_password: "" }}
                         onSubmit={async (values) => {
                             //TODO: Build API to BackEnd
-                            alert(JSON.stringify(values))
+                            const [username, password, confirm_password] = values;
+                            var result = await fetch("http://localhost:5000/register", {
+                                method:'post',
+                                body: JSON.stringify({username, password, confirm_password}),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                 }
+                            });
+                            result = await result.json();
+                            alert(result)
                         }}
                         validationSchema={registerValidation}
                     >
