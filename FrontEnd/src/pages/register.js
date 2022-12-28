@@ -7,17 +7,6 @@ import FacebookLogin from 'react-facebook-login';
 import { AccountCircle, Key } from '@mui/icons-material';
 
 const Register = () => {
-
-    // let [registered, setRegistered] = useState();
-
-    // const responseFacebook = (response) => {
-    //     // console.log(response);
-    //     setRegistered(true);
-    //   }
-
-    // const componentClicked = (data) => {
-    //     console.warn(data);
-    // }
     
     const collectData = async(values) => {
         const [username, password, confirm_password] = values;
@@ -29,7 +18,6 @@ const Register = () => {
             }
         });
         result = await result.json();
-        alert(result)
     }
 
     const checkError = (touched, errors) => {
