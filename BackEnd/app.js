@@ -10,7 +10,7 @@ const auth = require("./auth");
 const dbConnect = require("./db/dbConnect");
 
 // execute database connection 
-dbConnect();
+dbConnect(); 
 
 var app = express();
 app.use(express.json());
