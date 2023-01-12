@@ -1,36 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
-import FacebookLogin from 'react-facebook-login';
-import { AccountCircle, Key } from '@mui/icons-material';
+import axios from 'axios'
 
 const Register = () => {
-
-    // let [registered, setRegistered] = useState();
-
-    // const responseFacebook = (response) => {
-    //     // console.log(response);
-    //     setRegistered(true);
-    //   }
-
-    // const componentClicked = (data) => {
-    //     console.warn(data);
-    // }
-    
-    const collectData = async(values) => {
-        const [username, password, confirm_password] = values;
-        var result = await fetch("http://localhost:5000/register", {
-            method:'post',
-            body: JSON.stringify({username, password, confirm_password}),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        result = await result.json();
-        alert(result)
-    }
 
     const checkError = (touched, errors) => {
         if (touched && errors) {
@@ -38,6 +13,15 @@ const Register = () => {
         }
         return false;
       };
+ 
+    const onSubmit = async(values) => {
+        await axios.post('http://localhost:5000/register', values)
+        .then((res) => {
+            alert(JSON.stringify(res.data));
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     return (
         <Container>
@@ -45,30 +29,11 @@ const Register = () => {
                 <Grid padding={30}>
                     <Formik
                         initialValues={{ username: "", password: "", confirm_password: "" }}
-                        onSubmit={async (values) => {
-                            //TODO: Build API to BackEnd
-                            const [username, password, confirm_password] = values;
-                            var result = await fetch("http://localhost:5000/register", {
-                                method:'post',
-                                body: JSON.stringify({username, password, confirm_password}),
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                 }
-                            });
-                            result = await result.json();
-                            alert(result)
-                        }}
+                        onSubmit={onSubmit}
                         validationSchema={registerValidation}
                     >
                         {({ values, handleChange, handleBlur, touched, errors, handleSubmit }) => (
                             <Form>
-                           {/* <FacebookLogin
-                            appId="682929963233249"
-                            autoLoad={true}
-                            fields="name,email,picture"
-                            onClick={componentClicked}
-                            callback={responseFacebook} 
-                            />   */}
                                 <Box padding={1}>
                                     <TextField
                                         required
@@ -116,7 +81,7 @@ const Register = () => {
                                         }                                    />
                                 </Box>
                                 <Box padding={1}>
-                                    <Button fullWidth variant='contained' size='large' onClick={handleSubmit} >Register</Button>
+                                    <Button id='submit' fullWidth variant='contained' size='large' onClick={handleSubmit} >Register</Button>
                                 </Box>
                             </Form>
                         )}
