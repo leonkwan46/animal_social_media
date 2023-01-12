@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
+import { useNavigate } from 'react-router';
 
 const Register = () => {
 
@@ -13,11 +14,13 @@ const Register = () => {
         }
         return false;
       };
- 
+    const nav = useNavigate();
+
     const onSubmit = async(values) => {
         await axios.post('http://localhost:5000/register', values)
         .then((res) => {
             alert(JSON.stringify(res.data));
+            nav("/")
         }).catch((err) => {
             console.log(err);
         })
