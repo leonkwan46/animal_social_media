@@ -1,6 +1,7 @@
 const express = require('express')
 const body = require('body-parser')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
 require('./db/config')
 
 const bodyParser = require('body-parser');
@@ -19,10 +20,16 @@ app.post('/register', async(req, res) => {
         confirm_password: req.body.confirm_password
     })
     try {
-        // const addedUser = data.save();
-        res.json(data)
+        const addedUser = data.save();
+        jwt.sign({addedUser}, 'secretkey', (err, token) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json({token});
+            }
+        })
     } catch (err) {
-        res.json("FAILED")
+        res.json("Register FAILED")
     }
 })
 

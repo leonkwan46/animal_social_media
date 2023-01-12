@@ -8,19 +8,20 @@ import { useNavigate } from 'react-router';
 
 const Register = () => {
 
+    const navigate = useNavigate();
+
     const checkError = (touched, errors) => {
         if (touched && errors) {
           return true;
         }
         return false;
       };
-    const nav = useNavigate();
-
+    
     const onSubmit = async(values) => {
         await axios.post('http://localhost:5000/register', values)
         .then((res) => {
-            alert(JSON.stringify(res.data));
-            nav("/")
+            localStorage.setItem('token', res.data.token)
+            navigate("/")
         }).catch((err) => {
             console.log(err);
         })
