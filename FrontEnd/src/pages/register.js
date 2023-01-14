@@ -18,12 +18,14 @@ const Register = () => {
       };
     
     const onSubmit = async(values) => {
-        await axios.post('http://localhost:5000/register', values)
+        await axios.post('http://localhost:5000/register', 
+        values, 
+        {headers: {'Authorization': 'ajsdlkaskjd'}})
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            navigate("/")
+            navigate("/test/:id")
         }).catch((err) => {
-            console.log(err);
+            console.log(`Register Failed: ${err}`);
         })
     }
 
@@ -67,7 +69,8 @@ const Register = () => {
                                         helperText={
                                             checkError(touched.password, errors.password) ? errors.password
                                             :""
-                                        }                                    />
+                                        }                                    
+                                        />
                                 </Box>
                                 <Box padding={1}>
                                     <TextField
@@ -82,7 +85,8 @@ const Register = () => {
                                         helperText={
                                             checkError(touched.confirm_password, errors.confirm_password) ? errors.confirm_password
                                             :""
-                                        }                                    />
+                                        }                                    
+                                        />
                                 </Box>
                                 <Box padding={1}>
                                     <Button id='submit' fullWidth variant='contained' size='large' onClick={handleSubmit} >Register</Button>
