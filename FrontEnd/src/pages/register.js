@@ -23,7 +23,8 @@ const Register = () => {
         {headers: {'Authorization': 'ajsdlkaskjd'}})
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            navigate("/test/:id")
+            alert(res.token);
+            // navigate("/test/:id")
         }).catch((err) => {
             console.log(`Register Failed: ${err}`);
         })
@@ -34,7 +35,7 @@ const Register = () => {
             <Grid container justifyContent={"center"} textAlign={'center'}>
                 <Grid padding={30}>
                     <Formik
-                        initialValues={{ username: "", password: "", confirm_password: "" }}
+                        initialValues={{ username: "", password: "", confirm_password: ""}}
                         onSubmit={onSubmit}
                         validationSchema={registerValidation}
                     >
