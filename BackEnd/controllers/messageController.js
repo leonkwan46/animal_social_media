@@ -10,7 +10,8 @@ const Message = require('../model/messageModel')
 // @route GET /api/goals
 // @access private
 const getMessage = asyncHandler(async(req,res) => {
-    const messages = await Message.find()
+    // find message that specific for user!
+    const messages = await Message.find({user: req.user.id})
     res.status(200).json(messages)
 })
 
@@ -26,6 +27,7 @@ const createMessage = asyncHandler(async(req,res) => {
     
     const message = await Message.create({
         text: req.body.text,
+        user: req.user.id,
     })
     res.status(200).json(message)
 })
@@ -40,6 +42,19 @@ const updateMessage = asyncHandler(async(req,res) => {
     if(!message){
     res.status(400)
     throw new Error('Message not found')
+    }
+
+    //checkuser 
+    const user = await User.findById(req.user.id)
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //check for the goal match logged in user
+    if(message.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('User not authorized')
     }
     // to update it
     //third is option tell that it's new
@@ -63,6 +78,19 @@ const deleteMessage = asyncHandler(async(req,res) => {
     throw new Error('Message not found')
     }
 
+     //checkuser 
+     const user = await User.findById(req.user.id)
+     if(!user){
+         res.status(401)
+         throw new Error('User not found')
+     }
+ 
+     //check for the goal match logged in user
+     if(message.user.toString() !== user.id){
+         res.status(401)
+         throw new Error('User not authorized')
+     }
+     
     //to remove
     await message.remove()
 

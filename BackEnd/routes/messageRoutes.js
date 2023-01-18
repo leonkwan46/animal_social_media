@@ -4,6 +4,7 @@ const router = express.Router()
 //import controller to define function
 const {getMessage, createMessage, updateMessage, deleteMessage} = require('../controllers/messageController')
 
+const {protect} = require('../middleware/authMiddleware')
 // after reach route to this file and do it after that
 // '/' because it's specified in server.js
 // router.get('/', getMessage)
@@ -13,8 +14,8 @@ const {getMessage, createMessage, updateMessage, deleteMessage} = require('../co
 // merge into this vvvv (same route)
 
 
-router.route('/').get(getMessage).post(createMessage)
-router.route('/:id').put(updateMessage).delete(deleteMessage)
+router.route('/').get(protect, getMessage).post(protect,createMessage)
+router.route('/:id').put(protect,updateMessage).delete(protect,deleteMessage)
 
 module.exports = router
 
