@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const Test = () => {
+    const [username, setUsername] = useState()
+    const [password, setPasswrod] = useState()
 
-    const token = localStorage.getItem('token')
-    const data = axios.get('http://localhost:5000/test').then((res) => {
-        alert(JSON.stringify(res.data))
+    axios.get('http://localhost:5000/test', {
+        headers: {
+            authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then((res)=> {
+        setUsername(res.data.data.username)
+        setPasswrod(res.data.data.password)
     })
-    
     return (
-        <h1>ABC</h1>
+        <div>
+            <h1>Username: {username}</h1>
+            <h1>Password: {password}</h1>
+        </div>
     )
 };
 

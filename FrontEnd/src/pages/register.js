@@ -20,11 +20,10 @@ const Register = () => {
     const onSubmit = async(values) => {
         await axios.post('http://localhost:5000/register', 
         values, 
-        {headers: {'Authorization': 'ajsdlkaskjd'}})
+        {headers: {'authorization': 'ajsdlkaskjd'}})
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            alert(res.token);
-            // navigate("/test/:id")
+            navigate("/test")
         }).catch((err) => {
             console.log(`Register Failed: ${err}`);
         })
