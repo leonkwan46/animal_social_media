@@ -4,7 +4,28 @@ import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
+import axios from 'axios';
+// import {useNavigate} from 'react-router-dom'
 
+const backURL = "http://localhost:5000/api/users/login"
+
+
+const onSubmit = async (values) =>{
+  
+  await axios.post(backURL,values)
+  .then(res =>{
+    if(res.data.redirect === '/'){
+      window.location = "/";
+      localStorage.setItem('token',res.data.token);
+      }
+
+  }).catch((err) => { 
+    console.log("Error: " + err.message);
+    alert(JSON.stringify(err.message));
+  })
+  
+  
+};
 const Login = () => (
   <Formik
     initialValues={{
@@ -12,9 +33,11 @@ const Login = () => (
       password: '',
     }}
     validationSchema= {loginValidation}
-    onSubmit= {values => {
-      alert(JSON.stringify(values));
-    }}
+    onSubmit={onSubmit}
+    // onSubmit= {values => {
+    //   // alert(JSON.stringify(values))
+    //   axios.post(backURL, values)  
+    // }}
   >
   {({errors, touched, handleSubmit,handleChange,handleBlur}) => (
   <Container maxWidth="sm">

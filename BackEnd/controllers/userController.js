@@ -63,14 +63,17 @@ const loginUser = asyncHandler(async(req,res) => {
 
     // check if password is matched
     if(user && (await bcrypt.compare(password, user.password))){
-        res.json({
-            _id: user.id,
-            username: user.username,
-            token: generateToken(user._id)
-        })
+        // res.json({
+        //     _id: user.id,
+        //     username: user.username,
+        //     token: generateToken(user._id)
+        // })
+        const redir = {redirect:'/'}
+        const token = generateToken(user.id)
+        res.json({token,redir})
     } else {
         res.status(400)
-        throw new Error('Invalid Credentials')
+        throw new Error('Username or password incorrect')
     }
 })
 
