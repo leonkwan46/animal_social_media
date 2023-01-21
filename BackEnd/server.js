@@ -36,6 +36,7 @@ app.use(errorHandler)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+    console.log(`localhost:${port}`)
 });
 
 //JSON web token (note)
