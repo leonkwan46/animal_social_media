@@ -4,9 +4,13 @@ import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
+import Top_nav from '../components/Top_nav';
 
 const Login = () => (
-  <Formik
+  <Container maxWidth={false} disableGutters>
+    <Top_nav />
+
+    <Formik
     initialValues={{
       username: '',
       password: '',
@@ -53,6 +57,8 @@ const Login = () => (
     </Container>
 )}
     </Formik>
+  </Container>
+
 ); 
 
 export default Login

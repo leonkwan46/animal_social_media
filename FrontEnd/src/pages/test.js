@@ -1,23 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
+import useFetch from '../hooks/usefetch';
+import { Typography, Skeleton } from '@mui/material';
+import { Box, Container } from '@mui/system';
+import Top_nav from '../components/Top_nav';
 
 const Test = () => {
-    const [username, setUsername] = useState()
-    const [password, setPasswrod] = useState()
+    
+    const { data, loading, error } = useFetch('http://localhost:5000/test', {
+            headers: {
+                authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        })
 
-    axios.get('http://localhost:5000/test', {
-        headers: {
-            authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-    }).then((res)=> {
-        setUsername(res.data.data.username)
-        setPasswrod(res.data.data.password)
-    })
+    // |||||
+    // vvvvv
+    // This is the olde way to get API call
+
+    // axios.get('http://localhost:5000/test', {
+    //     headers: {
+    //         authorization: 'Bearer ' + localStorage.getItem('token')
+    //     }
+    // }).then((res)=> {
+    //     setUsername(res.data.data.username)
+    //     setPasswrod(res.data.data.password)
+    // }).catch((err) => {
+    //     // USE [err.response.data] TO GET CUSTOM MESSAGE
+    //     console.log('====================================');
+    //     console.log(err.response.data);
+    //     console.log('====================================');
+    // })
+
+
+    // Have to use "data?", Because we are waiting for data to finish loading
     return (
-        <div>
-            <h1>Username: {username}</h1>
-            <h1>Password: {password}</h1>
-        </div>
+        <Container maxWidth={false} disableGutters>
+            <Top_nav />
+
+            <Box sx={{padding: '10% 10%'}}>
+                <Typography variant='h4'>Username: </Typography> 
+                {loading?<Skeleton animation="wave" width={'50%'} />:null}
+                {error?(<Typography>Error</Typography>):null}
+                {data?.data.username}
+                <Typography variant='h4'>Password: </Typography>
+                {loading?<Skeleton animation="wave" width={'50%'} />:null}
+                {error?(<Typography>Error</Typography>):null}
+                {data?.data.password}
+            </Box>
+
+        </Container>
     )
 };
 

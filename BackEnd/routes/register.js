@@ -5,35 +5,25 @@ const User = require('../db/users')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-// Path Can't do '/register'
-// Do '/' instead, as thie route is the home of this route
+// Endpoint Can't do '/register'
+// Do '/' instead, as this Endpoint is the home of this Endpoint
 
-router.post('/', async(req, res) => {
-    // const hash = bcrypt.hash(req.bodypassword, salt)
-    console.log('====================================');
-    console.log("SUCCESS");
-    console.log('===================================='); 
+router.post('/', async(req, res, next) => {
+
+    const salt = 10;
+    const hash = await bcrypt.hash(req.body.password, salt)
     const data = new User({
         username: req.body.username,
-        password: req.body.password,
+        password: hash,
     })
+
     try {
         await data.save();
         jwt.sign({data}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-            if (err) {
-                console.log('====================================');
-                console.log("Register route - Token BREAK");
-                console.log(err);
-                console.log('====================================');
-            } else {
-                res.json({token});
-            }
+            res.json({token});
         })
     } catch (err) {
-        console.log('====================================');
-        console.log("Register route BREAK");
-        console.log(err);
-        console.log('====================================');    
+        next(err)
     }
 })
 
