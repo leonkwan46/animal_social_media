@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 import axios from 'axios';
-// import {useNavigate} from 'react-router-dom'
+
 
 const backURL = "http://localhost:5000/api/users/login"
 
@@ -14,10 +14,11 @@ const onSubmit = async (values) =>{
   
   await axios.post(backURL,values)
   .then(res =>{
-    if(res.data.redirect === '/'){
-      window.location = "/";
+    // if(res.data.redirect === '/'){
+      // window.location = "/";
       localStorage.setItem('token',res.data.token);
-      }
+      alert(JSON.stringify(res.data.token));
+      // }
 
   }).catch((err) => { 
     console.log("Error: " + err.message);
