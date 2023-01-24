@@ -68,9 +68,9 @@ const loginUser = asyncHandler(async(req,res) => {
         //     username: user.username,
         //     token: generateToken(user._id)
         // })
-        const redir = {redirect:'/'}
+        
         const token = generateToken(user.id)
-        res.json({token,redir})
+        res.json({token})
     } else {
         res.status(400)
         throw new Error('Username or password incorrect')
