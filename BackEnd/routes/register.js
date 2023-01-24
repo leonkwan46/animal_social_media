@@ -10,19 +10,28 @@ const bcrypt = require('bcrypt')
 
 router.post('/', async(req, res, next) => {
 
-    const salt = 10;
-    const hash = await bcrypt.hash(req.body.password, salt)
-    const data = new User({
-        username: req.body.username,
+    const {username, password} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt)
+    const user = new User({
+        username: username,
         password: hash,
     })
 
     try {
-        await data.save();
-        jwt.sign({data}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+        const userExist = User.findOne({username})
+        if (!userExist) throw new Error("User already exist")
+
+        const saved = user.save();
+        if(!saved) throw new Error("Register Failed")
+
+        jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             res.json({token});
         })
     } catch (err) {
+        console.log('====================================');
+        console.log("NANI");
+        console.log('====================================');
         next(err)
     }
 })
