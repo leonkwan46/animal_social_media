@@ -23,8 +23,8 @@ const Register = () => {
         await axios.post('http://localhost:5000/register', 
         values)
         .then((res) => {
-            // localStorage.setItem('token', res.data.token)
-            // navigate("/test")
+            localStorage.setItem('token', res.data.token)
+            navigate("/test")
         }).catch((err) => {
             alert(err)
             console.log(`Register Failed: ${err.status} : ${err.message}`);

@@ -19,20 +19,13 @@ router.post('/', async(req, res, next) => {
     })
 
     try {
-        user.save((err) => {
-            if(err.code == 11000) {
-
-                throw new Error("User existed")
-            }
-        });
+        user.save();
 
         jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             res.json({token});
         })
     } catch (err) {
-        console.log('====================================');
-        console.log(err);
-        console.log('====================================');
+
         next(err)
     }
 })

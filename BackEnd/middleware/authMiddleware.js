@@ -11,7 +11,7 @@ const authenticateToken = async(req, res, next) => {
         if(!authHeader || !token) throw new Error("Token Missing!")
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
         // Assign Data from Auth_Middleware to Backend
-        req.user = await User.findById(decoded.data._id)
+        req.user = await User.findById(decoded.user._id)
         if (!req.user) throw new Error("User is not Exist!")
         next()
     } catch (err) { 
