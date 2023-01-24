@@ -4,11 +4,7 @@ import { Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
-<<<<<<< HEAD
 import axios from 'axios';
-=======
-import Top_nav from '../components/Top_nav';
->>>>>>> leon
 
 
 const backURL = "http://localhost:5000/api/users/login"
@@ -26,18 +22,15 @@ const onSubmit = async (values) =>{
       // }
 
   })
-  .catch((err) => { 
-    console.log("Error: " + err.message);
-    alert(JSON.stringify(err.message));
-  })
+  // .catch((err) => { 
+  //   console.log("Error: " + err.message);
+  //   alert(JSON.stringify(err.message));
+  // })
   
   
 };
 const Login = () => (
-  <Container maxWidth={false} disableGutters>
-    <Top_nav />
-
-    <Formik
+  <Formik
     initialValues={{
       username: '',
       password: '',
@@ -88,8 +81,6 @@ const Login = () => (
     </Container>
 )}
     </Formik>
-  </Container>
-
 ); 
 
 export default Login
