@@ -22,10 +22,10 @@ const onSubmit = async (values) =>{
       // }
 
   })
-  // .catch((err) => { 
-  //   console.log("Error: " + err.message);
-  //   alert(JSON.stringify(err.message));
-  // })
+  .catch((err) => { 
+    console.log("Error: " + err.message);
+    alert(JSON.stringify(err.message));
+  })
   
   
 };

@@ -24,6 +24,9 @@ app.use('/register', registerRoute)
 const testRoute = require('./routes/test')
 app.use('/test', testRoute)
 
+//Login Router
+app.use('/login', require('./routes/login'))
+
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
 app.use(errorHandler)
