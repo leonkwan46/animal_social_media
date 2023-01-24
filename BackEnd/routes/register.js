@@ -19,18 +19,20 @@ router.post('/', async(req, res, next) => {
     })
 
     try {
-        const userExist = User.findOne({username})
-        if (!userExist) throw new Error("User already exist")
 
-        const saved = user.save();
-        if(!saved) throw new Error("Register Failed")
+        user.save((err) => {
+            err.message = "WTF LAH"
+            if(err.code == 11000) {
+                throw new Error("User already exist")
+            } 
+        });
 
         jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             res.json({token});
         })
     } catch (err) {
         console.log('====================================');
-        console.log("NANI");
+        console.log(err);
         console.log('====================================');
         next(err)
     }
