@@ -5,6 +5,7 @@ import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
+import Top_nav from '../components/Top_nav';
 
 const Register = () => {
 
@@ -18,20 +19,22 @@ const Register = () => {
       };
     
     const onSubmit = async(values) => {
+
         await axios.post('http://localhost:5000/register', 
-        values, 
-        {headers: {'Authorization': 'ajsdlkaskjd'}})
+        values)
         .then((res) => {
-            localStorage.setItem('token', res.data.token)
-            alert(res.token);
-            // navigate("/test/:id")
+            // localStorage.setItem('token', res.data.token)
+            // navigate("/test")
         }).catch((err) => {
-            console.log(`Register Failed: ${err}`);
+            alert(err)
+            console.log(`Register Failed: ${err.status} : ${err.message}`);
         })
     }
-
+     
     return (
-        <Container>
+        <Container maxWidth={false} disableGutters >
+            <Top_nav />
+
             <Grid container justifyContent={"center"} textAlign={'center'}>
                 <Grid padding={30}>
                     <Formik

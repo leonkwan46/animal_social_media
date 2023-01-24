@@ -2,7 +2,7 @@
 
 const username = "ABC";
 const password = "HAHAHA123";
-const wrong = "asda132123sd"
+const wrong = "asda132123sd";
 
 describe('Register Page', () => {
 

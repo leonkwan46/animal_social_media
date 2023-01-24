@@ -1,38 +1,35 @@
 const express = require('express')
-//make color in log
-const colors = require('colors')
-//make environment variable
-const dotenv = require('dotenv').config()
-//import error middleware
-const {errorHandler} = require('./middleware/errorMiddleware')
-const connectDB = require('./db/config')
-const port = process.env.PORT || 5000
-
-
-connectDB()
 const app = express()
+const body = require('body-parser')
+const cors = require('cors')
+const connectDB = require('./db/config')
+const bodyParser = require('body-parser')
+const errorHandler = require('./middleware/errorHandler')
+require('dotenv').config()
 
-const cors = require('cors');
+// MongoDB Connection
+connectDB()
+
+//MiddleWares (App-level)
+app.use(body.urlencoded({extended:true}))
+app.use(bodyParser.json())
+app.use(express.json());
 app.use(cors());
 
+// Register Router
+const registerRoute = require('./routes/register')
+app.use('/register', registerRoute)
 
+// Test Router
+const testRoute = require('./routes/test')
+app.use('/test', testRoute)
 
-//in order to use req.body -> it needs middleware to carry value after value has been input
-// declare to have middleware
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-
-
-// tell what we listen to + import routes to use
-// app.use('/api/messages',require('./routes/messageRoutes'))
-app.use('/api/users',require('./routes/userRoutes'))
-
+// Error Handling middleware always at LAST
+// Can only use on Routes/Endpoints, not DB Connection
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-    console.log(`localhost:${port}`)
-    
+app.listen(5000, () => {
+    console.log("http://localhost:5000");
 });
 
 //JSON web token (note)
