@@ -21,8 +21,8 @@ router.post('/', async(req, res, next) => {
     try {
         user.save((err) => {
             if(err.code == 11000) {
-                throw new Error("User existed")
 
+                throw new Error("User existed")
             }
         });
 
@@ -33,7 +33,7 @@ router.post('/', async(req, res, next) => {
         console.log('====================================');
         console.log(err);
         console.log('====================================');
-        return next(err)
+        next(err)
     }
 })
 
