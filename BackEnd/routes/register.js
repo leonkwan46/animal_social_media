@@ -19,12 +19,11 @@ router.post('/', async(req, res, next) => {
     })
 
     try {
-
         user.save((err) => {
-            err.message = "WTF LAH"
             if(err.code == 11000) {
-                throw new Error("User already exist")
-            } 
+                throw new Error("User existed")
+
+            }
         });
 
         jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
@@ -34,7 +33,7 @@ router.post('/', async(req, res, next) => {
         console.log('====================================');
         console.log(err);
         console.log('====================================');
-        next(err)
+        return next(err)
     }
 })
 
