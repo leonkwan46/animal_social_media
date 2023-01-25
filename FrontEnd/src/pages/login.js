@@ -7,7 +7,7 @@ import { AccountCircle, Key } from '@mui/icons-material';
 import axios from 'axios';
 
 
-const backURL = "http://localhost:5000/api/users/login"
+const backURL = "http://localhost:5000/login"
 
 
 const onSubmit = async (values) =>{
@@ -17,14 +17,14 @@ const onSubmit = async (values) =>{
     // if(res.data.redirect === '/'){
       // window.location = "/";
       localStorage.setItem('token',res.data.token);
-      alert(JSON.stringify(res.data.token));
+      alert(JSON.stringify(res));
       // alert(JSON.stringify(res));
       // }
 
   })
   .catch((err) => { 
-    console.log("Error: " + err.message);
-    alert(JSON.stringify(err.message));
+    // console.log("Error: " + err.message);
+    alert(JSON.stringify("Error: " + err));
   })
   
   

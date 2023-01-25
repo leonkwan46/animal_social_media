@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
-import Top_nav from '../components/Top_nav';
+// import Top_nav from '../components/Top_nav';
 
 const Register = () => {
 
@@ -33,7 +33,7 @@ const Register = () => {
      
     return (
         <Container maxWidth={false} disableGutters >
-            <Top_nav />
+      
 
             <Grid container justifyContent={"center"} textAlign={'center'}>
                 <Grid padding={30}>
