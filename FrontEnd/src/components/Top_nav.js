@@ -15,6 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import PetsIcon from '@mui/icons-material/Pets';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -85,7 +86,7 @@ const Top_nav = () => {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'right',
       }}
       id={menuId}
@@ -107,7 +108,7 @@ const Top_nav = () => {
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'right',
       }}
       id={mobileMenuId}
@@ -139,6 +140,7 @@ const Top_nav = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+      
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -156,8 +158,9 @@ const Top_nav = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="" sx={{bgcolor:"#000000"}}>
         <Toolbar>
+
           <IconButton
             size="large"
             edge="start"
@@ -165,16 +168,22 @@ const Top_nav = () => {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <PetsIcon />
           </IconButton>
+
+
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Animal Society
           </Typography>
+
+          <Box sx={{flexGrow:'1' }} />
+
+          {/* search bar */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -184,22 +193,26 @@ const Top_nav = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+
+
+          
+
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={898198198} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            
+            <IconButton size="large" aria-label="AHHAHAHA" color="inherit">
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
+
+
             </IconButton>
+
             <IconButton
               size="large"
               edge="end"
@@ -209,9 +222,13 @@ const Top_nav = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
+
+
               <AccountCircle />
             </IconButton>
           </Box>
+
+
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
