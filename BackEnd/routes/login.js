@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt  = require('bcrypt')
 // import it because it contain script for async handler (easier to write code)
 const asyncHandler = require('express-async-handler')
-const User = require('../model/usersModel')
+const User = require('../db/users')
 const router = express.Router()
 
 router.post('/', async(req, res, next) => {
