@@ -19,8 +19,6 @@ const authenticateToken = async(req, res, next) => {
         err.message = "AuthWrong"
         next(err)
     }
-
-
-} 
+}
 
 module.exports = authenticateToken

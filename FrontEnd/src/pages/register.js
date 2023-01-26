@@ -26,8 +26,8 @@ const Register = () => {
             localStorage.setItem('token', res.data.token)
             navigate("/test")
         }).catch((err) => {
-            alert(err)
-            console.log(`Register Failed: ${err.status} : ${err.message}`);
+            alert(err.response.data)
+            console.log(`Register Failed: ${err.response.status} : ${err.response.data}`);
         })
     }
      
