@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 import axios from 'axios';
-
+import Top_nav from '../components/Top_nav';
 
 const backURL = "http://localhost:5000/login"
 
@@ -42,6 +42,7 @@ const Login = () => (
   >
   {({values,errors, touched, handleSubmit,handleChange,handleBlur}) => (
   <Container maxWidth="sm">
+     <Top_nav />
     <Box sx={{
             marginTop: 8,
             display: 'flex',
