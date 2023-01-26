@@ -1,27 +1,33 @@
-const express = require('express')
-const app = express()
-const body = require('body-parser')
+require('dotenv').config();
+
+const express = require('express');
 const cors = require('cors');
-const connectDB = require('./db/config')
-const bodyParser = require('body-parser')
-const errorHandler = require('./middleware/errorHandler')
-require('dotenv').config()
+const connectDB = require('./db/config');
+const errorHandler = require('./middleware/errorHandler');
 
-// MongoDB Connection
-connectDB()
+// Import routes
+const registerRoute = require('./routes/register');
+const loginRoute = require("./routes/login");
+const testRoute = require('./routes/test');
 
-//MiddleWares (App-level)
-app.use(body.urlencoded({extended:true}))
-app.use(bodyParser.json())
+const app = express();
+
+//Middlewares (App-level)
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 
+// MongoDB Connection
+connectDB();
+
+
 // Register Router
-const registerRoute = require('./routes/register')
 app.use('/register', registerRoute)
 
+
+// Login Router
+app.use("/login", loginRoute);
 // Test Router
-const testRoute = require('./routes/test')
 app.use('/test', testRoute)
 
 // Error Handling middleware always at LAST

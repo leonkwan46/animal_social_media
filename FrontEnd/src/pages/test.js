@@ -12,25 +12,6 @@ const Test = () => {
             }
         })
 
-    // |||||
-    // vvvvv
-    // This is the olde way to get API call
-
-    // axios.get('http://localhost:5000/test', {
-    //     headers: {
-    //         authorization: 'Bearer ' + localStorage.getItem('token')
-    //     }
-    // }).then((res)=> {
-    //     setUsername(res.data.data.username)
-    //     setPasswrod(res.data.data.password)
-    // }).catch((err) => {
-    //     // USE [err.response.data] TO GET CUSTOM MESSAGE
-    //     console.log('====================================');
-    //     console.log(err.response.data);
-    //     console.log('====================================');
-    // })
-
-
     // Have to use "data?", Because we are waiting for data to finish loading
     return (
         <Container maxWidth={false} disableGutters>

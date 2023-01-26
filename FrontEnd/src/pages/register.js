@@ -1,40 +1,40 @@
-import React from 'react';
-import { Button, Grid, TextField } from '@mui/material';
+import {React, useState} from 'react';
+import { Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
 import Top_nav from '../components/Top_nav';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
 
 const Register = () => {
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
     const checkError = (touched, errors) => {
-        if (touched && errors) {
-          return true;
-        }
-        return false;
-      };
+        return touched && errors;
+    };
+
+    const handleShowPassword = () => {
+        setShowPassword((prev) => !prev);
+    }
     
     const onSubmit = async(values) => {
-
         await axios.post('http://localhost:5000/register', 
         values)
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            navigate("/test")
+            navigate("/test");
         }).catch((err) => {
             alert(err)
             console.log(`Register Failed: ${err.status} : ${err.message}`);
         })
     }
-     
     return (
         <Container maxWidth={false} disableGutters >
             <Top_nav />
-
             <Grid container justifyContent={"center"} textAlign={'center'}>
                 <Grid padding={30}>
                     <Formik
@@ -68,12 +68,24 @@ const Register = () => {
                                         value={values.password}
                                         id='password'
                                         label='Password'
-                                        type='password'
+                                        type={showPassword ? "text" : "password"}
                                         error={checkError(touched.password, errors.password)}
                                         helperText={
                                             checkError(touched.password, errors.password) ? errors.password
                                             :""
-                                        }                                    
+                                        }
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        onClick={handleShowPassword}
+                                                        
+                                                    >   
+                                                        {showPassword ? <VisibilityOff fontSize = "small" /> : <Visibility fontSize = "small"/>}
+                                                    </IconButton>
+                                            </InputAdornment>
+                                            )
+                                        }}
                                         />
                                 </Box>
                                 <Box padding={1}>

@@ -12,7 +12,7 @@ router.post('/', async(req, res, next) => {
 
     const {username, password} = req.body;
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt)
+    const hash = await bcrypt.hash(password, salt);
     const user = new User({
         username: username,
         password: hash,
@@ -20,7 +20,6 @@ router.post('/', async(req, res, next) => {
 
     try {
         user.save();
-
         jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             res.json({token});
         })
@@ -29,5 +28,7 @@ router.post('/', async(req, res, next) => {
         next(err)
     }
 })
+
+
 
 module.exports = router;
