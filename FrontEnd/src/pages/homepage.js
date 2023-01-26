@@ -1,11 +1,9 @@
 import React from 'react';
-
-import Header from '../components/layout/header';
+// import Top_nav from '../components/Top_nav';
 
 const Homepage = () => {
   return (
     <div className = "homepage">
-        <Header/>
         
     </div>
   )
