@@ -6,7 +6,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import "./register-login.css";
 // import Top_nav from '../components/Top_nav';
