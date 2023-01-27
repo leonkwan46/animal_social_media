@@ -2,11 +2,11 @@ import {React, useState} from 'react';
 import { Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
-import Top_nav from '../components/Top_nav';
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+// import Top_nav from '../components/Top_nav';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,15 +26,16 @@ const Register = () => {
         values)
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            navigate("/test");
+            navigate("/test")
         }).catch((err) => {
-            alert(err)
-            console.log(`Register Failed: ${err.status} : ${err.message}`);
+            alert(err.response.data)
+            console.log(`Register Failed: ${err.response.status} : ${err.response.data}`);
         })
     }
     return (
         <Container maxWidth={false} disableGutters >
-            <Top_nav />
+      
+
             <Grid container justifyContent={"center"} textAlign={'center'}>
                 <Grid padding={30}>
                     <Formik

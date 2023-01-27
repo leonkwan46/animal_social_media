@@ -16,10 +16,9 @@ const authenticateToken = async(req, res, next) => {
         next()
     } catch (err) { 
         // Send Custom error message to errorHandler middleware
+        err.message = "AuthWrong"
         next(err)
     }
-
-
-} 
+}
 
 module.exports = authenticateToken
