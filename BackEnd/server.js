@@ -31,7 +31,6 @@ app.use("/login", loginRoute);
 app.use('/test', testRoute)
 
 //Login Router
-const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
 
 // Error Handling middleware always at LAST
