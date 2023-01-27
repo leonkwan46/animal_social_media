@@ -5,35 +5,31 @@ const User = require('../db/users')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-// Path Can't do '/register'
-// Do '/' instead, as thie route is the home of this route
+// Endpoint Can't do '/register'
+// Do '/' instead, as this Endpoint is the home of this Endpoint
 
-router.post('/', async(req, res) => {
-    // const hash = bcrypt.hash(req.bodypassword, salt)
-    console.log('====================================');
-    console.log("SUCCESS");
-    console.log('===================================='); 
-    const data = new User({
-        username: req.body.username,
-        password: req.body.password,
-    })
+router.post('/', async(req, res, next) => {
     try {
-        await data.save();
-        jwt.sign({data}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-            if (err) {
-                console.log('====================================');
-                console.log("Register route - Token BREAK");
-                console.log(err);
-                console.log('====================================');
-            } else {
-                res.json({token});
-            }
+    const {username, password, name, date} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt)
+    const onlyDate = date.split('T')[0]
+    const user = new User({
+        username: username,
+        password: hash,
+        name: name,
+        date: onlyDate,
+        bio: "",
+    })
+
+        const found = await User.findOne({username})
+        if(found) throw new Error("User already Exist")
+        user.save();
+        jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+            res.json({token});
         })
     } catch (err) {
-        console.log('====================================');
-        console.log("Register route BREAK");
-        console.log(err);
-        console.log('====================================');    
+        next(err)
     }
 })
 
