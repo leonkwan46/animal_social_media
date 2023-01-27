@@ -2,8 +2,7 @@ import React from 'react'
 import useFetch from '../hooks/usefetch';
 import { Typography, Skeleton } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import Top_nav from '../components/Top_nav';
-// import Top_nav from '../components/Top_nav';
+import TopNav from '../components/TopNav';
 
 const Test = () => {
 
@@ -16,7 +15,7 @@ const Test = () => {
     // Have to use "data?", Because we are waiting for data to finish loading
     return (
         <Container maxWidth={false} disableGutters>
-            <Top_nav />
+            <TopNav />
             
             <Box sx={{padding: '10% 10%'}}>
                 <Typography variant='h4'>Username: </Typography> 
