@@ -20,4 +20,4 @@ Highlights of working in a team setting:
 
 - Instead of one taking care of FrontEnd and another one taking BackEnd, Everyone is doing Full-Stack. (Ex. Leon built Register page, Mai built Login page, and Yuya built Homepage)
 
-- We build slow, because this is for learning purpose and we want make sure we understand every details, and make sure everyone is following.
+- We build slow, because this is for learning purpose and we want to make sure we understand every details, and make sure everyone is following.
