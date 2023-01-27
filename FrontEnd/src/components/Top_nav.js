@@ -2,16 +2,15 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import {
   AppBar, Box, Toolbar, IconButton, Typography, InputBase,
-  Badge, MenuItem, Menu
+  Badge, MenuItem, Menu,
 } from '@mui/material';
-
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import PetsIcon from '@mui/icons-material/Pets';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -176,6 +175,28 @@ const Top_nav = () => {
           >
             Animal Society
           </Typography>
+          
+          <Box sx={{flexGrow:'1' }} />
+
+          <Box
+          component="img"
+          src={require('../assets/images/cat.gif')}
+          alt='cat'
+          width={"40px"}
+          height={"40px"}
+          padding={"5px"}
+          />
+          
+          <Box
+          component="img"
+          src={require('../assets/images/rotated.gif')}
+          alt='dog'
+          width={"40px"}
+          height={"40px"}
+          padding={"5px"}
+          />
+
+          {/* search bar */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
