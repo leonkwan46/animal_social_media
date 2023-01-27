@@ -10,12 +10,15 @@ const bcrypt = require('bcrypt')
 
 router.post('/', async(req, res, next) => {
     try {
-    const {username, password} = req.body;
+    const {username, password, date} = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt)
+    const onlyDate = date.split('T')[0]
+    
     const user = new User({
         username: username,
         password: hash,
+        date: onlyDate,
     })
 
         const found = await User.findOne({username})

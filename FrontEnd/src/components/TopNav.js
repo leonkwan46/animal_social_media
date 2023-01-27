@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,8 +15,6 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import PetsIcon from '@mui/icons-material/Pets';
-import Image from 'mui-image'
-
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,8 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Top_nav = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -70,7 +68,7 @@ const Top_nav = () => {
   };
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+    setMobileMoreAnchorEl();
   };
 
   const handleMenuClose = () => {
@@ -164,12 +162,11 @@ const Top_nav = () => {
 
           <IconButton
             size="large"
-            edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-          <PetsIcon />
+            <PetsIcon />
           </IconButton>
 
 
@@ -228,8 +225,6 @@ const Top_nav = () => {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-
-
             </IconButton>
 
             <IconButton
