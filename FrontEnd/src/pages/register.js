@@ -23,10 +23,6 @@ const Register = () => {
     const checkError = (touched, errors) => {
         return touched && errors;
     };
-
-    const handleShowPassword = () => {
-        setShowPassword((prev) => !prev);
-    }
     
     const onSubmit = async(values) => {
         await axios.post('http://localhost:5000/register', 
