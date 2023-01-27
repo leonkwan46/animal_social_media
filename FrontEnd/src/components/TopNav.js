@@ -56,7 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Top_nav = () => {
+const TopNav = () => {
   const [anchorEl, setAnchorEl] = useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
 
@@ -263,4 +263,4 @@ const Top_nav = () => {
   );
 }
 
-export default Top_nav;
+export default TopNav;

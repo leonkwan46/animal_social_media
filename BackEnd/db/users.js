@@ -9,7 +9,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    name: {
+        type: String,
+        require: true
+    },
     date: {
+        type: String,
+    },
+    bio: {
         type: String,
     }
 }, {collection: 'users'});

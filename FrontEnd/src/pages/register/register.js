@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dialog, Grid, TextField } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle, Divider, Grid, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../../validations/validation'
@@ -32,7 +32,9 @@ const Register = () => {
       };
     
     const onSubmit = async(values) => {
-        
+        console.log('====================================');
+        console.log(JSON.stringify(values));
+        console.log('====================================');
         await axios.post('http://localhost:5000/register', 
         values)
         .then((res) => {
@@ -53,10 +55,11 @@ const Register = () => {
                 Register
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <Grid container justifyContent={"center"} textAlign={'center'}>
-                    <Grid padding={5}>
+                <Grid justifyContent={"center"} textAlign={'center'} padding={2}>
+                    <DialogTitle textAlign={'center'}>Create new account</DialogTitle>
+                    <DialogContent>
                         <Formik
-                            initialValues={{ username: "", password: "", confirm_password: "", date: ""}}
+                            initialValues={{ username: "", password: "", confirm_password: "", name: "", date: ""}}
                             onSubmit={onSubmit}
                             validationSchema={registerValidation}
                         >
@@ -110,15 +113,36 @@ const Register = () => {
                                             />
                                     </Box>
                                     <Box padding={1}>
+                                        <Divider />
+                                    </Box>
+
+                                    <Box padding={1}>
+                                        <TextField 
+                                            required
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.name}
+                                            id='name'
+                                            label='Name'
+                                            error={checkError(touched.confirm_password, errors.confirm_password)}
+                                        />
+                                    </Box>
+
+                                    <Box padding={1}>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <DesktopDatePicker
-                                            
-                                            label="Date of Birth"
-                                            inputFormat="DD/MM/YYYY"
+
+                                            InputProps={{ sx: {width: "225px"}}}
+                                            renderInput={(date) => <TextField 
+                                                {...date}
+                                                inputProps={{...date.inputProps, readOnly: true}}
+                                                error={checkError(touched.confirm_password, errors.confirm_password)}
+                                                onBlur={handleBlur}
+                                                />}
                                             value={values.date}
-                                            type='string'
+                                            inputFormat="DD/MM/YYYY"
                                             onChange={(value) => setFieldValue("date", value, true)}
-                                            renderInput={(date) => <TextField {...date} />}
+                                            label="Date of Birth"
                                             />
                                         </LocalizationProvider>
                                     </Box>
@@ -128,7 +152,7 @@ const Register = () => {
                                 </Form>
                             )}
                         </Formik>
-                    </Grid>
+                    </DialogContent>
                 </Grid>
             </Dialog>
         </Container>
