@@ -19,11 +19,11 @@ const asyncHandler = require('express-async-handler')
 router.get('/', protected, async(req, res, next) => {
     console.log(req.body)
         try{
-        const message = await Messages.find({})
+        const message = await Messages.find()
         console.log("check1")
         // check if password is matched
         if(message){
-            res.status(200).json(messages)
+            res.status(200).json(message)
             }
         else{
             res.status(400)
@@ -42,3 +42,5 @@ router.get('/', protected, async(req, res, next) => {
         
     
 })
+
+module.exports = router;

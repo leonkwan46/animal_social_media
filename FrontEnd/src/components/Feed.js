@@ -1,21 +1,39 @@
 import Post from "./post";
-import { Grid } from "@mui/material";
-import {Posts} from './dummyData'
+import { Card, Grid, Typography } from "@mui/material";
+// import {Posts} from './dummyData'
+import { useEffect } from 'react';
+import { useState } from "react";
+import axios from "axios";
 
+const backURL = 'http://localhost:5000/getpost'
+const accessToken = localStorage.getItem('token')
 
 
 const Feed = () => {
-    return(
+    const [posts,setPosts] = useState([]);
+    useEffect(() => {
         
-        <Grid
+    axios.get(backURL,accessToken)
+    .then(res =>{
+            res.json(posts=>{
+                console.log(posts)
+                setPosts(posts);
+            });
+        })
+        },[]);
+        
+    return( <Grid
         container
         direction="column"
         justifyContent="flex-end"
         alignItems="stretch"
         maxWidth="sm">
-            {Posts.map(p=>(
-                <Post key={p.id} post={p}/>
-            ))}
+            {posts.length >0 
+            ? posts.map(p=>(
+                <Post key={p.id} post={p}/>))
+            : <Typography>There's no post!</Typography>
+            }
+            
             
       </Grid>
         

@@ -4,6 +4,7 @@ import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } f
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {format} from 'date-fns'
 
 // const backURL = 'http://localhost:5000/getpost'
 // const accessToken = localStorage.getItem('token')
@@ -67,7 +68,7 @@ const Post = (props) => {
                     </IconButton>
                 }
                 title={props.post.username}
-                subheader={props.post.timestamp} />
+                subheader={format(new Date(props.post.createdAt),'MMM d,yyyy HH:mm')} />
             <CardContent
             sx={{
                 bgcolor:'#FFFFFF',
