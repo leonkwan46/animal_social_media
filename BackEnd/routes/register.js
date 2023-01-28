@@ -22,7 +22,7 @@ router.post('/', async(req, res, next) => {
         bio: "",
     })
 
-        const found = await User.findOne({username})
+        const found = await User.findOne({ username });
         if(found) throw new Error("User already Exist")
         user.save();
         jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
