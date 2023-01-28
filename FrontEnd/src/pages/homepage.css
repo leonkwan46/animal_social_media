@@ -1,0 +1,7 @@
+.left-side{
+    width: 70vw;
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    background-color: #e8eaf6;
+}
