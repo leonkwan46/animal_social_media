@@ -8,7 +8,7 @@ const Test = () => {
 
     const { data, loading, error } = useFetch('http://localhost:5000/test', {
             headers: {
-                authorization: 'Bearer ' + localStorage.getItem('token')
+                authorization: 'Bearer ' + sessionStorage.getItem('token')
             }
         })
 

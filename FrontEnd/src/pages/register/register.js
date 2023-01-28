@@ -38,7 +38,7 @@ const Register = () => {
         await axios.post('http://localhost:5000/register', 
         values)
         .then((res) => {
-            localStorage.setItem('token', res.data.token)
+            sessionStorage.setItem('token', res.data.token)
             handleClose()
             navigate("/test")
         }).catch((err) => {

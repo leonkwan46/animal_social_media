@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import { Link } from "react-router-dom";
+import { Formik, Form } from 'formik';
+
 import profilePic from "../assets/images/charo.jpg";
-import { FormControl, TextField, Button } from '@mui/material';
+import { TextField, Button, Avatar } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -11,65 +12,61 @@ import "./createPost.css";
 const user = {
     picture: profilePic,
     alt: "black-hand",
-
+    
 }
 
 const maxLength = 280;
 
 const Post = () => {
-  const [circle, setCircle] = useState(false);
-
-  const [textInfo, setTextInfo] = useState({
-    text: "",
-    length: 0,
-    percent: 0
-  });
-
-  const handleText = (e) => {
-    const value = e.target.value;
-    setTextInfo({
-      text: value,
-      length: value.length,
-      percent: Math.floor(value.length / maxLength * 100) 
-    });
-
-    setCircle(value.length === 0 ? false : true);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(textInfo.text);
+  const handleSubmit = (values) => {
+    alert(values.text);
   }
 
   return (
-    <form className="post-wrapper" onSubmit={handleSubmit}>
+    <Formik
+      onSubmit={handleSubmit}
+      initialValues={{ text: "", length: 0, percent: 0 }}
+    >
+      { ({values, handleChange, handleSubmit}) => (
+      <Form className = "post-wrapper">
       <div className="post-upper">
-        <Link to = "" className = "profile-pic-link">
-          <img src={user.picture} alt={user.alt} className ="profile-pic-for-post"/>
-        </Link>
-        <TextField value={textInfo.text}
-          onChange={handleText}
-          label="What's new with you?"
-          className="post"
-          fullWidth
-          multiline="true"
-          inputProps={{ maxLength: maxLength }}
-        />
+        <Avatar sx={{width: "50px", height: "50px"}} src={user.picture} alt={user.alt} className ="profile-pic-for-post"/>
+            <TextField
+              value={values.text}
+              onChange={(e) => {
+                values.text += e.target.value;
+                values.length = e.target.value.length;
+                values.percent = Math.floor(e.target.value.length / maxLength * 100)
+                handleChange(e);
+              }}
+              id = "text"
+              label="What's new with you?"
+              className="post"
+              multiline="true"
+              inputProps={{ maxLength: maxLength }}
+              fullWidth
+         />
       </div>
       <div className="post-lower">
         <div className="circular-container">
           {
-            circle ? <CircularProgressbar
-              value={textInfo.percent}
-              text={`${maxLength - textInfo.length <= 30 ? maxLength - textInfo.length : ""}`} 
+            values.length !== 0 ? <CircularProgressbar
+              value={values.percent}
+              text={`${maxLength - values.length <= 30 ? maxLength - values.length : ""}`} 
               strokeWidth="12"
-              styles={buildStyles({ textSize: "2em",textWeight: "700",pathColor: `${maxLength - textInfo.length < 10 ? "#ff3d00" : (maxLength - textInfo.length < 30 ? "#ffff00" : "#3e98c7")}`})}
+              styles={buildStyles({
+                textSize: "2em", textWeight: "700",
+                pathColor: `${maxLength - values.length < 10 ? "#ff3d00"
+                           : (maxLength - values.length < 30 ? "#ffff00" : "#3e98c7")}`
+              })}
               /> : ""
           }
         </div>
         <Button type = "submit" variant="contained" size = "medium" endIcon={<SendIcon />}>Send</Button>
       </div>
-    </form>
+      </Form>
+      )}
+    </Formik>
   )
 }
 
