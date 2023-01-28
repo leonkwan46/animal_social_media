@@ -1,5 +1,5 @@
 import Post from "./post";
-import { Card, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // import {Posts} from './dummyData'
 import { useEffect } from 'react';
 import { useState } from "react";
@@ -13,7 +13,12 @@ const Feed = () => {
     const [posts,setPosts] = useState([]);
     useEffect(() => {
         
-    axios.get(backURL,accessToken)
+    axios.get(backURL,accessToken
+        // {
+        // headers: {
+        //     authorization: 'Bearer ' + accessToken
+        // }}
+        )
     .then(res =>{
             res.json(posts=>{
                 console.log(posts)
