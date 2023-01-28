@@ -1,18 +1,29 @@
 .post-wrapper {
-    width: 70vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
 }
-
-.profile-pic-for-post{
+/* 
+.profile-pic-link, .profile-pic-for-post{
     width: 50px;
     max-width: 50px;
     max-height: 50px;
+    margin-right: 10px;
     border-radius: 50%;
-    border: black solid 1px;
+} */
+
+.MuiAvatar-root, .MuiAvatar-img{
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    --Avatar-size: 50px;
+}
+
+.MuiAvatar-root {
     margin-right: 10px;
 }
 
@@ -20,12 +31,7 @@
     display: flex;
     width: 90%;
     justify-content: space-between;
-}
-
-.circular-container {
-    width: 40px;
-    height: 40px;
-    margin-right: 3%;
+    align-items: center;
 }
 
 .post-lower {
@@ -36,6 +42,12 @@
     justify-content: flex-end;
 }
 
-.CircularProgressbar-trail, .CircularProgressbar-path{
-    stroke-width: 8px;
+.circular-container {
+    width: 40px;
+    height: 40px;
+    margin-right: 3%;
+}
+
+.CircularProgressbar-text{
+    font-weight: 700;
 }
