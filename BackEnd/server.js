@@ -6,6 +6,7 @@ const connectDB = require('./db/config')
 const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
 require('dotenv').config()
+const protected = require('./middleware/authMiddleware')
 
 // MongoDB Connection
 connectDB()
@@ -27,6 +28,10 @@ app.use('/test', testRoute)
 //Login Router
 const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
+
+//get post Router
+const getPostRoute = require('./routes/getPost')
+app.use('/getpost', getPostRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

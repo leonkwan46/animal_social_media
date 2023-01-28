@@ -1,17 +1,25 @@
 import Post from "./post";
 import { Grid } from "@mui/material";
+import {Posts} from './dummyData'
 
-export default function Feed(){
+
+
+const Feed = () => {
     return(
+        
         <Grid
         container
         direction="column"
         justifyContent="flex-end"
         alignItems="stretch"
         maxWidth="sm">
-            <Post/>
-            <Post/>
+            {Posts.map(p=>(
+                <Post key={p.id} post={p}/>
+            ))}
+            
       </Grid>
-
+        
     )
 }
+
+export default Feed

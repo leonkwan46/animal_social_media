@@ -16,6 +16,9 @@ const messageSchema = mongoose.Schema({
     }
 },{
     timestamps: true
+},
+{
+    collection: 'Message'
 })
 
 //export as model
