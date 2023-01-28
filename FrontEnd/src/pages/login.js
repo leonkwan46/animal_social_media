@@ -6,6 +6,7 @@ import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 import axios from 'axios';
 import Top_nav from '../components/Top_nav';
+import { useNavigate } from 'react-router-dom';
 
 const backURL = "http://localhost:5000/login"
 
@@ -20,6 +21,7 @@ const onSubmit = async (values) =>{
       alert(JSON.stringify(res));
       // alert(JSON.stringify(res));
       // }
+      useNavigate('/',{replace:true})
 
   })
   .catch((err) => {
