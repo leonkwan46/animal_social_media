@@ -20,13 +20,13 @@ app.use(cors());
 const registerRoute = require('./routes/register')
 app.use('/register', registerRoute)
 
-// Test Router
-const testRoute = require('./routes/test')
-app.use('/test', testRoute)
-
 //Login Router
 const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
+
+// Profile Router
+const profileRoute = require('./routes/profile')
+app.use('/profile', profileRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

@@ -157,7 +157,7 @@ const TopNav = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="" sx={{bgcolor:"#000000"}}>
+      <AppBar position="static" sx={{bgcolor:"#000000"}}>
         <Toolbar>
 
           <IconButton

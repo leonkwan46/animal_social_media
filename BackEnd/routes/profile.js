@@ -10,8 +10,13 @@ router.get('/', authenticateToken, (req, res, next) => {
     try {  
         const data = {
             username: req.user.username,
-            password: req.user.password
+            name: req.user.name,
+            bio: req.user.bio,
+            date: req.user.date,
         }
+        console.log('====================================');
+        console.log(data);
+        console.log('====================================');
         res.json({data});
     } catch (err) {
         next({message: "Failed sending Data"})
