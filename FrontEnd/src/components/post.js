@@ -1,67 +1,74 @@
 import React from 'react';
-// import axios from 'axios';
-import { Box} from '@mui/system';
-import { Typography, Grid, Avatar } from '@mui/material';
+import axios from 'axios';
+import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-export default function Post(){
-    return(
-    
-    <Grid
+// const backURL = 'http://localhost:5000/getpost'
+// const accessToken = localStorage.getItem('token')
+// const getPost = () => {
+//     const [posts,setPosts] = useState([]);
+//     useEffect(()=>{
+//     // const postDB = async () =>
+//     // await axios.get(backURL,accessToken)
+//     // .then(res =>{
+//     //     console.log(res)
+//     //     setPosts()
+        
+//     // })
+//     // .catch((err) => {
+//     //     alert(err.response.data)
+//     //     console.log('Error', err.response);
+//     //   })
+//     async function fetchData(){
+//         const {data} = await http.get('backURL');
+//         setPosts(data.data.posts);
+//     }
+//     })
+//     }
+
+const Post = (props) => {
+    // props = getPost
+    console.log(props);
+    return (<Grid
       container
       direction="column"
-      justifyContent="flex-end"
+      justifyContent="center"
       alignItems="stretch"
       maxWidth="sm"
     >
-        <Box
+        <Card
         sx={{
-            bgcolor:'#edeccc',
+            bgcolor:'#f6d5d8',
             boxShadow:3,
             borderRadius:2,
-            padding: 3,
+            padding: 1,
             marginBottom:4,
             border:1
 
         }}>
-            <Grid container
-            direction="row"
-            >
-            <Box 
+            <CardHeader
             sx={{
                 marginRight:2,
-                marginBottom:2,
-            }}>
+                marginBottom:1,}}
+            avatar={
                 <Avatar 
                 sx={{
                     bgcolor: '#c6aea1',
                     border: 1,
                 }}> 
-                M
+                {props.post.username.charAt(0)}
                 </Avatar>
-                </Box>
-                <Box 
-                sx={{
-                marginBottom:2,
-                }}>
-                <Typography 
-                sx={{
-                    fontWeight:'bold',
-                    fontSize: 22,
-                    fontFamily:'American Typewriter'}}
-                    >
-                    Mai
-                </Typography>
-                <Typography
-                sx={{
-                    fontWeight:'medium',
-                    fontSize: 14,
-                    }}
-                    >
-                        18 sec ago
-                </Typography>
-            </Box>
-            </Grid>
-            <Box
+                }
+                action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                }
+                title={props.post.username}
+                subheader={props.post.timestamp} />
+            <CardContent
             sx={{
                 bgcolor:'#FFFFFF',
                 paddingBottom:4,
@@ -71,11 +78,13 @@ export default function Post(){
                 borderRadius:1,
 
             }}>
-                <Typography>Meow Meow</Typography>
-            </Box>
-        </Box>
+                <Typography>{props.post.message}</Typography>
+            </CardContent>
+        </Card>
 
     </Grid>
     
-    )
-    }
+    
+    )}
+
+    export default Post
