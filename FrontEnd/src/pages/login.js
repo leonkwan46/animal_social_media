@@ -7,32 +7,34 @@ import { AccountCircle, Key } from '@mui/icons-material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import axios from 'axios';
 // import Top_nav from '../components/Top_nav';
-import { useNavigate } from 'react-router-dom';
-
-const backURL = "http://localhost:5000/login"
+import { useNavigate } from 'react-router';
 
 
-const onSubmit = async (values) =>{
-  
-  await axios.post(backURL,values)
-  .then(res =>{
-    
-      localStorage.setItem('token',res.data.token);
-      alert(JSON.stringify(res));
-      useNavigate('/',{replace:true})
-
-  })
-  .catch((err) => {
-      alert(err.response.data)
-      console.log('Error', err.response);
-    })
-};
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   }
+
+  const backURL = "http://localhost:5000/login"
+  const navigate = useNavigate()
+
+  const onSubmit = async (values) =>{
+  
+    await axios.post(backURL,values)
+    .then(res =>{
+      
+        localStorage.setItem('token',res.data.token);
+        // alert(JSON.stringify(res));
+        navigate('/')
+
+    })
+    .catch((err) => {
+        alert(err.response.data)
+        console.log('Error', err.response);
+      })  
+};
 
   return (
     <Formik
