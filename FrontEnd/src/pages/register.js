@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button, Grid, TextField } from '@mui/material';
-import { Form, Formik } from 'formik';
+import { Form, Formik, replace } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import Top_nav from '../components/Top_nav';
 
 const Register = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const checkError = (touched, errors) => {
         if (touched && errors) {
@@ -24,7 +24,7 @@ const Register = () => {
         values)
         .then((res) => {
             // localStorage.setItem('token', res.data.token)
-            // navigate("/test")
+            navigate("/",{replace:true})
         }).catch((err) => {
             alert(err)
             console.log(`Register Failed: ${err.status} : ${err.message}`);

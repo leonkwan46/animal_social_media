@@ -8,7 +8,7 @@ const errorHandler = require('./middleware/errorHandler')
 require('dotenv').config()
 
 
-const app = express();
+
 
 //Middlewares (App-level)
 app.use(express.urlencoded({extended:true}));
@@ -20,15 +20,17 @@ connectDB();
 
 
 // Register Router
+const registerRoute = require('./routes/register')
 app.use('/register', registerRoute)
 
 
-// Login Router
-app.use("/login", loginRoute);
+
 // Test Router
+const testRoute = require('./routes/test')
 app.use('/test', testRoute)
 
 //Login Router
+const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
 
 //get post Router

@@ -33,7 +33,7 @@ const Post = (props) => {
                     bgcolor: '#c6aea1',
                     border: 1,
                 }}> 
-                {props.post.username.charAt(0)}
+                {props.post.name.charAt(0)}
                 </Avatar>
                 }
                 action={
@@ -41,7 +41,7 @@ const Post = (props) => {
                       <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.post.username}
+                title={props.post.name}
                 subheader={format(new Date(props.post.createdAt),'MMM d,yyyy HH:mm')} />
             <CardContent
             sx={{
