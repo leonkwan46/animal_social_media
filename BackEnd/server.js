@@ -8,7 +8,7 @@ const errorHandler = require('./middleware/errorHandler')
 require('dotenv').config()
 
 
-const app = express();
+
 
 //Middlewares (App-level)
 app.use(express.urlencoded({extended:true}));
