@@ -1,36 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import {format} from 'date-fns'
 
-// const backURL = 'http://localhost:5000/getpost'
-// const accessToken = localStorage.getItem('token')
-// const getPost = () => {
-//     const [posts,setPosts] = useState([]);
-//     useEffect(()=>{
-//     // const postDB = async () =>
-//     // await axios.get(backURL,accessToken)
-//     // .then(res =>{
-//     //     console.log(res)
-//     //     setPosts()
-        
-//     // })
-//     // .catch((err) => {
-//     //     alert(err.response.data)
-//     //     console.log('Error', err.response);
-//     //   })
-//     async function fetchData(){
-//         const {data} = await http.get('backURL');
-//         setPosts(data.data.posts);
-//     }
-//     })
-//     }
-
 const Post = (props) => {
-    // props = getPost
+   
     console.log(props);
     return (<Grid
       container

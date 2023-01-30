@@ -7,15 +7,6 @@ const protected = require('../middleware/authMiddleware')
 const asyncHandler = require('express-async-handler')
 
 
-// // @desc get message
-// // @route GET /api/goals
-// // @access private
-// const getMessage = asyncHandler(async(req,res) => {
-//     // find message that specific for user!
-//     const messages = await Message.find({user: req.user.id})
-//     res.status(200).json(messages)
-// })
-
 router.get('/', protected, async(req, res, next) => {
     console.log(req.body)
         try{

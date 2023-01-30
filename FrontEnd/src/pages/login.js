@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/system';
 import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 import axios from 'axios';
-import Top_nav from '../components/Top_nav';
+// import Top_nav from '../components/Top_nav';
 import { useNavigate } from 'react-router-dom';
 
 const backURL = "http://localhost:5000/login"
@@ -15,12 +15,9 @@ const onSubmit = async (values) =>{
   
   await axios.post(backURL,values)
   .then(res =>{
-    // if(res.data.redirect === '/'){
-      // window.location = "/";
+    
       localStorage.setItem('token',res.data.token);
       alert(JSON.stringify(res));
-      // alert(JSON.stringify(res));
-      // }
       useNavigate('/',{replace:true})
 
   })
@@ -44,7 +41,6 @@ const Login = () => (
   >
   {({values,errors, touched, handleSubmit,handleChange,handleBlur}) => (
   <Container maxWidth="sm">
-     <Top_nav />
     <Box sx={{
             marginTop: 8,
             display: 'flex',
