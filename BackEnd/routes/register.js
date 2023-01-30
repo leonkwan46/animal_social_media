@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 const User = require('../db/users')
 const jwt = require('jsonwebtoken')
@@ -32,5 +32,7 @@ router.post('/', async(req, res, next) => {
         next(err)
     }
 })
+
+
 
 module.exports = router;

@@ -8,14 +8,17 @@ const errorHandler = require('./middleware/errorHandler')
 const multer = require('multer')
 require('dotenv').config()
 
-// MongoDB Connection
-connectDB()
 
-//MiddleWares (App-level)
-app.use(body.urlencoded({extended:true}))
-app.use(bodyParser.json())
+
+
+//Middlewares (App-level)
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
+
+// MongoDB Connection
+connectDB();
+
 
 // Register Router
 const registerRoute = require('./routes/register')
@@ -31,6 +34,9 @@ app.use('/profile', profileRoute)
 
 // const editProfilePic = require('./routes/editProfilePic')
 // app.use('./profile/edit_profile_pic', editProfilePic)
+//get post Router
+const getPostRoute = require('./routes/getPost')
+app.use('/getpost', getPostRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

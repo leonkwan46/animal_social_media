@@ -14,6 +14,7 @@ const Test = () => {
     nav(`/profile/${id}`)
   }
 
+<<<<<<< HEAD
 
   return (
     <Grid>
@@ -24,6 +25,26 @@ const Test = () => {
       <ProfilePicEdit />
     </Grid>
   );
+=======
+    // Have to use "data?", Because we are waiting for data to finish loading
+    return (
+        <Container maxWidth={false} disableGutters>
+            <TopNav />
+            
+            <Box sx={{padding: '10% 10%'}}>
+                <Typography variant='h4'>Username: </Typography> 
+                {loading?<Skeleton animation="wave" width={'50%'} />:null}
+                {error?(<Typography>{error}</Typography>):null}
+                {data?.data.username}
+                <Typography variant='h4'>Password: </Typography>
+                {loading?<Skeleton animation="wave" width={'50%'} />:null}
+                {error?(<Typography>{error}</Typography>):null}
+                {data?.data.password}
+            </Box>
+
+        </Container>
+    )
+>>>>>>> developers
 };
 
 export default Test;

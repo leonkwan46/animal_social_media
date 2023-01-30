@@ -1,0 +1,41 @@
+.post-wrapper {
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.profile-pic-for-post{
+    width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+    border: black solid 1px;
+    margin-right: 10px;
+}
+
+.post-upper{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.circular-container {
+    width: 40px;
+    height: 40px;
+    margin-right: 3%;
+}
+
+.post-lower {
+    margin-top: 10px;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.CircularProgressbar-trail, .CircularProgressbar-path{
+    stroke-width: 8px;
+}
