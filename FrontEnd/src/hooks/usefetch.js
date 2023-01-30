@@ -13,7 +13,6 @@ const useFetch = (url, headers) => {
             .then((res) => {
                 setData(res.data)
             }).catch((err) => {
-                err.message = ""
                 setError(err)
             }).finally(() => {
                 setLoading(false)

@@ -1,17 +1,20 @@
 import React from 'react';
-import Top_nav from '../components/Top_nav';
+import Post from "../components/createPost.js";
+import TopNav from '../components/TopNav';
+
 import Feed from '../components/Feed';
 
 const Homepage = () => {
+
   return (
-    <div className = "homepage" >
-        <Top_nav />
-        
-        <Feed />
+    <div className = "homepage">
+      <TopNav />
+      <Post/>
+      <Feed />
         
     </div>
    
-  )
-}
+  )}
+
 
 export default Homepage

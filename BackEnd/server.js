@@ -6,27 +6,29 @@ const connectDB = require('./db/config')
 const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
 require('dotenv').config()
-const protected = require('./middleware/authMiddleware')
 
-// MongoDB Connection
-connectDB()
 
-//MiddleWares (App-level)
-app.use(body.urlencoded({extended:true}))
-app.use(bodyParser.json())
+const app = express();
+
+//Middlewares (App-level)
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 
+// MongoDB Connection
+connectDB();
+
+
 // Register Router
-const registerRoute = require('./routes/register')
 app.use('/register', registerRoute)
 
+
+// Login Router
+app.use("/login", loginRoute);
 // Test Router
-const testRoute = require('./routes/test')
 app.use('/test', testRoute)
 
 //Login Router
-const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
 
 //get post Router

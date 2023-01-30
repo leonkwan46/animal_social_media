@@ -8,6 +8,16 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true
+    },
+    name: {
+        type: String,
+        require: true
+    },
+    date: {
+        type: String,
+    },
+    bio: {
+        type: String,
     }
 }, {collection: 'users'});
 
