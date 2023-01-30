@@ -1,55 +1,29 @@
-import React from 'react'
-import useFetch from '../hooks/usefetch';
-import { Typography, Skeleton } from '@mui/material';
-import { Box, Container } from '@mui/system';
-import TopNav from '../components/TopNav';
+import { Button, Grid } from "@mui/material";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ProfileEditForm from "../components/ProfileEditForm/ProfileEditForm";
+import ProfilePicEdit from "../components/ProfileEditForm/ProfilePicEdit/ProfilePicEdit";
+import RegisterButton from "../components/RegisterButton/RegisterButton";
+import TopNav from "../components/TopNav/TopNav";
+import useFetch from "../hooks/usefetch";
 
 const Test = () => {
-
-    const { data, loading, error } = useFetch('http://localhost:5000/test', {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem('token')
-            }
-        })
-
-
-    // |||||
-    // vvvvv
-    // This is the olde way to get API call
-
-    // axios.get('http://localhost:5000/test', {
-    //     headers: {
-    //         authorization: 'Bearer ' + localStorage.getItem('token')
-    //     }
-    // }).then((res)=> {
-    //     setUsername(res.data.data.username)
-    //     setPasswrod(res.data.data.password)
-    // }).catch((err) => {
-    //     // USE [err.response.data] TO GET CUSTOM MESSAGE
-    //     console.log('====================================');
-    //     console.log(err.response.data);
-    //     console.log('====================================');
-    // })
+  const id = localStorage.getItem('token')
+  const nav = useNavigate();
+  const handleClick = () => {
+    nav(`/profile/${id}`)
+  }
 
 
-    // Have to use "data?", Because we are waiting for data to finish loading
-    return (
-        <Container maxWidth={false} disableGutters>
-            <TopNav />
-            
-            <Box sx={{padding: '10% 10%'}}>
-                <Typography variant='h4'>Username: </Typography> 
-                {loading?<Skeleton animation="wave" width={'50%'} />:null}
-                {error?(<Typography>{error}</Typography>):null}
-                {data?.data.username}
-                <Typography variant='h4'>Password: </Typography>
-                {loading?<Skeleton animation="wave" width={'50%'} />:null}
-                {error?(<Typography>{error}</Typography>):null}
-                {data?.data.password}
-            </Box>
-
-        </Container>
-    )
+  return (
+    <Grid>
+      <TopNav />
+      <RegisterButton />
+      <ProfileEditForm />
+      <Button onClick={handleClick} >asd</Button>
+      <ProfilePicEdit />
+    </Grid>
+  );
 };
 
 export default Test;

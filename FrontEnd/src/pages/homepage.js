@@ -1,11 +1,7 @@
-import React from 'react';
-import TopNav from '../components/TopNav';
-
 const Homepage = () => {
   return (
-    <TopNav />
+    <h1>HI</h1>
+  );
+};
 
-  )
-}
-
-export default Homepage
+export default Homepage;

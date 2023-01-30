@@ -14,9 +14,6 @@ router.get('/', authenticateToken, (req, res, next) => {
             bio: req.user.bio,
             date: req.user.date,
         }
-        console.log('====================================');
-        console.log(data);
-        console.log('====================================');
         res.json({data});
     } catch (err) {
         next({message: "Failed sending Data"})

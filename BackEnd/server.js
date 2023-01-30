@@ -5,6 +5,7 @@ const cors = require('cors')
 const connectDB = require('./db/config')
 const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
+const multer = require('multer')
 require('dotenv').config()
 
 // MongoDB Connection
@@ -27,6 +28,9 @@ app.use('/login', loginRoute)
 // Profile Router
 const profileRoute = require('./routes/profile')
 app.use('/profile', profileRoute)
+
+// const editProfilePic = require('./routes/editProfilePic')
+// app.use('./profile/edit_profile_pic', editProfilePic)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
