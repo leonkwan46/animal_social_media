@@ -1,16 +1,14 @@
-require('dotenv').config();
+const express = require('express')
+const app = express()
+const body = require('body-parser')
+const cors = require('cors')
+const connectDB = require('./db/config')
+const bodyParser = require('body-parser')
+const errorHandler = require('./middleware/errorHandler')
+require('dotenv').config()
 
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./db/config');
-const errorHandler = require('./middleware/errorHandler');
 
-// Import routes
-const registerRoute = require('./routes/register');
-const loginRoute = require("./routes/login");
-const testRoute = require('./routes/test');
 
-const app = express();
 
 //Middlewares (App-level)
 app.use(express.urlencoded({extended:true}));
@@ -32,6 +30,10 @@ app.use('/test', testRoute)
 
 //Login Router
 app.use('/login', loginRoute)
+
+//get post Router
+const getPostRoute = require('./routes/getPost')
+app.use('/getpost', getPostRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

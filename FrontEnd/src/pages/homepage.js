@@ -1,21 +1,16 @@
-import React from 'react';
+import React from "react";
 import Post from "../components/createPost.js";
-import TopNav from '../components/TopNav';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
-import charoPic from "../assets/images/charo.jpg";
+import TopNav from "../components/TopNav";
+import { Container } from "@mui/system";
+import Feed from "../components/Feed";
+
 import "./homepage.css";
-import { Box, Container } from '@mui/system';
 
 const Homepage = () => {
-
   return (
-    <Container disableGutters={true} maxWidth = {false} className = "homepage">
+    <Container className="homepage">
       <TopNav />
-      <Box className="left-side">
-        <Post />
-      </Box>
+      <Post />
     </Container>
-  )
-}
-
-export default Homepage
+  );
+};
