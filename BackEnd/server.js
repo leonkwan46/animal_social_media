@@ -33,7 +33,7 @@ const profileRoute = require('./routes/profile')
 app.use('/profile', profileRoute)
 
 //create, get post Router
-const homepageRoute = require('./routes/getPost')
+const homepageRoute = require('./routes/homepage')
 app.use('/homepage', homepageRoute)
 
 // Error Handling middleware always at LAST
