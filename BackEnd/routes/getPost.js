@@ -33,14 +33,8 @@ router.get('/', protected, async(req, res, next) => {
             console.log('====================================');
             console.log(err);
             console.log('====================================');
-            next(err)
-            
+            next(err);
         }
-
-     
-
-        
-    
 })
 
 module.exports = router;
