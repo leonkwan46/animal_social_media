@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-pascal-case */
-import React from "react";
-import { Button, Grid, TextField } from "@mui/material";
-import { Form, Formik } from "formik";
-import { Box, Container } from "@mui/system";
-import { registerValidation } from "../validations/validation";
-import axios from "axios";
-import { useNavigate } from "react-router";
-import Top_nav from "../components/Top_nav";
+import React from 'react';
+import { Button, Grid, TextField } from '@mui/material';
+import { Form, Formik } from 'formik';
+import { Box, Container } from '@mui/system';
+import { registerValidation } from '../validations/validation'
+import axios from 'axios'
+import { useNavigate } from 'react-router';
+import Top_nav from '../components/Top_nav';
 
 const Register = () => {
   const navigate = useNavigate();

@@ -1,35 +1,29 @@
-import React from 'react'
-import useFetch from '../hooks/usefetch';
-import { Typography, Skeleton } from '@mui/material';
-import { Box, Container } from '@mui/system';
-import TopNav from '../components/TopNav';
+import { Button, Grid } from "@mui/material";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileEditForm from "../components/ProfileEditForm/ProfileEditForm";
+import ProfilePicEdit from "../components/ProfileEditForm/ProfilePicEdit/ProfilePicEdit";
+import RegisterButton from "../components/RegisterButton/RegisterButton";
+import TopNav from "../components/TopNav/TopNav";
+import useFetch from "../hooks/usefetch";
 
 const Test = () => {
+  const id = localStorage.getItem('token')
+  const nav = useNavigate();
+  const handleClick = () => {
+    nav(`/profile/${id}`)
+  }
 
-    const { data, loading, error } = useFetch('http://localhost:5000/test', {
-            headers: {
-                authorization: 'Bearer ' + sessionStorage.getItem('token')
-            }
-        })
 
-    // Have to use "data?", Because we are waiting for data to finish loading
-    return (
-        <Container maxWidth={false} disableGutters>
-            <TopNav />
-            
-            <Box sx={{padding: '10% 10%'}}>
-                <Typography variant='h4'>Username: </Typography> 
-                {loading?<Skeleton animation="wave" width={'50%'} />:null}
-                {error?(<Typography>{error}</Typography>):null}
-                {data?.data.username}
-                <Typography variant='h4'>Password: </Typography>
-                {loading?<Skeleton animation="wave" width={'50%'} />:null}
-                {error?(<Typography>{error}</Typography>):null}
-                {data?.data.password}
-            </Box>
-
-        </Container>
-    )
+  return (
+    <Grid>
+      <TopNav />
+      <RegisterButton />
+      <ProfileEditForm />
+      <Button onClick={handleClick} >asd</Button>
+      <ProfilePicEdit />
+    </Grid>
+  );
 };
 
 export default Test;

@@ -5,6 +5,7 @@ const cors = require('cors')
 const connectDB = require('./db/config')
 const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
+const multer = require('multer')
 require('dotenv').config()
 
 
@@ -20,16 +21,16 @@ connectDB();
 
 
 // Register Router
+const registerRoute = require('./routes/register')
 app.use('/register', registerRoute)
 
-
-// Login Router
-app.use("/login", loginRoute);
-// Test Router
-app.use('/test', testRoute)
-
 //Login Router
+const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
+
+// Profile Router
+const profileRoute = require('./routes/profile')
+app.use('/profile', profileRoute)
 
 //get post Router
 const getPostRoute = require('./routes/getPost')
