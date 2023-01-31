@@ -11,6 +11,9 @@ const Homepage = () => {
     <Container className="homepage">
       <TopNav />
       <Post />
+      <Feed />
     </Container>
   );
 };
+
+export default Homepage;
