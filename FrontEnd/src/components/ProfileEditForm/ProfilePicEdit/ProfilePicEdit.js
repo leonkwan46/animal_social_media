@@ -22,7 +22,7 @@ const ProfilePicEdit = () => {
       type: values.file.type,
       size: `${values.file.size} bytes`,
     });
-    axios.post("http://localhost:5000/profile/profile_pic_edit", values)
+    axios.post("http://localhost:5000/profile/profile_pic_edit", {values})
     .then((res) => {
 
     })
