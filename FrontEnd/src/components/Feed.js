@@ -4,7 +4,6 @@ import { Grid, Typography,Button } from "@mui/material";
 import { useEffect } from 'react';
 import { useState } from "react";
 import axios from "axios";
-import { typography } from "@mui/system";
  
 
 
@@ -12,7 +11,7 @@ import { typography } from "@mui/system";
 
 const Feed = () => {
     const [status,setData] = useState([])
-    const backURL = 'http://localhost:5000/getpost'
+    const backURL = 'http://localhost:5000/homepage'
     const accessToken = localStorage.getItem('token')
     
     useEffect(() =>{

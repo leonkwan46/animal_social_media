@@ -31,13 +31,9 @@ app.use('/test', testRoute)
 const loginRoute = require('./routes/login')
 app.use('/login', loginRoute)
 
-//get post Router
-const getPostRoute = require('./routes/getPost')
-app.use('/getpost', getPostRoute)
-
-//create post Router
-const createPostRoute = require('./routes/createPost')
-app.use('/createpost', createPostRoute)
+//create, get post Router
+const homepageRoute = require('./routes/getPost')
+app.use('/homepage', homepageRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
