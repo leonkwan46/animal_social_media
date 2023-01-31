@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { Button, Grid, TextField } from '@mui/material';
-import { Form, Formik } from 'formik';
+import { Form, Formik, replace } from 'formik';
 import { Box, Container } from '@mui/system';
 import { registerValidation } from '../validations/validation'
 import axios from 'axios'
@@ -25,7 +25,7 @@ const Register = () => {
         values)
         .then((res) => {
             // localStorage.setItem('token', res.data.token)
-            // navigate("/test")
+            navigate("/",{replace:true})
         }).catch((err) => {
             alert(err)
             console.log(`Register Failed: ${err.status} : ${err.message}`);
