@@ -1,5 +1,5 @@
 import Post from "./post";
-import { Grid, Typography,Button } from "@mui/material";
+import { Grid, Typography} from "@mui/material";
 // import {Posts} from './dummyData'
 import { useEffect } from 'react';
 import { useState } from "react";
@@ -54,8 +54,8 @@ const Feed = () => {
         container
         position= "relative"
         direction="column"
-        justifyContent="center"
-        alignItems="stretch"
+        justifyContent="space-evenly"
+        alignItems="center"
         maxWidth="sm"
         >
             {status.length >0 ? status.map(p=>(
