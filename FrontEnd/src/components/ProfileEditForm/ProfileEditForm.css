@@ -1,0 +1,71 @@
+.dialog-wrap {
+  justify-content: center;
+  text-align: center;
+  min-height: 850px;
+  min-width: 550px;
+}
+
+.dialog-item-wrap {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dialog-title.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+.card {
+  width: 500px;
+}
+
+.card-wrap {
+  margin: 10px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header-text.css-ahj2mt-MuiTypography-root {
+  font-weight: bolder;
+}
+
+.card-item-pic {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 15px 0;
+}
+
+.card-item-icon {
+  margin: 0 10px;
+}
+
+.card-item-info-wrap {
+  display: block;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-item-info {
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.avatar.css-1wlk0hk-MuiAvatar-root {
+  width: 200px;
+  height: 200px;
+  background-color: #aaaaaa;
+}
+
+.card-item-bg-img {
+  height: 200px;
+  width: 80%;
+  object-fit: cover;
+}

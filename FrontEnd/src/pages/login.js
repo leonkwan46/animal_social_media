@@ -6,34 +6,35 @@ import { loginValidation } from '../../src/validations/validation'
 import { AccountCircle, Key } from '@mui/icons-material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import axios from 'axios';
+// import Top_nav from '../components/Top_nav';
+import { useNavigate } from 'react-router';
 
 
-const backURL = "http://localhost:5000/login"
-
-
-const onSubmit = async (values) =>{
-  
-  await axios.post(backURL,values)
-  .then(res =>{
-    // if(res.data.redirect === '/'){
-      // window.location = "/";
-      sessionStorage.setItem('token',res.data.token);
-      alert(JSON.stringify(res));
-      // alert(JSON.stringify(res));
-      // }
-
-  })
-  .catch((err) => {
-      alert(err.response.data)
-      console.log('Error', err.response);
-    })
-};
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   }
+
+  const backURL = "http://localhost:5000/login"
+  // const navigate = useNavigate()
+
+  const onSubmit = async (values) =>{
+  
+    await axios.post(backURL,values)
+    .then(res =>{
+      
+        localStorage.setItem('token',res.data.token);
+        // alert(JSON.stringify(res));
+        // navigate('/')
+
+    })
+    .catch((err) => {
+        alert(err.response.data)
+        console.log('Error', err.response);
+      })  
+};
 
   return (
     <Formik
@@ -47,12 +48,10 @@ const Login = () => {
     //   // alert(JSON.stringify(values))
     //   axios.post(backURL, values)  
     // }}
-    >
-      {({ values, errors, touched, handleSubmit, handleChange, handleBlur }) => (
-        <Container maxWidth="sm" sx={{
-       
-        }}>
-          <Box sx={{
+  >
+  {({values,errors, touched, handleSubmit,handleChange,handleBlur}) => (
+  <Container maxWidth="sm">
+    <Box sx={{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
