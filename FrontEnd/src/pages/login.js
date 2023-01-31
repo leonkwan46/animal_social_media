@@ -18,7 +18,7 @@ const onSubmit = async (values) =>{
   .then(res =>{
     // if(res.data.redirect === '/'){
       // window.location = "/";
-      sessionStorage.setItem('token',res.data.token);
+      localStorage.setItem('token',res.data.token);
       alert(JSON.stringify(res));
       // alert(JSON.stringify(res));
       // }

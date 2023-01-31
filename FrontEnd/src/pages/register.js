@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-pascal-case */
-import React from 'react';
-import { Button, Grid, TextField } from '@mui/material';
-import { Form, Formik } from 'formik';
-import { Box, Container } from '@mui/system';
-import { registerValidation } from '../validations/validation'
-import axios from 'axios'
-import { useNavigate } from 'react-router';
-import Top_nav from '../components/Top_nav';
+import React from "react";
+import { Button, Grid, TextField } from "@mui/material";
+import { Form, Formik } from "formik";
+import { Box, Container } from "@mui/system";
+import { registerValidation } from "../validations/validation";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import Top_nav from "../components/Top_nav";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ const Register = () => {
     await axios
       .post("http://localhost:5000/register", values)
       .then((res) => {
-        // localStorage.setItem('token', res.data.token)
-        // navigate("/test")
+        localStorage.setItem("token", res.data.token);
+        // navigate("/test");
       })
       .catch((err) => {
         alert(err);
