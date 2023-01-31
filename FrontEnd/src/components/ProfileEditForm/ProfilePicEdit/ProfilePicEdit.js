@@ -3,7 +3,6 @@ import axios from "axios";
 import { Formik, Form } from "formik";
 import React from "react";
 import { useState } from "react";
-import useFetch from "../../../hooks/usefetch";
 import "./ProfilePicEdit.css"
 
 const ProfilePicEdit = () => {
