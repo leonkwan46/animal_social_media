@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 const authenticateToken = require('../middleware/authMiddleware')
 
-// Endpoint Can't do '/test'
-// Do '/' instead, as this Endpoint is the home of this Endpoint
+const multer
 
 router.get('/', authenticateToken, (req, res, next) => {
     
@@ -18,6 +17,12 @@ router.get('/', authenticateToken, (req, res, next) => {
     } catch (err) {
         next({message: "Failed sending Data"})
     }
+})
+
+router.post('/profile_pic_edit', (req, res) => {
+    console.log('====================================');
+    console.log();
+    console.log('====================================');
 })
 
 module.exports = router

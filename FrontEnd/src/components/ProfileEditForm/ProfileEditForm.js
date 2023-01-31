@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Grid,
   Skeleton,
   Stack,
   Typography,
@@ -19,6 +18,8 @@ import CakeIcon from "@mui/icons-material/Cake";
 import NotesIcon from "@mui/icons-material/Notes";
 import useFetch from "../../hooks/usefetch";
 import "./ProfileEditForm.css";
+import ProfilePicEdit from "./ProfilePicEdit/ProfilePicEdit";
+import BgPicEdit from "./BgPicEdit/BgAddEdit";
 
 const ProfileEditForm = () => {
   const [open, setOpen] = useState(false);
@@ -52,7 +53,8 @@ const ProfileEditForm = () => {
                     <Typography className="card-header-text">
                       Profile Picture
                     </Typography>
-                    <Button variant="outlined">Edit</Button>
+                    {/* Edit Button */}
+                    <ProfilePicEdit />
                   </Box>
                   <Box className="card-item-pic">
                     <Avatar
@@ -69,7 +71,8 @@ const ProfileEditForm = () => {
                     <Typography className="card-header-text">
                       Cover Photo
                     </Typography>
-                    <Button variant="outlined">Edit</Button>
+                    {/* Edit Button */}
+                    <BgPicEdit />
                   </Box>
                   <Box className="card-item-pic">
                     <Card
@@ -111,7 +114,6 @@ const ProfileEditForm = () => {
                       <CakeIcon className="card-item-icon" />
                       {loading ? <Skeleton animation="wave" /> : null}
                       {error ? <Typography>{error}</Typography> : null}
-
                       {data ? <Typography>{data.data.date}</Typography> : null}
                     </Box>
 

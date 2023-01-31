@@ -32,8 +32,6 @@ app.use('/login', loginRoute)
 const profileRoute = require('./routes/profile')
 app.use('/profile', profileRoute)
 
-// const editProfilePic = require('./routes/editProfilePic')
-// app.use('./profile/edit_profile_pic', editProfilePic)
 //get post Router
 const getPostRoute = require('./routes/getPost')
 app.use('/getpost', getPostRoute)
