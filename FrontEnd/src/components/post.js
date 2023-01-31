@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {format} from 'date-fns'
+// import ('./post.css')
 
 const Post = (post) => {
    
@@ -13,7 +14,7 @@ const Post = (post) => {
       alignItems="stretch"
       maxWidth="sm"
     >
-        <Card
+        <Card className='post'
         sx={{
             bgcolor:'#f6d5d8',
             boxShadow:3,
@@ -21,8 +22,8 @@ const Post = (post) => {
             padding: 1,
             marginBottom:4,
             border:1
-
-        }}>
+        }}
+        >
             <CardHeader
             sx={{
                 marginRight:2,

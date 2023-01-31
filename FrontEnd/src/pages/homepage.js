@@ -3,7 +3,7 @@ import Post from "../components/createPost.js";
 import TopNav from '../components/TopNav';
 
 import Feed from '../components/Feed';
-import { TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 
 const Homepage = () => {
 
@@ -12,9 +12,10 @@ const Homepage = () => {
     
     <div className = "homepage">
       <TopNav />
+      <Grid>
       <Post/>
       <Feed />
-      
+      </Grid>
     </div>
    
   )}
