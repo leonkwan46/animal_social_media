@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const authenticateToken = require('../middleware/authMiddleware')
-
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -28,10 +27,10 @@ router.get('/', authenticateToken, (req, res, next) => {
 })
 
 router.post('/profile_pic_edit', (req, res) => {
-    const upload = multer({ storage: storage }).single('image')
+    const upload = multer({ storage: storage }).array('event_thumbnail')
     upload(req, res, () => {
         console.log('====================================');
-        console.log(req.file);
+        console.log(req.upl);
         console.log('====================================');
     })
 })

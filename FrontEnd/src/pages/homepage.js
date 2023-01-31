@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from "../components/createPost.js";
-import TopNav from '../components/TopNav';
+import TopNav from '../components/TopNav/TopNav';
 
 import Feed from '../components/Feed';
 
