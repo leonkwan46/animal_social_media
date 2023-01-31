@@ -3,9 +3,9 @@ import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } f
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {format} from 'date-fns'
 
-const Post = (props) => {
+const Post = (post) => {
    
-    console.log(props);
+    console.log(post);
     return (<Grid
       container
       direction="column"
@@ -33,7 +33,7 @@ const Post = (props) => {
                     bgcolor: '#c6aea1',
                     border: 1,
                 }}> 
-                {props.post.name.charAt(0)}
+                {post.post.name.charAt(0)}
                 </Avatar>
                 }
                 action={
@@ -41,8 +41,8 @@ const Post = (props) => {
                       <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.post.name}
-                subheader={format(new Date(props.post.createdAt),'MMM d,yyyy HH:mm')} />
+                title={post.post.name}
+                subheader={format(new Date(post.post.createdAt),'MMM d,yyyy HH:mm')} />
             <CardContent
             sx={{
                 bgcolor:'#FFFFFF',
@@ -53,7 +53,7 @@ const Post = (props) => {
                 borderRadius:1,
 
             }}>
-                <Typography>{props.post.message}</Typography>
+                <Typography>{post.post.text}</Typography>
             </CardContent>
         </Card>
 

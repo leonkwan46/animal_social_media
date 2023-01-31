@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 //schema = field in the desire collections
 
 const messageSchema = mongoose.Schema({
-    user:{
+    id:{
         // define the type of user by ID from created message
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -13,6 +13,10 @@ const messageSchema = mongoose.Schema({
     text:{
         type: String,
         required: [true, 'Please add text']
+    },
+    name:{
+        type: String,
+        required: true,
     }
 },{
     timestamps: true

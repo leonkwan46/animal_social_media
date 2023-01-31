@@ -18,7 +18,7 @@ const Login = () => {
   }
 
   const backURL = "http://localhost:5000/login"
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const onSubmit = async (values) =>{
   
@@ -27,7 +27,7 @@ const Login = () => {
       
         localStorage.setItem('token',res.data.token);
         // alert(JSON.stringify(res));
-        navigate('/')
+        // navigate('/')
 
     })
     .catch((err) => {

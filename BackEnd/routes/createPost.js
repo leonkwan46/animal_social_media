@@ -10,9 +10,10 @@ const asyncHandler = require('express-async-handler')
 router.post('/', protected, async(req, res, next) => {
     console.log(req.body)
         try{
-            const message = await Message.create({
+            const message = await Messages.create({
                 text: req.body.text,
-                user: req.user.name,
+                id: req.user.id,
+                name: req.user.name,
             })
             
         console.log("check1")

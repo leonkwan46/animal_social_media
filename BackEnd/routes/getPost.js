@@ -14,6 +14,7 @@ router.get('/', protected, async(req, res, next) => {
         console.log("check1")
         // check if password is matched
         if(message){
+            console.log(message)
             res.status(200).json(message)
             }
         else{

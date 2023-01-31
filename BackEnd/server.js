@@ -37,7 +37,7 @@ app.use('/getpost', getPostRoute)
 
 //create post Router
 const createPostRoute = require('./routes/createPost')
-app.use('/getpost', createPostRoute)
+app.use('/createpost', createPostRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
