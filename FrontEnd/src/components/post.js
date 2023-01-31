@@ -1,37 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import {format} from 'date-fns'
 
-// const backURL = 'http://localhost:5000/getpost'
-// const accessToken = localStorage.getItem('token')
-// const getPost = () => {
-//     const [posts,setPosts] = useState([]);
-//     useEffect(()=>{
-//     // const postDB = async () =>
-//     // await axios.get(backURL,accessToken)
-//     // .then(res =>{
-//     //     console.log(res)
-//     //     setPosts()
-        
-//     // })
-//     // .catch((err) => {
-//     //     alert(err.response.data)
-//     //     console.log('Error', err.response);
-//     //   })
-//     async function fetchData(){
-//         const {data} = await http.get('backURL');
-//         setPosts(data.data.posts);
-//     }
-//     })
-//     }
-
-const Post = (props) => {
-    // props = getPost
-    console.log(props);
+const Post = (post) => {
+   
+    console.log(post);
     return (<Grid
       container
       direction="column"
@@ -59,7 +33,7 @@ const Post = (props) => {
                     bgcolor: '#c6aea1',
                     border: 1,
                 }}> 
-                {props.post.username.charAt(0)}
+                {post.post.name.charAt(0)}
                 </Avatar>
                 }
                 action={
@@ -67,8 +41,8 @@ const Post = (props) => {
                       <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.post.username}
-                subheader={format(new Date(props.post.createdAt),'MMM d,yyyy HH:mm')} />
+                title={post.post.name}
+                subheader={format(new Date(post.post.createdAt),'MMM d,yyyy HH:mm')} />
             <CardContent
             sx={{
                 bgcolor:'#FFFFFF',
@@ -79,7 +53,7 @@ const Post = (props) => {
                 borderRadius:1,
 
             }}>
-                <Typography>{props.post.message}</Typography>
+                <Typography>{post.post.text}</Typography>
             </CardContent>
         </Card>
 

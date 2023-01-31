@@ -12,7 +12,7 @@ require('dotenv').config()
 
 
 //Middlewares (App-level)
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
@@ -32,9 +32,9 @@ app.use('/login', loginRoute)
 const profileRoute = require('./routes/profile')
 app.use('/profile', profileRoute)
 
-//get post Router
-const getPostRoute = require('./routes/getPost')
-app.use('/getpost', getPostRoute)
+//create, get post Router
+const homepageRoute = require('./routes/homepage')
+app.use('/homepage', homepageRoute)
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

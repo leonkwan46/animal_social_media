@@ -4,11 +4,9 @@ import TopNav from "../components/TopNav";
 import { Container, Box } from "@mui/system";
 import Feed from "../components/Feed";
 
-import "./homepage.css";
-
 const Homepage = () => {
   return (
-    <Container className="homepage" disableGutters={true} maxWidth={false}>
+    <Container disableGutters={true} maxWidth={false} className="homepage">
       <TopNav />
       <Box className="left-side">
         <Post />
