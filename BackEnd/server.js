@@ -1,12 +1,10 @@
 const express = require('express')
 const app = express()
-const body = require('body-parser')
 const cors = require('cors')
 const connectDB = require('./db/config')
-const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
 const multer = require('multer')
-require('dotenv').config()
+require('dotenv').config();
 
 
 
@@ -18,7 +16,6 @@ app.use(cors());
 
 // MongoDB Connection
 connectDB();
-
 
 // Register Router
 const registerRoute = require('./routes/register')

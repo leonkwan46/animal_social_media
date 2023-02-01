@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 
+import axios from "axios";
+
 import profilePic from "../assets/images/charo.jpg";
 import { TextField, Button, Avatar } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import SendIcon from "@mui/icons-material/Send";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -16,14 +20,55 @@ const user = {
 
 const maxLength = 280;
 
+const backURL = "http://localhost:5000/homepage";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={8} ref={ref} variant="filled" {...props} />;
+});
+
 const Post = () => {
-  const handleSubmit = (values) => {
-    alert(values.text);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const onSubmit = async (values, { setValues }) => {
+    try {
+      if (values.length === 0)
+        throw new Error("You need to write more than 1 letter!");
+      await axios
+        .post(
+          backURL,
+          { text: values.text },
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.status);
+          handleOpen();
+          setValues({ text: "", length: 0, percent: 0 });
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <Formik
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       initialValues={{ text: "", length: 0, percent: 0 }}
     >
       {({ values, handleChange, handleSubmit }) => (
@@ -82,12 +127,26 @@ const Post = () => {
             </div>
             <Button
               type="submit"
+              disabled={values.length === 0 ? true : false}
               variant="contained"
               size="medium"
               endIcon={<SendIcon />}
             >
               Send
             </Button>
+            <Snackbar
+              open={open}
+              autoHideDuration={2500}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+            >
+              <Alert onClose={handleClose} severity="info">
+                This is a success message!
+              </Alert>
+            </Snackbar>
           </div>
         </Form>
       )}
