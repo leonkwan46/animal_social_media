@@ -1,8 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Grid, Typography, Button } from "@mui/material";
 import Post from "./post";
- 
+import { Grid, Typography} from "@mui/material";
+// import {Posts} from './dummyData'
+import { useEffect } from 'react';
+import { useState } from "react";
+import axios from "axios";
+ import "./feed.css"
+import { Box, Container } from "@mui/system";
+
+
+
+
 const Feed = () => {
     const [status,setData] = useState([])
     const backURL = 'http://localhost:5000/homepage'
@@ -44,24 +51,23 @@ const Feed = () => {
     return( 
     // ({handleSubmit}) => {
         
-    <Grid
-        container
-        position= "relative"
-        direction="column"
-        justifyContent="center"
-        alignItems="stretch"
-        maxWidth="sm"
+    <div
+        className="post-wrapper"
         >
+            <Box>
             {status.length >0 ? status.map(p=>(
                 <Post key={p._id} post={p}/>))
                 
             : <Typography>There's no post!</Typography>
             }
+            </Box>
+            <br/>
+            <Box>
             {status.length >0 ? 
-            <Typography> That's all.</Typography>
+            <Typography> - That's all. - </Typography>
             :<Typography></Typography>}
-         
-      </Grid>
+            </Box>
+      </div>
       )}
     //   )}}
        

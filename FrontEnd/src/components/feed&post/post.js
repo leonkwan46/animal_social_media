@@ -1,28 +1,22 @@
 import React from 'react';
-import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent } from '@mui/material';
+import { Typography, Grid, Avatar, Card, CardHeader, IconButton, CardContent, Container } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {format} from 'date-fns'
+import ('./feed.css')
 
 const Post = (post) => {
    
     console.log(post);
-    return (<Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="stretch"
-      maxWidth="sm"
+    return (
+    <Container
+      className="post"
     >
-        <Card
+        <Card 
         sx={{
             bgcolor:'#f6d5d8',
-            boxShadow:3,
-            borderRadius:2,
-            padding: 1,
-            marginBottom:4,
-            border:1
-
-        }}>
+        }}
+        className="card-post"
+        >
             <CardHeader
             sx={{
                 marginRight:2,
@@ -57,7 +51,7 @@ const Post = (post) => {
             </CardContent>
         </Card>
 
-    </Grid>
+    </Container>
     
     
     )}
