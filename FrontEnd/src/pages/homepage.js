@@ -1,22 +1,29 @@
 import React from 'react';
 import Post from "../components/createPost.js";
 import TopNav from '../components/TopNav';
-
-import Feed from '../components/Feed';
+import NotificationWindow from '../components/notiWindow.js';
+import Feed from '../components/feed&post/Feed.js';
 import { Grid, TextField } from '@mui/material';
+import {Box, Container} from '@mui/system'
+import "./homepage.css"
 
 const Homepage = () => {
 
   
   return (
     
-    <div className = "homepage">
+    <Container disableGutters={true} maxWidth={false}>
       <TopNav />
-      <Grid>
-      <Post/>
-      <Feed />
-      </Grid>
-    </div>
+      <Box className = "body-wrapper">
+        <Box className = "left-side">
+        <Post/>
+        <Feed/>
+        </Box>
+        <Box className = "right-side">
+      <NotificationWindow />
+      </Box>
+      </Box>
+    </Container>
    
   )}
 

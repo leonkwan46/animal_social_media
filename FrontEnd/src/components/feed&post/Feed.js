@@ -4,7 +4,8 @@ import { Grid, Typography} from "@mui/material";
 import { useEffect } from 'react';
 import { useState } from "react";
 import axios from "axios";
- 
+ import "./feed.css"
+import { Box, Container } from "@mui/system";
 
 
 
@@ -50,24 +51,23 @@ const Feed = () => {
     return( 
     // ({handleSubmit}) => {
         
-    <Grid
-        container
-        position= "relative"
-        direction="column"
-        justifyContent="space-evenly"
-        alignItems="center"
-        maxWidth="sm"
+    <div
+        className="post-wrapper"
         >
+            <Box>
             {status.length >0 ? status.map(p=>(
                 <Post key={p._id} post={p}/>))
                 
             : <Typography>There's no post!</Typography>
             }
+            </Box>
+            <br/>
+            <Box>
             {status.length >0 ? 
-            <Typography> That's all.</Typography>
+            <Typography> - That's all. - </Typography>
             :<Typography></Typography>}
-         
-      </Grid>
+            </Box>
+      </div>
       )}
     //   )}}
        

@@ -1,0 +1,21 @@
+.body-wrapper{
+ width: 100%;
+display: flex;
+flex-direction: row;
+}
+
+.left-side{
+width: 70vw;
+height: auto; 
+display: flex;
+flex-direction: column;
+background-color: #e8eaf6;
+}
+
+.right-sider{
+width: 30vw;
+height: auto;
+display: flex;
+flex-direction: column; 
+background-color: #c4cbf7;
+}
