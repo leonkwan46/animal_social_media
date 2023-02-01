@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -6,6 +6,8 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  IconButton,
+  InputAdornment,
   Stack,
   TextField,
 } from "@mui/material";
@@ -15,9 +17,15 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState } from "react";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 const RegisterButton = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   // RegisterButton Open/Close methods
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -108,13 +116,29 @@ const RegisterButton = () => {
                       value={values.password}
                       id="password"
                       label="Password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       error={checkError(touched.password, errors.password)}
                       helperText={
                         checkError(touched.password, errors.password)
                           ? errors.password
                           : ""
                       }
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={handleShowPassword}
+                              size="small"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
 
                     <TextField
@@ -156,7 +180,6 @@ const RegisterButton = () => {
 
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DesktopDatePicker
-                        InputProps={{ sx: { width: "225px" } }}
                         renderInput={(date) => (
                           <TextField
                             {...date}
