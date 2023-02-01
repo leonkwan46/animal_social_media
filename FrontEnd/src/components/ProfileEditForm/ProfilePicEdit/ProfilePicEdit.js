@@ -1,12 +1,13 @@
-import { Box, Button, Dialog } from "@mui/material";
+import { Avatar, Box, Button, Dialog, Typography } from "@mui/material";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import React from "react";
 import { useState } from "react";
-import "./ProfilePicEdit.css"
+import "./ProfilePicEdit.css";
 
 const ProfilePicEdit = () => {
   const [open, setOpen] = useState(false);
+  const [img, setImg] = useState()
 
   const handleOpen = () => {
     setOpen(true);
@@ -16,48 +17,68 @@ const ProfilePicEdit = () => {
     setOpen(false);
   };
 
-  const onSubmit = (values) => {
-    console.log({
-      fileName: values.file.name,
-      type: values.file.type,
-      size: `${values.file.size} bytes`,
-    });
-    axios.post("http://localhost:5000/profile/profile_pic_edit", {values})
-    .then((res) => {
+  axios.get("http://localhost:5000/profile/profile_pic_edit", {
+    headers: {
+      authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  }).then((res) => {
+    setImg(res.data)
+  })
 
-    })
-  }
+  const onSubmit = async (values) => {
+    // This fking took me 6 hours of endless researching
+    // PLEASE DON'T DO THE SAME SHIT AGAIN
+    const imageData = new FormData();
+    imageData.append("image", values.photo);
 
-
+    await axios
+      .post("http://localhost:5000/profile/profile_pic_edit", imageData, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        alert(res.data)
+        setOpen(false);
+        window.location.reload(false);
+      });
+  };
 
   return (
-    <>
-      <Button variant="outlined" onClick={handleOpen}>Edit</Button>
+    <Box className="card-wrap">
+      <Box className="card-header">
+        <Typography className="card-header-text">Profile Picture</Typography>
+        <Button variant="outlined" onClick={handleOpen}>
+          Edit
+        </Button>
         <Dialog open={open} onClose={handleClose}>
           <Box sx={{ padding: "10px" }}>
-            <Formik
-              initialValues={{ file: null }}
-              onSubmit={onSubmit}
-            >
+            <Formik initialValues={{ photo: null }} onSubmit={onSubmit}>
               {({ handleSubmit, setFieldValue }) => (
                 <Form>
                   <input
-                    id="file"
-                    name="file"
+                    id="image"
+                    name="image"
                     type="file"
-                    accept=".png, .jpg, .jpeg"
+                    accept="image/*"
                     onChange={(event) => {
-                      setFieldValue("file", event.currentTarget.files[0]);
+                      setFieldValue("photo", event.currentTarget.files[0]);
                     }}
                   />
 
-                  <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
+                  <Button variant="outlined" onClick={handleSubmit}>
+                    Submit
+                  </Button>
                 </Form>
               )}
             </Formik>
           </Box>
         </Dialog>
-      </>
+      </Box>
+      <Box className="card-item-pic">
+        <Avatar src={img} className="avatar" />
+      </Box>
+    </Box>
   );
 };
 

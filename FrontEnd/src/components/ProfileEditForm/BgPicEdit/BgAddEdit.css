@@ -12,14 +12,15 @@
   font-weight: bolder;
 }
 
-.avatar.css-2s90m6-MuiAvatar-root {
-  width: 200px;
-  height: 200px;
-  background-color: #aaaaaa;
+.card-item-pic {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 15px 0;
 }
 
-.avatar.css-1wlk0hk-MuiAvatar-root {
-  width: 200px;
+.card-item-bg-img {
   height: 200px;
-  background-color: #aaaaaa;
+  width: 80%;
+  object-fit: cover;
 }

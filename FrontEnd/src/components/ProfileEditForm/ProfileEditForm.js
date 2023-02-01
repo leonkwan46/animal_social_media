@@ -47,41 +47,13 @@ const ProfileEditForm = () => {
           <DialogTitle className="dialog-title">Edit Profile</DialogTitle>
           <DialogContent>
             <Stack spacing={3} className="dialog-item-wrap">
+              
               <Card elevation={5} className="card">
-                <Box className="card-wrap">
-                  <Box className="card-header">
-                    <Typography className="card-header-text">
-                      Profile Picture
-                    </Typography>
-                    {/* Edit Button */}
                     <ProfilePicEdit />
-                  </Box>
-                  <Box className="card-item-pic">
-                    <Avatar
-                      src={require("../../assets/images/cat.gif")}
-                      className="avatar"
-                    />
-                  </Box>
-                </Box>
               </Card>
 
-              <Card elevation={5} className="card">
-                <Box className="card-wrap">
-                  <Box className="card-header">
-                    <Typography className="card-header-text">
-                      Cover Photo
-                    </Typography>
-                    {/* Edit Button */}
+              <Card elevation={5} className="card">                
                     <BgPicEdit />
-                  </Box>
-                  <Box className="card-item-pic">
-                    <Card
-                      component="img"
-                      src={require("../../assets/images/20171102_111822001_iOS.jpg")}
-                      className="card-item-bg-img"
-                    />
-                  </Box>
-                </Box>
               </Card>
 
               <Card elevation={5} className="card">

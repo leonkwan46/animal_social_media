@@ -1,20 +1,18 @@
 const express = require('express')
 const app = express()
-const body = require('body-parser')
 const cors = require('cors')
 const connectDB = require('./db/config')
 const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
-const multer = require('multer')
+
 require('dotenv').config()
 
-
-
-
 //Middlewares (App-level)
-app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1000000000 }));
+
 
 // MongoDB Connection
 connectDB();
