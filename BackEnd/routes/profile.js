@@ -21,3 +21,5 @@ router.post("/profile_pic_edit", (req, res) => {
   console.log();
   console.log("====================================");
 });
+
+module.exports = router;
