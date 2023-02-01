@@ -12,7 +12,7 @@
 } */
 
 .post{
-    width: 100%;
+    max-width: initial;
     display: flex;
     flex-direction: column;
     justify-content: stretch;

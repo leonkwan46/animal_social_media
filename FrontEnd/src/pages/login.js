@@ -7,7 +7,9 @@ import { AccountCircle, Key } from '@mui/icons-material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import axios from 'axios';
 // import Top_nav from '../components/Top_nav';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
+import RegisterButton from '../components/RegisterButton/RegisterButton';
+
 
 
 const Login = () => {
@@ -96,6 +98,8 @@ const Login = () => {
               helperText={(touched.password && errors.password) ? errors.password : ""} />
             <br />
             <Button variant='contained' type='submit' onClick={handleSubmit}> Submit </Button>
+            <Typography> Don't have account? Register now!</Typography>
+            {/* <RegisterButton /> */}
           </Box>
     
         </Container>
