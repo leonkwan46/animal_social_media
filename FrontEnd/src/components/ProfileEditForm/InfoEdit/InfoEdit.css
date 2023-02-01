@@ -1,0 +1,29 @@
+.card-wrap {
+  margin: 10px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header-text.css-ahj2mt-MuiTypography-root {
+  font-weight: bolder;
+}
+
+.card-item-icon {
+  margin: 0 10px;
+}
+
+.card-item-info-wrap {
+  display: block;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-item-info {
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+}
