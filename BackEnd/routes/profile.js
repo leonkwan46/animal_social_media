@@ -71,16 +71,17 @@ router.get("/cover_pic_edit", authenticateToken, (req, res, next) => {
 });
 
 router.post("/info_edit", authenticateToken, async (req, res, next) => {
-  const { username, password, name, date } = req.body;
+  const { username, name, date, bio } = req.body;
+  const onlyDate = date.split("T")[0];
   try {
     await User.updateOne(
       { _id: req.user._id },
       {
         $set: {
           username: username,
-          password: password,
           name: name,
-          date: date,
+          date: onlyDate,
+          bio: bio
         },
       },
       {
@@ -88,20 +89,6 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
       }
     );
     res.status(200).json("Upload Successful!");
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/info_edit", authenticateToken, (req, res, next) => {
-  try {
-    data = {
-      username: req.user.username,
-      name: req.user.name,
-      bio: req.user.bio,
-      date: req.user.date,
-    };
-    res.json(rconsteq.user);
   } catch (err) {
     next(err);
   }

@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BadgeIcon from "@mui/icons-material/Badge";
@@ -6,6 +6,7 @@ import CakeIcon from "@mui/icons-material/Cake";
 import NotesIcon from "@mui/icons-material/Notes";
 import useFetch from "../../../hooks/usefetch";
 import "./InfoEdit.css";
+import InfoEditButton from "./InfoEditButton";
 
 const InfoEdit = () => {
   const { data, loading, error } = useFetch("http://localhost:5000/profile", {
@@ -18,7 +19,7 @@ const InfoEdit = () => {
     <Box className="card-wrap">
       <Box className="card-header">
         <Typography className="card-header-text">Profile Info</Typography>
-        <Button variant="outlined">Edit</Button>
+        <InfoEditButton />
       </Box>
 
       <Box className="card-item-info-wrap">

@@ -1,4 +1,11 @@
-import { Avatar, Box, Button, Dialog, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import React from "react";
@@ -7,7 +14,7 @@ import "./ProfilePicEdit.css";
 
 const ProfilePicEdit = () => {
   const [open, setOpen] = useState(false);
-  const [img, setImg] = useState()
+  const [img, setImg] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -17,13 +24,15 @@ const ProfilePicEdit = () => {
     setOpen(false);
   };
 
-  axios.get("http://localhost:5000/profile/profile_pic_edit", {
-    headers: {
-      authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  }).then((res) => {
-    setImg(res.data)
-  })
+  axios
+    .get("http://localhost:5000/profile/profile_pic_edit", {
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+    .then((res) => {
+      setImg(res.data);
+    });
 
   const onSubmit = async (values) => {
     // This fking took me 6 hours of endless researching
@@ -38,8 +47,8 @@ const ProfilePicEdit = () => {
         },
       })
       .then((res) => {
-        alert(res.data)
-        setOpen(false);
+        alert(res.data);
+        handleClose();
         window.location.reload(false);
       });
   };
@@ -52,6 +61,7 @@ const ProfilePicEdit = () => {
           Edit
         </Button>
         <Dialog open={open} onClose={handleClose}>
+          <DialogTitle textAlign={"center"}>Edit Profile Picture</DialogTitle>
           <Box sx={{ padding: "10px" }}>
             <Formik initialValues={{ photo: null }} onSubmit={onSubmit}>
               {({ handleSubmit, setFieldValue }) => (

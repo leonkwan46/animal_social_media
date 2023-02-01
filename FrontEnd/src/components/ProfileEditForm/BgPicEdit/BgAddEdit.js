@@ -1,4 +1,11 @@
-import { Box, Button, Card, Dialog, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Dialog,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import React from "react";
@@ -41,7 +48,7 @@ const ProfilePicEdit = () => {
       })
       .then((res) => {
         alert(res.data);
-        setOpen(false);
+        handleClose();
         window.location.reload(false);
       });
   };
@@ -54,6 +61,7 @@ const ProfilePicEdit = () => {
           Edit
         </Button>
         <Dialog open={open} onClose={handleClose}>
+          <DialogTitle textAlign={"center"}>Edit Cover Photo</DialogTitle>
           <Box sx={{ padding: "10px" }}>
             <Formik initialValues={{ photo: null }} onSubmit={onSubmit}>
               {({ handleSubmit, setFieldValue }) => (
@@ -78,11 +86,7 @@ const ProfilePicEdit = () => {
         </Dialog>
       </Box>
       <Box className="card-item-pic">
-        <Card
-          component="img"
-          src={img}
-          className="card-item-bg-img"
-        />
+        <Card component="img" src={img} className="card-item-bg-img" />
       </Box>
     </Box>
   );
