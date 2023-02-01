@@ -15,6 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -159,14 +160,16 @@ const TopNav = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "#000000" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <PetsIcon />
-          </IconButton>
+          <Link to="/">
+            <IconButton
+              size="large"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            >
+              <PetsIcon />
+            </IconButton>
+          </Link>
 
           <Typography
             variant="h6"
