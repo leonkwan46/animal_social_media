@@ -1,17 +1,15 @@
 import React from "react";
-import { Grid, Typography,Box, Container} from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 // import { useEffect } from 'react';
 // import { useState } from "react";
 // import axios from "axios";
-import {Message} from "./dummyData_fornotification"
+import { Message } from "./dummyData_fornotification";
 import Notification from "./notification";
-import "./notification.css"
-const NotificationWindow = () =>{
-
+import "./notification.css";
+const NotificationWindow = () => {
     return(
         <Grid container 
             className="notification-window"
-            
         >
             <Grid item sx={{ bgcolor : '#f9e6e6'}} className = "notification-headers">
                 <Typography sx={{fontWeight: "bold "}}>  Notification</Typography>
@@ -24,6 +22,6 @@ const NotificationWindow = () =>{
             </Grid>
         </Grid>
     )
-}
+};
 
 export default NotificationWindow

@@ -51,7 +51,7 @@ const Profile = () => {
             <CardMedia
               component="img"
               height="100%"
-              src={require("../assets/images/20171102_111822001_iOS.jpg")}
+              image={data?.data.coverPic}
             />
           </Card>
 
@@ -62,8 +62,7 @@ const Profile = () => {
               height: "250px",
               width: "250px",
             }}
-            alt="profile pic"
-            src={require("../assets/images/cat.gif")}
+            src={data?.data.profilePic}
           />
 
           <Card

@@ -1,39 +1,97 @@
-const express = require('express')
-const router = express.Router()
-const authenticateToken = require('../middleware/authMiddleware')
+const express = require("express");
+const router = express.Router();
+const authenticateToken = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadHandler");
+const User = require("../db/users");
 
-const multer = require('multer')
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../../FrontEnd/public/uploads');
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
-      }
-})
+router.get("/", authenticateToken, (req, res, next) => {
+  try {
+    const data = {
+      username: req.user.username,
+      name: req.user.name,
+      bio: req.user.bio,
+      date: req.user.date,
+      profilePic: req.user.profilePic,
+      coverPic: req.user.coverPic,
+    };
+    res.json({ data });
+  } catch (err) {
+    next({ message: "Failed sending Data" });
+  }
+});
 
-router.get('/', authenticateToken, (req, res, next) => {
-    
-    try {  
-        const data = {
-            username: req.user.username,
-            name: req.user.name,
-            bio: req.user.bio,
-            date: req.user.date,
-        }
-        res.json({data});
+router.post(
+  "/profile_pic_edit",
+  authenticateToken,
+  upload.single("image"),
+  async (req, res, next) => {
+    try {
+      await User.updateOne(
+        { _id: req.user._id },
+        { $set: { profilePic: req.file.location } }
+      );
+      res.status(200).json("Upload Successful!");
     } catch (err) {
-        next({message: "Failed sending Data"})
+      next(err);
     }
-})
+  }
+);
 
-router.post('/profile_pic_edit', (req, res) => {
-    const upload = multer({ storage: storage }).single('image')
-    upload(req, res, () => {
-        console.log('====================================');
-        console.log(req.file);
-        console.log('====================================');
-    })
-})
+router.get("/profile_pic_edit", authenticateToken, (req, res, next) => {
+  try {
+    res.json(req.user.profilePic);
+  } catch (err) {
+    next(err);
+  }
+});
 
-module.exports = router
+router.post(
+  "/cover_pic_edit",
+  authenticateToken,
+  upload.single("image"),
+  async (req, res, next) => {
+    try {
+      await User.updateOne(
+        { _id: req.user._id },
+        { $set: { coverPic: req.file.location } }
+      );
+      res.status(200).json("Upload Successful!");
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get("/cover_pic_edit", authenticateToken, (req, res, next) => {
+  try {
+    res.json(req.user.coverPic);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/info_edit", authenticateToken, async (req, res, next) => {
+  const { username, name, date, bio } = req.body;
+  const onlyDate = date.split("T")[0];
+  try {
+    await User.updateOne(
+      { _id: req.user._id },
+      {
+        $set: {
+          username: username,
+          name: name,
+          date: onlyDate,
+          bio: bio
+        },
+      },
+      {
+        multi: true,
+      }
+    );
+    res.status(200).json("Upload Successful!");
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = router;

@@ -1,11 +1,10 @@
 import React from "react";
 import Post from "../components/createPost.js";
-import TopNav from '../components/TopNav';
-import NotificationWindow from '../components/notiWindow.js';
-import Feed from '../components/feed&post/Feed.js';
-import { Grid, TextField } from '@mui/material';
-import {Box, Container} from '@mui/system'
-import "./homepage.css"
+import TopNav from "../components/TopNav";
+import NotificationWindow from "../components/notiWindow.js";
+import Feed from "../components/feed&post/Feed.js";
+import { Box, Container } from "@mui/system";
+import "./homepage.css";
 
 const Homepage = () => {
   return (

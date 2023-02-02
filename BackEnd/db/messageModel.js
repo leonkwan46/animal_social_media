@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 //schema = field in the desire collections
 
@@ -26,4 +26,4 @@ const messageSchema = mongoose.Schema({
 })
 
 //export as model
-module.exports = mongoose.model('Message', messageSchema)
+module.exports = mongoose.model("Message", messageSchema);

@@ -15,6 +15,7 @@ const useFetch = (url, headers) => {
         .get(url, headers)
         .then((res) => {
           setData(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           setError(err);
@@ -24,7 +25,7 @@ const useFetch = (url, headers) => {
         });
     };
     getData();
-  }, [url]);
+  }, []);
 
   return { data, loading, error };
 };

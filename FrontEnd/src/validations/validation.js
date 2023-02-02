@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 const username = yup.string('Enter your username').required('Required')
+const name = yup.string('Enter your username').required('Required')
 const password = yup.string('Enter your Password').min(8, 'Minimum 8 characters').required('Required')
 const confirm_password = yup.string('Enter your Confirm Password')
   .required('Required').oneOf([yup.ref("password"), null],
@@ -11,6 +12,7 @@ const confirm_password = yup.string('Enter your Confirm Password')
 const registerValidation = yup.object().shape({
     username,
     password,
+    name,
     confirm_password,
 })
 
@@ -19,4 +21,9 @@ const loginValidation = yup.object().shape({
   password,
 })
 
-export {loginValidation, registerValidation};
+const updateValidation = yup.object().shape({
+  username,
+  name,
+})
+
+export {loginValidation, registerValidation, updateValidation};
