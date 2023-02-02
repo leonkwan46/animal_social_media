@@ -6,6 +6,7 @@ import ProfilePicEdit from "../components/ProfileEditForm/ProfilePicEdit/Profile
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import TopNav from "../components/TopNav/TopNav";
 import useFetch from "../hooks/usefetch";
+import BgAddEdit from "../components/ProfileEditForm/BgPicEdit/BgAddEdit"
 
 const Test = () => {
   const id = localStorage.getItem('token')
@@ -21,7 +22,7 @@ const Test = () => {
       <RegisterButton />
       <ProfileEditForm />
       <Button onClick={handleClick} >asd</Button>
-      <ProfilePicEdit />
+      <BgAddEdit />
     </Grid>
   );
 };
