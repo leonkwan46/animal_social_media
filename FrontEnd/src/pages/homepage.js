@@ -21,6 +21,6 @@ const Homepage = () => {
       </Box>
     </Container>
   );
-};
+};          
 
 export default Homepage;
