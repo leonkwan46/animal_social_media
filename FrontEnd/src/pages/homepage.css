@@ -19,25 +19,3 @@
     flex-direction: column;
     background-color: #c4cbf7;
 }
-
-.MuiCard-root {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-s;
-}
-
-.card-container {
-    width: 30%;
-    padding-top: 20px;
-}
-
-.MuiCardMedia-img {
-    border-radius: 50% ;
- width: 100%;
-display: flex;
-flex-direction: row;
-}
-

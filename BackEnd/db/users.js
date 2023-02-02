@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       require: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -18,6 +19,12 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     bio: {
+      type: String,
+    },
+    profilePic: {
+      type: String,
+    },
+    coverPic: {
       type: String,
     },
     following: {

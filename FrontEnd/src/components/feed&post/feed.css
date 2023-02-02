@@ -30,3 +30,8 @@
     border:2px;
     justify-content: stretch;
 }
+
+.profile-button {
+    outline: none;
+    text-decoration: none;
+}

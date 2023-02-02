@@ -20,6 +20,7 @@ router.post("/", async (req, res, next) => {
       name: name,
       date: onlyDate,
       bio: "",
+      img: [],
     });
 
     const found = await User.findOne({ username });
