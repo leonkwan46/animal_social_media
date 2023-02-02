@@ -33,6 +33,10 @@ app.use('/profile', profileRoute)
 const homepageRoute = require('./routes/homepage')
 app.use('/homepage', homepageRoute)
 
+// Handle following a user and being Followed by a user
+const network = require("./routes/network");
+app.use("/network", network);
+
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
 app.use(errorHandler)
