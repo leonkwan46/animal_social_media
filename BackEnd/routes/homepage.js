@@ -8,10 +8,8 @@ const asyncHandler = require("express-async-handler");
 
 //get all posts to create feed
 router.get("/", protected, async (req, res, next) => {
-  console.log(req.body);
   try {
     const message = await Messages.find();
-    console.log("check1");
     // check if password is matched
     if (message) {
       console.log(message);
