@@ -11,7 +11,7 @@ import {
   Container,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { format } from "date-fns";
+import { format } from "timeago.js";
 import("./feed.css");
 
 const Post = (props) => {
@@ -49,7 +49,7 @@ const Post = (props) => {
             </IconButton>
           }
           title={props.post.name}
-          subheader={format(new Date(props.post.createdAt), "MMM d,yyyy HH:mm")}
+          subheader={format(props.post.createdAt)}
         />
         <CardContent
           sx={{
