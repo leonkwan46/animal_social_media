@@ -40,6 +40,7 @@ router.post('/', protected, async(req, res, next) => {
                 id: req.user.id,
                 name: req.user.name,
             })
+
             
         console.log("check1")
         // check if password is matched

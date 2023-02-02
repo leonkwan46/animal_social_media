@@ -99,7 +99,7 @@ const Login = () => {
             <br />
             <Button variant='contained' type='submit' onClick={handleSubmit}> Submit </Button>
             <Typography> Don't have account? Register now!</Typography>
-            {/* <RegisterButton /> */}
+            <RegisterButton />
           </Box>
     
         </Container>
