@@ -143,7 +143,7 @@ const InfoEditButton = () => {
                       size="large"
                       onClick={handleSubmit}
                     >
-                      Register
+                      Update
                     </Button>
                   </Stack>
                 </Form>
