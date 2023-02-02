@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
     },
+    profilePic: {
+      type: String,
+    },
+    coverPic: {
+      type: String,
+    },
     following: {
       type: [String],
     },

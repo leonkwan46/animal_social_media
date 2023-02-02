@@ -11,6 +11,8 @@ router.get("/", authenticateToken, (req, res, next) => {
       name: req.user.name,
       bio: req.user.bio,
       date: req.user.date,
+      profilePic: req.user.profilePic,
+      coverPic: req.user.coverPic,
     };
     res.json({ data });
   } catch (err) {
@@ -92,10 +94,6 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
   }
 });
 
-router.post("/profile_pic_edit", (req, res) => {
-  console.log("====================================");
-  console.log();
-  console.log("====================================");
-});
+
 
 module.exports = router;

@@ -4,7 +4,6 @@ const app = express();
 const cors = require("cors");
 const connectDB = require("./db/config");
 const errorHandler = require("./middleware/errorHandler");
-const multer = require("multer");
 
 //Middlewares (App-level)
 app.use(
