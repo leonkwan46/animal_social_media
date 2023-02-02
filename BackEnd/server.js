@@ -1,21 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const connectDB = require('./db/config')
 const errorHandler = require('./middleware/errorHandler')
-<<<<<<< HEAD
-
 require('dotenv').config()
-=======
-const multer = require('multer')
-require('dotenv').config();
->>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 
 //Middlewares (App-level)
-<<<<<<< HEAD
-=======
-app.use(express.urlencoded({ extended: true }));
->>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));

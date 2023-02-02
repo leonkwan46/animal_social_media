@@ -20,21 +20,18 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
     },
-<<<<<<< HEAD
     profilePic: {
       type: String,
     },
     coverPic: {
       type: String,
-    }
-=======
+    },
     following: {
       type: [String],
     },
     followers: {
       type: [String],
     },
->>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
   },
   { collection: "users" }
 );

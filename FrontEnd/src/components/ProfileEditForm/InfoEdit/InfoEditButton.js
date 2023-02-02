@@ -14,6 +14,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { useState } from "react";
 import { updateValidation } from "../../../validations/validation";
+import useFetch from "../../../hooks/usefetch";
 
 const InfoEditButton = () => {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,12 @@ const InfoEditButton = () => {
     }
     return false;
   };
+
+  const { data } = useFetch("http://localhost:5000/profile", {
+    headers: {
+      authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });
 
   const onSubmit = async (values) => {
     await axios
@@ -60,12 +67,12 @@ const InfoEditButton = () => {
       <Dialog open={open} onClose={handleClose}>
         <Box justifyContent={"center"} textAlign={"center"}>
           <DialogTitle textAlign={"center"}>Edit Profile Info</DialogTitle>
+          <Box sx={{padding: "10px"}} >
           <DialogContent>
             <Formik
               initialValues={{
-                username: "",
-                name: "",
-                date: "",
+                name: data?.data.name,
+                date: data?.data.date,
                 bio: "",
               }}
               onSubmit={onSubmit}
@@ -82,20 +89,6 @@ const InfoEditButton = () => {
               }) => (
                 <Form>
                   <Stack spacing={2.5}>
-                    <TextField
-                      required
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.username}
-                      id="username"
-                      label="Username"
-                      error={checkError(touched.username, errors.username)}
-                      helperText={
-                        checkError(touched.username, errors.username)
-                          ? errors.username
-                          : ""
-                      }
-                    />
 
                     <TextField
                       required
@@ -106,9 +99,7 @@ const InfoEditButton = () => {
                       label="Name"
                       error={checkError(touched.name, errors.name)}
                       helperText={
-                        checkError(touched.name, errors.name)
-                          ? errors.name
-                          : ""
+                        checkError(touched.name, errors.name) ? errors.name : ""
                       }
                     />
 
@@ -159,6 +150,7 @@ const InfoEditButton = () => {
               )}
             </Formik>
           </DialogContent>
+          </Box>
         </Box>
       </Dialog>
     </>
