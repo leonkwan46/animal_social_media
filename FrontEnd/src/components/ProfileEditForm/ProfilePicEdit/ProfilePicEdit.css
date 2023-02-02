@@ -12,13 +12,7 @@
   font-weight: bolder;
 }
 
-.avatar.css-2s90m6-MuiAvatar-root {
-  width: 200px;
-  height: 200px;
-  background-color: #aaaaaa;
-}
-
-.avatar.css-1wlk0hk-MuiAvatar-root {
+.avatar.MuiAvatar-root {
   width: 200px;
   height: 200px;
   background-color: #aaaaaa;
