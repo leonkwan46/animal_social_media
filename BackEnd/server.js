@@ -2,12 +2,20 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const connectDB = require('./db/config')
-const bodyParser = require('body-parser')
 const errorHandler = require('./middleware/errorHandler')
+<<<<<<< HEAD
 
 require('dotenv').config()
+=======
+const multer = require('multer')
+require('dotenv').config();
+>>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 
 //Middlewares (App-level)
+<<<<<<< HEAD
+=======
+app.use(express.urlencoded({ extended: true }));
+>>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -16,7 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1
 
 // MongoDB Connection
 connectDB();
-
 
 // Register Router
 const registerRoute = require('./routes/register')
@@ -30,9 +37,13 @@ app.use('/login', loginRoute)
 const profileRoute = require('./routes/profile')
 app.use('/profile', profileRoute)
 
-//get post Router
-const getPostRoute = require('./routes/getPost')
-app.use('/getpost', getPostRoute)
+//create, get post Router
+const homepageRoute = require('./routes/homepage')
+app.use('/homepage', homepageRoute)
+
+// Handle following a user and being Followed by a user
+const network = require("./routes/network");
+app.use("/network", network);
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection

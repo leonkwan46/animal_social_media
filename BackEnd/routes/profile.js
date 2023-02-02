@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const authenticateToken = require("../middleware/authMiddleware");
+<<<<<<< HEAD
 const upload = require("../middleware/uploadHandler");
 const User = require("../db/users");
+=======
+>>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 
 router.get("/", authenticateToken, (req, res, next) => {
   try {
@@ -11,8 +14,11 @@ router.get("/", authenticateToken, (req, res, next) => {
       name: req.user.name,
       bio: req.user.bio,
       date: req.user.date,
+<<<<<<< HEAD
       profilePic: req.user.profilePic,
       coverPic: req.user.coverPic,
+=======
+>>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
     };
     res.json({ data });
   } catch (err) {
@@ -20,6 +26,7 @@ router.get("/", authenticateToken, (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 router.post(
   "/profile_pic_edit",
   authenticateToken,
@@ -94,4 +101,12 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
   }
 });
 
+=======
+router.post("/profile_pic_edit", (req, res) => {
+  console.log("====================================");
+  console.log();
+  console.log("====================================");
+});
+
+>>>>>>> e1404540f35b129ae14d84cc63c474d49eadd006
 module.exports = router;
