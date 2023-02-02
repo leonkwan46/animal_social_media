@@ -75,7 +75,7 @@ const Post = () => {
         <Form className="post-wrapper">
           <div className="post-upper">
             <Avatar
-              sx={{ width: "50px", height: "50px" }}
+              
               src={user.picture}
               alt={user.alt}
               className="profile-pic-for-post"

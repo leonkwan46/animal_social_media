@@ -7,15 +7,7 @@
     margin: 20px 0;
 }
 
-.MuiAvatar-root, .MuiAvatar-img{
-    width: 50px;
-    height: 50px;
-    max-width: 50px;
-    max-height: 50px;
-    --Avatar-size: 50px;
-}
-
-.MuiAvatar-root {
+.profile-pic-for-post{
     margin-right: 10px;
 }
 

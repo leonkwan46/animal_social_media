@@ -81,7 +81,7 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
           username: username,
           name: name,
           date: onlyDate,
-          bio: bio
+          bio: bio,
         },
       },
       {
@@ -93,5 +93,7 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
     next(err);
   }
 });
+
+
 
 module.exports = router;
