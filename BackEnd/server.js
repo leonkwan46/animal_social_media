@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 const connectDB = require('./db/config')
 const errorHandler = require('./middleware/errorHandler')
 require('dotenv').config()
+// const server = require('http').createServer(app);
+// const io = require('socket.io')(server);
 
 //Middlewares (App-level)
 app.use(express.json());
@@ -44,8 +46,22 @@ app.listen(5000, () => {
     console.log("http://localhost:5000");
 });
 
-//JSON web token (note)
-//encoded   -header (algorithm,token type)
-//          -data (json format + id + issue at(timestamp))
-//          -signature (tell that JWT is authorized with header, middleware, known as token is produce for whom e.g. private, party)
-//right route -> login -> create token -> send token and header to accessed protected route
+
+// // รอการ connect จาก client
+// io.on('connection', (client) => {
+//     console.log('user connected')
+  
+//     // เมื่อ Client ตัดการเชื่อมต่อ
+//     client.on('disconnect', () => {
+//         console.log('user disconnected')
+//     })
+
+//     // // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
+//     // client.on('sent-message', function (message) {
+//     //     io.sockets.emit('new-message', message)
+//     // })
+// })
+
+// server.listen(5000,() => {
+//     console.log("socket.io server is ready")
+// });
