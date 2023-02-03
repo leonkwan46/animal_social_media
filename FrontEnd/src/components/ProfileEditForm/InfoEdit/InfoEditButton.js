@@ -73,7 +73,7 @@ const InfoEditButton = () => {
               initialValues={{
                 name: data?.data.name,
                 date: data?.data.date,
-                bio: "",
+                bio: data?.data.bio,
               }}
               onSubmit={onSubmit}
               validationSchema={updateValidation}
