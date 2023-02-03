@@ -75,6 +75,7 @@ const RegisterButton = () => {
             <Formik
               initialValues={{
                 username: "",
+                email: "",
                 password: "",
                 confirm_password: "",
                 name: "",
@@ -105,6 +106,21 @@ const RegisterButton = () => {
                       helperText={
                         checkError(touched.username, errors.username)
                           ? errors.username
+                          : ""
+                      }
+                    />
+
+                    <TextField
+                      required
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      id="email"
+                      label="Email"
+                      error={checkError(touched.email, errors.email)}
+                      helperText={
+                        checkError(touched.email, errors.email)
+                          ? errors.email
                           : ""
                       }
                     />
@@ -172,10 +188,10 @@ const RegisterButton = () => {
                       value={values.name}
                       id="name"
                       label="Name"
-                      error={checkError(
-                        touched.confirm_password,
-                        errors.confirm_password
-                      )}
+                      error={checkError(touched.name, errors.name)}
+                      helperText={
+                        checkError(touched.name, errors.name) ? errors.name : ""
+                      }
                     />
 
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -184,10 +200,7 @@ const RegisterButton = () => {
                           <TextField
                             {...date}
                             inputProps={{ ...date.inputProps, readOnly: true }}
-                            error={checkError(
-                              touched.confirm_password,
-                              errors.confirm_password
-                            )}
+                            error={checkError(touched.date, errors.date)}
                             onBlur={handleBlur}
                           />
                         )}

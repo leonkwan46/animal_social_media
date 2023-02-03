@@ -6,8 +6,8 @@ const wrong = "asda132123sd";
 
 describe('Register Page', () => {
 
-  it('Visits Register Page', () => {
-    cy.visit('http://localhost:3000/register')
+  it.only('Visits Page', () => {
+    cy.visit('http://localhost:3000/test')
   })
 
   it('Inputs', () => {
