@@ -1,6 +1,6 @@
 import React from "react";
 import Post from "../components/createPost.js";
-import TopNav from "../components/TopNav";
+import TopNav from "../components/TopNav/TopNav";
 import NotificationWindow from "../components/notiWindow.js";
 import Feed from "../components/feed&post/Feed.js";
 import { Box, Container } from "@mui/system";
