@@ -4,7 +4,7 @@ const authenticateToken = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadHandler");
 const User = require("../db/users");
 
-router.get("/", authenticateToken, (req, res, next) => {
+router.get("/", authenticateToken, async (req, res, next) => {
   try {
     const data = {
       username: req.user.username,
@@ -13,6 +13,8 @@ router.get("/", authenticateToken, (req, res, next) => {
       date: req.user.date,
       profilePic: req.user.profilePic,
       coverPic: req.user.coverPic,
+      following: req.user.following,
+      followers: req.user.followers,
     };
     res.json({ data });
   } catch (err) {
@@ -94,6 +96,15 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
   }
 });
 
-
+router.get("/others/:username", authenticateToken, async (req, res, next) => {
+  const username = req.params.username;
+  try {
+    const data = await User.findOne({ username: username }).select("-password");
+    if (!data) throw new Error("Could not get specified User");
+    res.json({ data, authUser: req.user.username });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

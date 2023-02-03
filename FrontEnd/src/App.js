@@ -7,7 +7,6 @@ import Test from "./pages/test";
 import Profile from "./pages/profile";
 import ResetPassword from "./pages/resetPassword";
 
-
 const App = () => {
   return (
     <Router>
