@@ -130,16 +130,16 @@ const TopNav = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" sx={{ bgcolor: "#000000" }}>
         <Toolbar>
-          <Link to="/">
+
             <IconButton
               size="large"
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
+              href="/"
             >
               <PetsIcon />
             </IconButton>
-          </Link>
 
           <Typography
             variant="h6"
@@ -198,17 +198,16 @@ const TopNav = () => {
               </Badge>
             </IconButton>
 
-            <Link to="/profile">
               <IconButton
                 size="large"
                 edge="end"
                 aria-label="account of current user"
                 aria-haspopup="true"
                 color="inherit"
+                href="/profile"
               >
                 <AccountCircle />
               </IconButton>
-            </Link>
 
           </Box>
 
