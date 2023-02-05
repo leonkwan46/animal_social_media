@@ -37,9 +37,17 @@ const userSchema = new mongoose.Schema(
     followers: {
       type: [String],
     },
+    numOfFollowing: {
+      type: Number,
+      default: 0,
+    },
+    numOfFollowers: {
+      type: Number,
+      default: 0,
+    },
     verified: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   { collection: "users" }
 );

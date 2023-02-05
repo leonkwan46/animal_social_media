@@ -34,7 +34,7 @@ router.post("/", protected, async (req, res, next) => {
       text: req.body.text,
       id: req.user.id,
       name: req.user.name,
-      username: req.user.username
+      username: req.user.username,
     });
 
     if (message) {
