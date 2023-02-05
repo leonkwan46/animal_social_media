@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema(
       require: true,
       unique: true,
     },
+    email: {
+      type: String,
+      require: true,
+    },
     password: {
       type: String,
       require: true,
@@ -32,6 +36,17 @@ const userSchema = new mongoose.Schema(
     },
     followers: {
       type: [String],
+    },
+    numOfFollowing: {
+      type: Number,
+      default: 0,
+    },
+    numOfFollowers: {
+      type: Number,
+      default: 0,
+    },
+    verified: {
+      type: Boolean,
     },
   },
   { collection: "users" }

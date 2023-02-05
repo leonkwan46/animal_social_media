@@ -18,12 +18,11 @@ module.exports = router;
  */
 router.post("/follow", authenticateToken, async (req, res, next) => {
   try {
-    const { username } = req.user;
-    const targetPerson = req.body.username;
+    const { username } = req.user; // yourself
+    const targetPerson = req.body.username; //
     const follow = req.body.follow;
-    const a = await User.findOne({ username: username });
-    const alreadyFollowing = a.following.includes(targetPerson);
-    console.log(alreadyFollowing);
+    const you = await User.findOne({ username: username });
+    const alreadyFollowing = you.following.includes(targetPerson);
     if (follow) {
       if (alreadyFollowing) throw new Error("You already follow this user");
       await User.findOneAndUpdate(
@@ -31,6 +30,9 @@ router.post("/follow", authenticateToken, async (req, res, next) => {
         {
           $push: {
             following: targetPerson,
+          },
+          $inc: {
+            numOfFollowing: 1,
           },
         }
       );
@@ -40,6 +42,9 @@ router.post("/follow", authenticateToken, async (req, res, next) => {
         {
           $push: {
             followers: username,
+          },
+          $inc: {
+            numOfFollowers: 1,
           },
         }
       );
@@ -55,6 +60,9 @@ router.post("/follow", authenticateToken, async (req, res, next) => {
           $pull: {
             following: targetPerson,
           },
+          $inc: {
+            numOfFollowing: -1,
+          },
         }
       );
 
@@ -64,6 +72,9 @@ router.post("/follow", authenticateToken, async (req, res, next) => {
           $pull: {
             followers: username,
           },
+          $inc: {
+            numOfFollowers: -1,
+          },
         }
       );
       res.json("Successfully unfollow this user");
@@ -72,3 +83,61 @@ router.post("/follow", authenticateToken, async (req, res, next) => {
     next(err);
   }
 });
+
+/**
+ * Get followers of a user
+ * @param req.params: target user
+ */
+router.get(
+  "/following/:username",
+  authenticateToken,
+  async (req, res, next) => {
+    try {
+      const username = req.params.username;
+      const { following } = await User.findOne({ username: username }).select(
+        "following"
+      );
+      if (!following) throw new Error("Could not get the following");
+      const followingDetails = [];
+      for (const followingUser of following) {
+        const user = await User.findOne({ username: followingUser }).select(
+          "username name bio profilePic"
+        );
+        followingDetails.push(user);
+      }
+      console.log(followingDetails);
+      res.json(followingDetails);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+/**
+ * Get followers of a user
+ * @param req.params: target user
+ */
+router.get(
+  "/followers/:username",
+  authenticateToken,
+  async (req, res, next) => {
+    try {
+      const username = req.params.username;
+      const { followers } = await User.findOne({ username: username }).select(
+        "followers"
+      );
+      if (!followers) throw new Error("Could not get the followers");
+      const followersDetails = [];
+      for (const follower of followers) {
+        const user = await User.findOne({ username: follower }).select(
+          "username name bio profilePic"
+        );
+        followersDetails.push(user);
+      }
+      console.log(followersDetails);
+      res.json(followersDetails);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
