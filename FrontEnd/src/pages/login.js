@@ -7,12 +7,12 @@ import { AccountCircle, Key } from '@mui/icons-material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import axios from 'axios';
 // import Top_nav from '../components/Top_nav';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import RegisterButton from '../components/RegisterButton/RegisterButton';
 
 
 
-const Login = () => {
+const Login = (socket) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -20,7 +20,7 @@ const Login = () => {
   }
 
   const backURL = "http://localhost:5000/login"
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const onSubmit = async (values) =>{
   
@@ -28,8 +28,11 @@ const Login = () => {
     .then(res =>{
       
         localStorage.setItem('token',res.data.token);
+        localStorage.setItem('name',res.data.name);
         // alert(JSON.stringify(res));
-        // navigate('/')
+        
+        navigate('/')
+        
 
     })
     .catch((err) => {

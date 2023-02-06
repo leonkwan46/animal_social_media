@@ -2,6 +2,7 @@ import React from "react";
 import { Typography,Box, Avatar, Grid} from "@mui/material";
 import "./notification.css"
 import { Container } from "@mui/system";
+import { format } from "timeago.js";
 
 
 const Notification = (message) =>{
@@ -11,13 +12,13 @@ const Notification = (message) =>{
             className = "notification-body"
         >       <Grid item>
                 <Avatar sx= {{bgcolor: '#c6aea1'}} className="avatar-pro" > 
-                {message.message.username.charAt(0)}
+                {message.message.senderName.charAt(0)}
                 </Avatar>
                 </Grid>
                 <Grid item maxWidth="sm" className="noti-all">
-                <Typography fontWeight="bold">{message.message.username}</Typography>
+                <Typography fontWeight="bold">{message.message.senderName}</Typography>
                 <Typography fontSize={16}> {message.message.action} </Typography>
-                <Typography fontSize={12}> {message.message.timestamp} </Typography>
+                <Typography fontSize={12}> {format(message.message.timestamp)} </Typography>
                 </Grid>
             
         </Grid>

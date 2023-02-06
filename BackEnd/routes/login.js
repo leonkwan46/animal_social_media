@@ -16,6 +16,7 @@ router.post('/', async(req, res, next) => {
         if(user && (await bcrypt.compare(password, user.password))){
             jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             res.json({token});
+            
             })
         }
         else{
@@ -28,7 +29,7 @@ router.post('/', async(req, res, next) => {
             next(err)
             
         }
-
+    
         
     
 })
