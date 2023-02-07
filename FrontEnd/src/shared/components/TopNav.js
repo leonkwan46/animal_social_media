@@ -58,9 +58,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// TODO: useContext() to get Username!
 const TopNav = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -203,7 +203,7 @@ const TopNav = () => {
                 aria-label="account of current user"
                 aria-haspopup="true"
                 color="inherit"
-                href="/profile"
+                href={"/profile"}
               >
                 <AccountCircle />
               </IconButton>
