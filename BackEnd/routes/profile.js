@@ -8,6 +8,7 @@ router.get("/:username", authenticateToken, async (req, res, next) => {
   // username is for a user you are visiting
   const username = req.params.username;
   let data;
+  let followersData;
   try {
     data = await User.findOne({ username: username }).select(
       "-password -following -followers"
@@ -16,10 +17,11 @@ router.get("/:username", authenticateToken, async (req, res, next) => {
     const { followers } = await User.findOne({ username: username }).select(
       "followers"
     );
+    followersData = followers;
   } catch (err) {
     next(err);
   }
-  const authFollow = followers.includes(req.user.username);
+  const authFollow = followersData.includes(req.user.username);
   const sameUser = req.user.username === username;
   res.json({ data, authFollow: authFollow, sameUser: sameUser });
 });

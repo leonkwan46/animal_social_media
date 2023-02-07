@@ -6,11 +6,9 @@ import Login from "./pages/login";
 import Test from "./pages/test";
 import Profile from "./pages/profile";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-
-
 import "./App.css";
-const App = () => {
 
+const App = () => {
     
   return (
     <Router>

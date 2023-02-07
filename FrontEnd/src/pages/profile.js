@@ -40,6 +40,7 @@ const Profile = () => {
   const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
   const [users, setUsers] = useState();
+  
   useEffect(() => {
     setLoading(true);
     const getProfile = async () => {
