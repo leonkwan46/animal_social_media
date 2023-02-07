@@ -22,13 +22,11 @@ router.post("/", async (req, res, next) => {
       throw new Error("Username or password incorrect");
     }
   } catch (err) {
-    console.log("====================================");
-    console.log(err);
-    console.log("====================================");
     next(err);
   }
 });
 
+// Reset Password API
 router.post("/reset-password", async(req, res, next) => {
   try{
     await User.updateOne({username: req.body.username}, { $set: {

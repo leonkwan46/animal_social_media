@@ -13,32 +13,39 @@ import { AccountCircle, Key } from "@mui/icons-material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import axios from "axios";
 // import Top_nav from '../components/Top_nav';
-import { useNavigate } from "react-router";
+import { useNavigate } from 'react-router';
+import RegisterButton from '../components/RegisterButton/RegisterButton';
 import { Link } from "react-router-dom";
 
-const Login = () => {
+
+const Login = (socket) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const backURL = "http://localhost:5000/login";
-  // const navigate = useNavigate()
+  const backURL = "http://localhost:5000/login"
+  const navigate = useNavigate()
 
-  const onSubmit = async (values) => {
-    await axios
-      .post(backURL, values)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
+  const onSubmit = async (values) =>{
+  
+    await axios.post(backURL,values)
+    .then(res =>{
+      
+        localStorage.setItem('token',res.data.token);
+        localStorage.setItem('name',res.data.name);
         // alert(JSON.stringify(res));
-        // navigate('/')
-      })
-      .catch((err) => {
-        alert(err.response.data);
-        console.log("Error", err.response);
-      });
-  };
+        
+        navigate('/')
+        
+
+    })
+    .catch((err) => {
+        alert(err.response.data)
+        console.log('Error', err.response);
+      })  
+};
 
   return (
     <Formik

@@ -26,7 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={8} ref={ref} variant="filled" {...props} />;
 });
 
-const Post = () => {
+const Post = ({socket, name}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -41,6 +41,8 @@ const Post = () => {
     setOpen(false);
   };
 
+  
+
   const onSubmit = async (values, { setValues }) => {
     try {
       if (values.length === 0)
@@ -54,11 +56,19 @@ const Post = () => {
               authorization: "Bearer " + localStorage.getItem("token"),
             },
           }
+          
         )
         .then((res) => {
           console.log(res.status);
-          handleOpen();
+          console.log(res.data);
+          handleOpen("Successfully post your message");
           setValues({ text: "", length: 0, percent: 0 });
+          socket.emit("createPost",{
+            senderName:res.data.name,
+            action: "created a post",
+            timestamp:res.data.createdAt,
+            
+          })
         })
         .catch((err) => console.log(err));
     } catch (err) {

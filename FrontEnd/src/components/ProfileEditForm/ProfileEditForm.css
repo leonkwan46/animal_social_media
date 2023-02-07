@@ -1,23 +1,23 @@
-.dialog-wrap {
+.ProfileEditForm-dialog-wrap {
   justify-content: center;
   text-align: center;
   min-height: 850px;
   min-width: 550px;
 }
 
-.dialog-item-wrap {
+.ProfileEditForm-dialog-item-wrap {
   margin: 10px 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.dialog-title.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+.ProfileEditForm-dialog-title.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
   font-size: xx-large;
   font-weight: bolder;
 }
 
-.card {
+.ProfileEditForm-card {
   width: 500px;
 }
 

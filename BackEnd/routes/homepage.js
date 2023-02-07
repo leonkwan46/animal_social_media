@@ -27,7 +27,7 @@ router.post("/", protected, async (req, res, next) => {
   // Check if text data is there
   if (!req.body.text) {
     res.status(400);
-    throw new Error("Textarea can not be blank!");
+    throw new Error("Text area can not be blank!");
   }
   try {
     const message = await Messages.create({
@@ -38,7 +38,8 @@ router.post("/", protected, async (req, res, next) => {
     });
 
     if (message) {
-      res.status(200).json("Successfully post your message");
+      // res.status(200).json("Successfully post your message");
+      res.status(200).json(message);
     } else {
       res.status(400);
       throw new Error("please add text");

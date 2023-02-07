@@ -1,9 +1,14 @@
-require("dotenv").config();
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const connectDB = require("./db/config");
-const errorHandler = require("./middleware/errorHandler");
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const connectDB = require('./db/config')
+const errorHandler = require('./middleware/errorHandler')
+require('dotenv').config()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server, { cors: {origin: "http://localhost:3000"}})
+
+
 
 //Middlewares (App-level)
 app.use(
@@ -45,18 +50,56 @@ app.use("/homepage", homepageRoute);
 
 // Handle following a user and being Followed by a user
 const network = require("./routes/network");
+const { clearScreenDown } = require('readline')
 app.use("/network", network);
 
 // Error Handling middleware always at LAST
 // Can only use on Routes/Endpoints, not DB Connection
 app.use(errorHandler);
 
-app.listen(5000, () => {
-  console.log("http://localhost:5000");
-});
+// app.listen(5000, () => {
+//     console.log("http://localhost:5000");
+// });
 
-//JSON web token (note)
-//encoded   -header (algorithm,token type)
-//          -data (json format + id + issue at(timestamp))
-//          -signature (tell that JWT is authorized with header, middleware, known as token is produce for whom e.g. private, party)
-//right route -> login -> create token -> send token and header to accessed protected route
+
+let onlineUsers = []
+
+const addNewUser = (username,socketId) => {
+    !onlineUsers.some(user=>user.username === username) && onlineUsers.push({username, socketId})}
+
+const removeUser = (socketId) => {
+    onlineUsers = onlineUsers.filter(user => user.socketId !== socketId)
+}
+
+const getUser = (username) =>{
+    return onlineUsers.find((user) => user.username === username)
+}
+// connect with client
+io.on('connection', (socket) => {
+
+    // take action from client
+    socket.on("newUser",(username)=>{
+        addNewUser(username,socket.id)
+        console.log("gotcha!")
+    })
+  
+    // client disconnected
+    socket.on('disconnect', () => {
+        removeUser(socket.id)
+    })
+
+    socket.on("createPost",({senderName,action,timestamp})=>{
+        // console.log(`I got ${timestamp}!`)
+        io.emit("getPost",{senderName,action,timestamp})
+    })
+    
+
+    // // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
+    // client.on('sent-message', function (message) {
+    //     io.sockets.emit('new-message', message)
+    // })
+})
+
+server.listen(5000,() => {
+    console.log("socket.io server is ready")
+});
