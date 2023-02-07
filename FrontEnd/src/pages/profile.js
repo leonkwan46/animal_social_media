@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useFetch from "../hooks/usefetch";
 import DialogListOfUsers from "../components/listOfUsers";
 import ProfileEditForm from "../components/ProfileEditForm/ProfileEditForm";
 import {

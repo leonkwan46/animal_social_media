@@ -7,16 +7,16 @@ import Test from "./pages/test";
 import Profile from "./pages/profile";
 import ResetPassword from "./pages/resetPassword";
 
+import "./App.css";
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<Test />}  />
+        <Route path="/test" element={<Test />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/:id" element={<Profile />}  />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </Router>
   );

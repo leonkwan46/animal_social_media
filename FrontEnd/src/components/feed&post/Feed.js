@@ -10,8 +10,8 @@ const Feed = () => {
 
   const { data, loading, error } = useFetch(backURL, {
     headers: {
-      authorization: "Bearer " + localStorage.getItem("token"),
-    },
+      authorization: "Bearer " + localStorage.getItem("token")
+    }
   });
 
   return (
@@ -19,7 +19,7 @@ const Feed = () => {
       <Box>
         {loading ? <CircularProgress /> : ""}
         {!loading && data && data.length > 0 ? (
-          data.map((p) => <Post key={p._id} post={p} />)
+          data.reverse().map((p) => <Post key={p._id} post={p} />)
         ) : loading ? (
           ""
         ) : (
@@ -28,11 +28,7 @@ const Feed = () => {
       </Box>
       <br />
       <Box>
-        {!loading && data && data.length > 0 ? (
-          <Typography> - That's all. - </Typography>
-        ) : (
-          <Typography></Typography>
-        )}
+        {!loading && data && data.length > 0 ? <Typography> - That's all. - </Typography> : <Typography></Typography>}
       </Box>
     </div>
   );

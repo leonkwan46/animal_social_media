@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import {
   Box,
   Avatar,
@@ -10,10 +10,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  CircularProgress,
-  Typography,
+  Typography
 } from "@mui/material";
-import axios from "axios";
 const DialogListOfUsers = (props) => {
   return (
     <Box>
@@ -23,13 +21,11 @@ const DialogListOfUsers = (props) => {
           props.setOpen(false);
         }}
       >
-        <DialogTitle>
-          {props.name + " " + props.followerOrFollowing}
-        </DialogTitle>
+        <DialogTitle>{props.name + " " + props.followerOrFollowing}</DialogTitle>
         <DialogContent>
           <List>
-            {props.users?.map((user, index) => (
-              <ListItem disableGutters key={index}>
+            {props.users?.map((user) => (
+              <ListItem disableGutters key={user.username}>
                 <ListItemAvatar>
                   <Link
                     to={"/profile/" + user.username}
