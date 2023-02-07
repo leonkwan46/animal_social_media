@@ -10,38 +10,26 @@ router.get("/:username", authenticateToken, async (req, res, next) => {
   let data;
   let followersData;
   try {
-    data = await User.findOne({ username: username }).select(
-      "-password -following -followers"
-    );
+    data = await User.findOne({ username: username }).select("-password -following -followers");
     if (!data) throw new Error("Could not get specified User");
-    const { followers } = await User.findOne({ username: username }).select(
-      "followers"
-    );
+    const { followers } = await User.findOne({ username: username }).select("followers");
     followersData = followers;
   } catch (err) {
     next(err);
   }
-  const authFollow = followersData.includes(req.user.username);
+  const authFollow = followersData?.includes(req.user.username);
   const sameUser = req.user.username === username;
   res.json({ data, authFollow: authFollow, sameUser: sameUser });
 });
 
-router.post(
-  "/profile_pic_edit",
-  authenticateToken,
-  upload.single("image"),
-  async (req, res, next) => {
-    try {
-      await User.updateOne(
-        { _id: req.user._id },
-        { $set: { profilePic: req.file.location } }
-      );
-      res.status(200).json("Upload Successful!");
-    } catch (err) {
-      next(err);
-    }
+router.post("/profile_pic_edit", authenticateToken, upload.single("image"), async (req, res, next) => {
+  try {
+    await User.updateOne({ _id: req.user._id }, { $set: { profilePic: req.file.location } });
+    res.status(200).json("Upload Successful!");
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 router.get("/profile_pic_edit", authenticateToken, (req, res, next) => {
   try {
@@ -51,22 +39,14 @@ router.get("/profile_pic_edit", authenticateToken, (req, res, next) => {
   }
 });
 
-router.post(
-  "/cover_pic_edit",
-  authenticateToken,
-  upload.single("image"),
-  async (req, res, next) => {
-    try {
-      await User.updateOne(
-        { _id: req.user._id },
-        { $set: { coverPic: req.file.location } }
-      );
-      res.status(200).json("Upload Successful!");
-    } catch (err) {
-      next(err);
-    }
+router.post("/cover_pic_edit", authenticateToken, upload.single("image"), async (req, res, next) => {
+  try {
+    await User.updateOne({ _id: req.user._id }, { $set: { coverPic: req.file.location } });
+    res.status(200).json("Upload Successful!");
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 router.get("/cover_pic_edit", authenticateToken, (req, res, next) => {
   try {
@@ -87,11 +67,11 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
           username: username,
           name: name,
           date: onlyDate,
-          bio: bio,
-        },
+          bio: bio
+        }
       },
       {
-        multi: true,
+        multi: true
       }
     );
     res.status(200).json("Upload Successful!");
