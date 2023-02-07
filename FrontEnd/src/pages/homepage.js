@@ -10,14 +10,15 @@ import {io} from 'socket.io-client'
 
 
 
-const Homepage = () => {
+const Homepage = (socket) => {
 
-const socket = io.connect("http://localhost:5000")
+// const socket = io.connect("http://localhost:5000")
+const socketHomepage = socket
 const name = localStorage.getItem('name')
   
-  useEffect(()=>{
-    socket.emit("newUser", name);
-  },[])
+  // useEffect(()=>{
+  //   socket.emit("newUser", name);
+  // },[])
 
 
   return (
@@ -25,11 +26,11 @@ const name = localStorage.getItem('name')
       <TopNav />
       <Box className="body-wrapper">
         <Box className="left-side">
-          <Post socket={socket} name = {name}/>
+          <Post socket={socketHomepage} name = {name}/>
           <Feed />
         </Box>
         <Box className="right-side">
-          <NotificationWindow socket={socket}/>
+          <NotificationWindow socket={socketHomepage}/>
         </Box>
       </Box>
     </Container>

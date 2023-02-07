@@ -18,7 +18,8 @@ import RegisterButton from '../components/RegisterButton/RegisterButton';
 import { Link } from "react-router-dom";
 
 
-const Login = (socket) => {
+const Login = () => {
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
