@@ -30,7 +30,7 @@ const NotificationWindow = ({socket}) => {
             <Box ></Box>
             <Grid item className="noti-all">
             
-            {notification.length >0 ? notification.map(p=>(
+            {notification.length >0 ? notification.reverse().map(p=>(
                 <Notification key = {p.senderName} message={p}/>)):
                 <Typography>You've caught up!</Typography>}
             </Grid>
