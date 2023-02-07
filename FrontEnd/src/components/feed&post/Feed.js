@@ -19,7 +19,7 @@ const Feed = () => {
       <Box>
         {loading ? <CircularProgress /> : ""}
         {!loading && data && data.length > 0 ? (
-          data.map((p) => <Post key={p._id} post={p} />)
+          data.reverse().map((p) => <Post key={p._id} post={p} />)
         ) : loading ? (
           ""
         ) : (
