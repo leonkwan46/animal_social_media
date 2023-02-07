@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DialogListOfUsers from "../components/listOfUsers";
-import ProfileEditForm from "../components/ProfileEditForm/ProfileEditForm";
+import ProfileEditForm from "../components/profileEditForm/ProfileEditForm";
 import {
   Avatar,
   Card,
@@ -15,7 +15,7 @@ import {
   DialogActions,
   DialogTitle,
   DialogContent,
-  DialogContentText,
+  DialogContentText
 } from "@mui/material";
 
 import { Container } from "@mui/system";
@@ -24,8 +24,8 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import CakeIcon from "@mui/icons-material/Cake";
 import NotesIcon from "@mui/icons-material/Notes";
 import Button from "@mui/material/Button";
-import TopNav from "../components/TopNav/TopNav";
-import "../components/ProfileEditForm/ProfileEditForm.css";
+import TopNav from "../../shared/components/TopNav";
+import "../components/profileEditForm/ProfileEditForm.css";
 
 import axios from "axios";
 
@@ -46,8 +46,8 @@ const Profile = () => {
       await axios
         .get("http://localhost:5000/profile/" + username, {
           headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-          },
+            authorization: "Bearer " + localStorage.getItem("token")
+          }
         })
         .then((res) => {
           setData(res.data);
@@ -69,8 +69,8 @@ const Profile = () => {
     await axios
       .get("http://localhost:5000/network/" + path + "/" + username, {
         headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
+          authorization: "Bearer " + localStorage.getItem("token")
+        }
       })
       .then((res) => {
         setUsers(res.data);
@@ -90,8 +90,8 @@ const Profile = () => {
         { username: username, follow: action },
         {
           headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-          },
+            authorization: "Bearer " + localStorage.getItem("token")
+          }
         }
       )
       .then((res) => {
@@ -119,21 +119,12 @@ const Profile = () => {
             display: "flex",
             justifyContent: "center",
             flex: 0,
-            alignItems: "flex-start",
+            alignItems: "flex-start"
           }}
         >
-          <Grid
-            container
-            spacing={1}
-            justifyContent={"center"}
-            sx={{ padding: "5px", width: "80%", margin: "0px" }}
-          >
+          <Grid container spacing={1} justifyContent={"center"} sx={{ padding: "5px", width: "80%", margin: "0px" }}>
             <Card elevation={3} sx={{ width: "100%", height: "180px" }}>
-              <CardMedia
-                component="img"
-                height="100%"
-                image={data?.data.coverPic}
-              />
+              <CardMedia component="img" height="100%" image={data?.data.coverPic} />
             </Card>
 
             <Avatar
@@ -141,7 +132,7 @@ const Profile = () => {
                 marginTop: "-125px",
                 backgroundColor: "#AAAAAA",
                 height: "250px",
-                width: "250px",
+                width: "250px"
               }}
               src={data?.data.profilePic}
             />
@@ -152,7 +143,7 @@ const Profile = () => {
                 backgroundColor: "white",
                 width: "100%",
                 minHeight: "500px",
-                marginTop: "-115px",
+                marginTop: "-115px"
               }}
             >
               <Grid
@@ -174,9 +165,7 @@ const Profile = () => {
                     <BadgeIcon className="card-item-icon" />
                     {loading ? <Skeleton animation="wave" /> : null}
                     {error ? <Typography>{error}</Typography> : null}
-                    {data ? (
-                      <Typography>@{data.data.username}</Typography>
-                    ) : null}
+                    {data ? <Typography>@{data.data.username}</Typography> : null}
                   </Box>
 
                   <Box className="card-item-info">
@@ -212,9 +201,7 @@ const Profile = () => {
                         <DialogListOfUsers
                           open={openUsers}
                           setOpen={setOpenUsers}
-                          followerOrFollowing={
-                            isFollow ? "Followers" : "Following"
-                          }
+                          followerOrFollowing={isFollow ? "Followers" : "Following"}
                           username={username}
                           name={data.data.name}
                           users={users}
@@ -247,13 +234,10 @@ const Profile = () => {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                           >
-                            <DialogTitle id="alert-dialog-title">
-                              Unfollow {username}?
-                            </DialogTitle>
+                            <DialogTitle id="alert-dialog-title">Unfollow {username}?</DialogTitle>
                             <DialogContent>
                               <DialogContentText id="alert-dialog-description">
-                                Posts from this user will no longer be shown in
-                                your homepage.
+                                Posts from this user will no longer be shown in your homepage.
                               </DialogContentText>
                               <DialogActions>
                                 <Button

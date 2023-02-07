@@ -1,18 +1,11 @@
-import {
-  Button,
-  Card,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Stack,
-} from "@mui/material";
+import { Button, Card, Dialog, DialogContent, DialogTitle, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useState } from "react";
 import "./ProfileEditForm.css";
-import ProfilePicEdit from "./ProfilePicEdit/ProfilePicEdit";
-import BgPicEdit from "./BgPicEdit/BgAddEdit";
-import InfoEdit from "./InfoEdit/InfoEdit";
+import ProfilePicEdit from "./profilePicEditForm/ProfilePicEdit";
+import BgPicEdit from "./backgroundPicEditForm/BgAddEdit";
+import InfoEdit from "./informationEditForm/InfoEdit";
 
 const ProfileEditForm = () => {
   const [open, setOpen] = useState(false);
@@ -34,7 +27,6 @@ const ProfileEditForm = () => {
           <DialogTitle className="ProfileEditForm-dialog-item-wrap">Edit Profile</DialogTitle>
           <DialogContent>
             <Stack spacing={3} className="ProfileEditForm-dialog-title">
-              
               <Card elevation={5} className="ProfileEditForm-card">
                 <ProfilePicEdit />
               </Card>
@@ -46,7 +38,6 @@ const ProfileEditForm = () => {
               <Card elevation={5} className="ProfileEditForm-card">
                 <InfoEdit />
               </Card>
-
             </Stack>
           </DialogContent>
         </Box>

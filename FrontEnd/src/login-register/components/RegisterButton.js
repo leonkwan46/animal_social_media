@@ -9,10 +9,10 @@ import {
   IconButton,
   InputAdornment,
   Stack,
-  TextField,
+  TextField
 } from "@mui/material";
 import { Form, Formik } from "formik";
-import { registerValidation } from "../../validations/validation";
+import { registerValidation } from "../../shared/util/validation";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -54,9 +54,7 @@ const RegisterButton = () => {
       })
       .catch((err) => {
         alert(err.response.data);
-        console.log(
-          `Register Failed: ${err.response.status} : ${err.response.data}`
-        );
+        console.log(`Register Failed: ${err.response.status} : ${err.response.data}`);
       });
   };
 
@@ -79,20 +77,12 @@ const RegisterButton = () => {
                 password: "",
                 confirm_password: "",
                 name: "",
-                date: "",
+                date: ""
               }}
               onSubmit={onSubmit}
               validationSchema={registerValidation}
             >
-              {({
-                values,
-                handleChange,
-                handleBlur,
-                touched,
-                errors,
-                handleSubmit,
-                setFieldValue,
-              }) => (
+              {({ values, handleChange, handleBlur, touched, errors, handleSubmit, setFieldValue }) => (
                 <Form>
                   <Stack spacing={2.5}>
                     <TextField
@@ -103,11 +93,7 @@ const RegisterButton = () => {
                       id="username"
                       label="Username"
                       error={checkError(touched.username, errors.username)}
-                      helperText={
-                        checkError(touched.username, errors.username)
-                          ? errors.username
-                          : ""
-                      }
+                      helperText={checkError(touched.username, errors.username) ? errors.username : ""}
                     />
 
                     <TextField
@@ -118,11 +104,7 @@ const RegisterButton = () => {
                       id="email"
                       label="Email"
                       error={checkError(touched.email, errors.email)}
-                      helperText={
-                        checkError(touched.email, errors.email)
-                          ? errors.email
-                          : ""
-                      }
+                      helperText={checkError(touched.email, errors.email) ? errors.email : ""}
                     />
 
                     <TextField
@@ -134,26 +116,15 @@ const RegisterButton = () => {
                       label="Password"
                       type={showPassword ? "text" : "password"}
                       error={checkError(touched.password, errors.password)}
-                      helperText={
-                        checkError(touched.password, errors.password)
-                          ? errors.password
-                          : ""
-                      }
+                      helperText={checkError(touched.password, errors.password) ? errors.password : ""}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
-                            <IconButton
-                              onClick={handleShowPassword}
-                              size="small"
-                            >
-                              {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
+                            <IconButton onClick={handleShowPassword} size="small">
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
 
@@ -165,17 +136,9 @@ const RegisterButton = () => {
                       id="confirm_password"
                       label="Confirm Password"
                       type="password"
-                      error={checkError(
-                        touched.confirm_password,
-                        errors.confirm_password
-                      )}
+                      error={checkError(touched.confirm_password, errors.confirm_password)}
                       helperText={
-                        checkError(
-                          touched.confirm_password,
-                          errors.confirm_password
-                        )
-                          ? errors.confirm_password
-                          : ""
+                        checkError(touched.confirm_password, errors.confirm_password) ? errors.confirm_password : ""
                       }
                     />
 
@@ -189,9 +152,7 @@ const RegisterButton = () => {
                       id="name"
                       label="Name"
                       error={checkError(touched.name, errors.name)}
-                      helperText={
-                        checkError(touched.name, errors.name) ? errors.name : ""
-                      }
+                      helperText={checkError(touched.name, errors.name) ? errors.name : ""}
                     />
 
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -211,13 +172,7 @@ const RegisterButton = () => {
                       />
                     </LocalizationProvider>
 
-                    <Button
-                      id="submit"
-                      fullWidth
-                      variant="contained"
-                      size="large"
-                      onClick={handleSubmit}
-                    >
+                    <Button id="submit" fullWidth variant="contained" size="large" onClick={handleSubmit}>
                       Register
                     </Button>
                   </Stack>

@@ -1,22 +1,13 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Card,
-  IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import TopNav from "../../components/TopNav/TopNav";
-import { resetPasswordValidation } from "../../validations/validation";
+import TopNav from "../../shared/components/TopNav";
+import { resetPasswordValidation } from "../../shared/util/validation";
 import "./ResetPassword.css";
 
 const ResetPassword = () => {
@@ -59,17 +50,10 @@ const ResetPassword = () => {
             onSubmit={onSubmit}
             validationSchema={resetPasswordValidation}
           >
-            {({
-              values,
-              handleChange,
-              handleSubmit,
-              handleBlur,
-              touched,
-              errors,
-            }) => (
+            {({ values, handleChange, handleSubmit, handleBlur, touched, errors }) => (
               <Form>
                 <Stack spacing={2.5}>
-                  <Typography className="ResetPassword-card-title" >Reset Password</Typography>
+                  <Typography className="ResetPassword-card-title">Reset Password</Typography>
                   <TextField
                     required
                     onChange={handleChange}
@@ -78,11 +62,7 @@ const ResetPassword = () => {
                     id="username"
                     label="Username"
                     error={checkError(touched.username, errors.username)}
-                    helperText={
-                      checkError(touched.username, errors.username)
-                        ? errors.username
-                        : ""
-                    }
+                    helperText={checkError(touched.username, errors.username) ? errors.username : ""}
                   />
 
                   <TextField
@@ -94,11 +74,7 @@ const ResetPassword = () => {
                     label="New Password"
                     type={showPassword ? "text" : "password"}
                     error={checkError(touched.password, errors.password)}
-                    helperText={
-                      checkError(touched.password, errors.password)
-                        ? errors.password
-                        : ""
-                    }
+                    helperText={checkError(touched.password, errors.password) ? errors.password : ""}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -106,7 +82,7 @@ const ResetPassword = () => {
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
-                      ),
+                      )
                     }}
                   />
                   <TextField
@@ -117,20 +93,14 @@ const ResetPassword = () => {
                     id="confirm_password"
                     label="Confirm New Password"
                     type={showPassword ? "text" : "password"}
-                    error={checkError(
-                      touched.confirm_password,
-                      errors.confirm_password
-                    )}
+                    error={checkError(touched.confirm_password, errors.confirm_password)}
                     helperText={
-                      checkError(
-                        touched.confirm_password,
-                        errors.confirm_password
-                      )
-                        ? errors.confirm_password
-                        : ""
+                      checkError(touched.confirm_password, errors.confirm_password) ? errors.confirm_password : ""
                     }
                   />
-                  <Button size="large" variant="contained" onClick={handleSubmit}>Submit</Button>
+                  <Button size="large" variant="contained" onClick={handleSubmit}>
+                    Submit
+                  </Button>
                 </Stack>
               </Form>
             )}

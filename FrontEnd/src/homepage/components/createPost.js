@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 
 import axios from "axios";
 
-import profilePic from "../assets/images/charo.jpg";
+import profilePic from "../../assets/images/charo.jpg";
 import { TextField, Button, Avatar } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -15,7 +15,7 @@ import "./createPost.css";
 
 const user = {
   picture: profilePic,
-  alt: "black-hand",
+  alt: "black-hand"
 };
 
 const maxLength = 280;
@@ -26,7 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={8} ref={ref} variant="filled" {...props} />;
 });
 
-const Post = ({socket, name}) => {
+const Post = ({ socket, name }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -41,34 +41,29 @@ const Post = ({socket, name}) => {
     setOpen(false);
   };
 
-  
-
   const onSubmit = async (values, { setValues }) => {
     try {
-      if (values.length === 0)
-        throw new Error("You need to write more than 1 letter!");
+      if (values.length === 0) throw new Error("You need to write more than 1 letter!");
       await axios
         .post(
           backURL,
           { text: values.text },
           {
             headers: {
-              authorization: "Bearer " + localStorage.getItem("token"),
-            },
+              authorization: "Bearer " + localStorage.getItem("token")
+            }
           }
-          
         )
         .then((res) => {
           console.log(res.status);
           console.log(res.data);
           handleOpen("Successfully post your message");
           setValues({ text: "", length: 0, percent: 0 });
-          socket.emit("createPost",{
-            senderName:res.data.name,
+          socket.emit("createPost", {
+            senderName: res.data.name,
             action: "created a post",
-            timestamp:res.data.createdAt,
-            
-          })
+            timestamp: res.data.createdAt
+          });
         })
         .catch((err) => console.log(err));
     } catch (err) {
@@ -77,27 +72,17 @@ const Post = ({socket, name}) => {
   };
 
   return (
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={{ text: "", length: 0, percent: 0 }}
-    >
+    <Formik onSubmit={onSubmit} initialValues={{ text: "", length: 0, percent: 0 }}>
       {({ values, handleChange, handleSubmit }) => (
         <Form className="post-wrapper">
           <div className="post-upper">
-            <Avatar
-              
-              src={user.picture}
-              alt={user.alt}
-              className="profile-pic-for-post"
-            />
+            <Avatar src={user.picture} alt={user.alt} className="profile-pic-for-post" />
             <TextField
               value={values.text}
               onChange={(e) => {
                 values.text += e.target.value;
                 values.length = e.target.value.length;
-                values.percent = Math.floor(
-                  (e.target.value.length / maxLength) * 100
-                );
+                values.percent = Math.floor((e.target.value.length / maxLength) * 100);
                 handleChange(e);
               }}
               id="text"
@@ -113,11 +98,7 @@ const Post = ({socket, name}) => {
               {values.length !== 0 ? (
                 <CircularProgressbar
                   value={values.percent}
-                  text={`${
-                    maxLength - values.length <= 30
-                      ? maxLength - values.length
-                      : ""
-                  }`}
+                  text={`${maxLength - values.length <= 30 ? maxLength - values.length : ""}`}
                   strokeWidth="12"
                   styles={buildStyles({
                     textSize: "2em",
@@ -128,7 +109,7 @@ const Post = ({socket, name}) => {
                         : maxLength - values.length < 30
                         ? "#ffff00"
                         : "#3e98c7"
-                    }`,
+                    }`
                   })}
                 />
               ) : (
@@ -150,7 +131,7 @@ const Post = ({socket, name}) => {
               onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "center",
+                horizontal: "center"
               }}
             >
               <Alert onClose={handleClose} severity="info">

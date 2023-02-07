@@ -3,15 +3,15 @@ import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CakeIcon from "@mui/icons-material/Cake";
 import NotesIcon from "@mui/icons-material/Notes";
-import useFetch from "../../../hooks/usefetch";
+import useFetch from "../../../../shared/hooks/usefetch";
 import "./InfoEdit.css";
 import InfoEditButton from "./InfoEditButton";
 
 const InfoEdit = () => {
   const { data, loading, error } = useFetch("http://localhost:5000/profile", {
     headers: {
-      authorization: "Bearer " + localStorage.getItem("token"),
-    },
+      authorization: "Bearer " + localStorage.getItem("token")
+    }
   });
 
   return (
@@ -20,7 +20,6 @@ const InfoEdit = () => {
         <Typography className="card-header-text">Profile Info</Typography>
 
         <InfoEditButton />
-        
       </Box>
 
       <Box className="card-item-info-wrap">
