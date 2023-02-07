@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -127,18 +128,18 @@ const TopNav = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="relative" sx={{ bgcolor: "#000000" }}>
+      <AppBar position="" sx={{ bgcolor: "#000000" }}>
         <Toolbar>
-
+          <Link to="/">
             <IconButton
               size="large"
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
-              href="/"
             >
               <PetsIcon />
             </IconButton>
+          </Link>
 
           <Typography
             variant="h6"
@@ -153,7 +154,7 @@ const TopNav = () => {
 
           <Box
             component="img"
-            src={require("../../assets/images/cat.gif")}
+            src={require("../assets/images/cat.gif")}
             alt="cat"
             width={"40px"}
             height={"40px"}
@@ -162,7 +163,7 @@ const TopNav = () => {
 
           <Box
             component="img"
-            src={require("../../assets/images/rotated.gif")}
+            src={require("../assets/images/rotated.gif")}
             alt="dog"
             width={"40px"}
             height={"40px"}
@@ -197,17 +198,15 @@ const TopNav = () => {
               </Badge>
             </IconButton>
 
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                color="inherit"
-                href="/profile"
-              >
-                <AccountCircle />
-              </IconButton>
-
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

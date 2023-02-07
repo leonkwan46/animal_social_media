@@ -16,6 +16,7 @@ module.exports = router;
  * @param username : user B (req.body)
  * @param follow: boolean (true: follow, false: unfollow)
  */
+
 router.post("/follow", authenticateToken, async (req, res, next) => {
   try {
     const { username } = req.user;

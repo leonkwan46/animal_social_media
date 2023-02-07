@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/usefetch";
 import ProfileEditForm from "../components/ProfileEditForm/ProfileEditForm";

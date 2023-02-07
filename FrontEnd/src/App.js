@@ -5,7 +5,7 @@ import Homepage from "./pages/homepage";
 import Login from "./pages/login";
 import Test from "./pages/test";
 import Profile from "./pages/profile";
-import ResetPassword from "./pages/resetPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 const App = () => {
   return (

@@ -30,20 +30,20 @@ const ProfileEditForm = () => {
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
-        <Box className="dialog-wrap">
-          <DialogTitle className="dialog-title">Edit Profile</DialogTitle>
+        <Box className="ProfileEditForm-dialog-wrap">
+          <DialogTitle className="ProfileEditForm-dialog-item-wrap">Edit Profile</DialogTitle>
           <DialogContent>
-            <Stack spacing={3} className="dialog-item-wrap">
+            <Stack spacing={3} className="ProfileEditForm-dialog-title">
               
-              <Card elevation={5} className="card">
+              <Card elevation={5} className="ProfileEditForm-card">
                 <ProfilePicEdit />
               </Card>
 
-              <Card elevation={5} className="card">
+              <Card elevation={5} className="ProfileEditForm-card">
                 <BgPicEdit />
               </Card>
 
-              <Card elevation={5} className="card">
+              <Card elevation={5} className="ProfileEditForm-card">
                 <InfoEdit />
               </Card>
 
