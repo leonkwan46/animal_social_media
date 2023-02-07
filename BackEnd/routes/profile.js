@@ -4,44 +4,24 @@ const authenticateToken = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadHandler");
 const User = require("../db/users");
 
-// router.get("/", authenticateToken, async (req, res, next) => {
-//   try {
-//     const data = {
-//       username: req.user.username,
-//       name: req.user.name,
-//       bio: req.user.bio,
-//       date: req.user.date,
-//       profilePic: req.user.profilePic,
-//       coverPic: req.user.coverPic,
-//       numOfFollowing: req.user.numOfFollowing,
-//       numOfFollowers: req.user.numOfFollowers,
-//     };
-//     res.json({ data, sameUser: true });
-//   } catch (err) {
-//     next({ message: "Failed sending Data" });
-//   }
-// });
-
 router.get("/:username", authenticateToken, async (req, res, next) => {
   // username is for a user you are visiting
   const username = req.params.username;
+  let data;
   try {
-    const data = await User.findOne({ username: username }).select(
+    data = await User.findOne({ username: username }).select(
       "-password -following -followers"
     );
     if (!data) throw new Error("Could not get specified User");
-
     const { followers } = await User.findOne({ username: username }).select(
       "followers"
     );
-
-    const authFollow = followers.includes(req.user.username);
-    const sameUser = req.user.username === username;
-
-    res.json({ data, authFollow: authFollow, sameUser: sameUser });
   } catch (err) {
     next(err);
   }
+  const authFollow = followers.includes(req.user.username);
+  const sameUser = req.user.username === username;
+  res.json({ data, authFollow: authFollow, sameUser: sameUser });
 });
 
 router.post(
