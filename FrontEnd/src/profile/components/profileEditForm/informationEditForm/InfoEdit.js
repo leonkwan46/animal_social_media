@@ -7,8 +7,8 @@ import useFetch from "../../../../shared/hooks/usefetch";
 import "./InfoEdit.css";
 import InfoEditButton from "./InfoEditButton";
 
-const InfoEdit = () => {
-  const { data, loading, error } = useFetch("http://localhost:5000/profile", {
+const InfoEdit = ({ username }) => {
+  const { data, loading, error } = useFetch("http://localhost:5000/profile/" + username, {
     headers: {
       authorization: "Bearer " + localStorage.getItem("token")
     }
@@ -19,7 +19,7 @@ const InfoEdit = () => {
       <Box className="card-header">
         <Typography className="card-header-text">Profile Info</Typography>
 
-        <InfoEditButton />
+        <InfoEditButton username={username} />
       </Box>
 
       <Box className="card-item-info-wrap">

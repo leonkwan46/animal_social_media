@@ -40,7 +40,7 @@ const Profile = () => {
   const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
   const [users, setUsers] = useState();
-  
+
   useEffect(() => {
     setLoading(true);
     const getProfile = async () => {
@@ -281,7 +281,7 @@ const Profile = () => {
                     {data ? <Typography>{data.data.bio}</Typography> : null}
                   </Box>
                 </Box>
-                {data?.sameUser ? <ProfileEditForm /> : ""}
+                {data?.sameUser ? <ProfileEditForm username={username} /> : ""}
               </Grid>
             </Card>
           </Grid>

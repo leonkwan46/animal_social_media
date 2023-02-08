@@ -8,7 +8,7 @@ import { useState } from "react";
 import { updateValidation } from "../../../../shared/util/validation";
 import useFetch from "../../../../shared/hooks/usefetch";
 
-const InfoEditButton = () => {
+const InfoEditButton = ({ username }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -24,7 +24,7 @@ const InfoEditButton = () => {
     return false;
   };
 
-  const { data } = useFetch("http://localhost:5000/profile", {
+  const { data } = useFetch("http://localhost:5000/profile/" + username, {
     headers: {
       authorization: "Bearer " + localStorage.getItem("token")
     }

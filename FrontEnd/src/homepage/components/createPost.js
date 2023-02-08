@@ -26,7 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={8} ref={ref} variant="filled" {...props} />;
 });
 
-const Post = ({ socket, name }) => {
+const Post = ({ socket, name, setRefreshFeed }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -59,6 +59,7 @@ const Post = ({ socket, name }) => {
           console.log(res.data);
           handleOpen("Successfully post your message");
           setValues({ text: "", length: 0, percent: 0 });
+          setRefreshFeed((prev) => !prev);
           socket.emit("createPost", {
             senderName: res.data.name,
             action: "created a post",

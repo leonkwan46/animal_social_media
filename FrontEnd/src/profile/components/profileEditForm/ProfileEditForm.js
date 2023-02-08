@@ -7,7 +7,7 @@ import ProfilePicEdit from "./profilePicEditForm/ProfilePicEdit";
 import BgPicEdit from "./backgroundPicEditForm/BgAddEdit";
 import InfoEdit from "./informationEditForm/InfoEdit";
 
-const ProfileEditForm = () => {
+const ProfileEditForm = ({ username }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -36,7 +36,7 @@ const ProfileEditForm = () => {
               </Card>
 
               <Card elevation={5} className="ProfileEditForm-card">
-                <InfoEdit />
+                <InfoEdit  username={username}/>
               </Card>
             </Stack>
           </DialogContent>

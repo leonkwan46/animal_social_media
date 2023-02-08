@@ -11,6 +11,7 @@ import { io } from "socket.io-client";
 const Homepage = () => {
   const socket = io.connect("http://localhost:5000");
   const name = localStorage.getItem("name");
+  const [refreshFeed, setRefreshFeed] = useState(false);
 
   useEffect(() => {
     socket.emit("newUser", name);
@@ -21,8 +22,8 @@ const Homepage = () => {
       <TopNav />
       <Box className="body-wrapper">
         <Box className="left-side">
-          <Post socket={socket} name={name} />
-          <Feed />
+          <Post socket={socket} name={name} setRefreshFeed={setRefreshFeed} />
+          <Feed refreshFeed={refreshFeed} />
         </Box>
         <Box className="right-side">
           <NotificationWindow socket={socket} />

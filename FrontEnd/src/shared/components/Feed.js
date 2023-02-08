@@ -5,13 +5,14 @@ import { Box } from "@mui/system";
 import Post from "./post";
 import "./feed.css";
 
-const Feed = () => {
+const Feed = ({ refreshFeed }) => {
   const backURL = "http://localhost:5000/homepage";
 
   const { data, loading, error } = useFetch(backURL, {
     headers: {
       authorization: "Bearer " + localStorage.getItem("token")
-    }
+    },
+    refreshFeed
   });
 
   return (

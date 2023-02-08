@@ -4,24 +4,6 @@ const authenticateToken = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadHandler");
 const User = require("../db/users");
 
-router.get("/:username", authenticateToken, async (req, res, next) => {
-  // username is for a user you are visiting
-  const username = req.params.username;
-  let data;
-  let followersData;
-  try {
-    data = await User.findOne({ username: username }).select("-password -following -followers");
-    if (!data) throw new Error("Could not get specified User");
-    const { followers } = await User.findOne({ username: username }).select("followers");
-    followersData = followers;
-  } catch (err) {
-    next(err);
-  }
-  const authFollow = followersData?.includes(req.user.username);
-  const sameUser = req.user.username === username;
-  res.json({ data, authFollow: authFollow, sameUser: sameUser });
-});
-
 router.post("/profile_pic_edit", authenticateToken, upload.single("image"), async (req, res, next) => {
   try {
     await User.updateOne({ _id: req.user._id }, { $set: { profilePic: req.file.location } });
@@ -78,6 +60,24 @@ router.post("/info_edit", authenticateToken, async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+router.get("/:username", authenticateToken, async (req, res, next) => {
+  // username is for a user you are visiting
+  const username = req.params.username;
+  let data;
+  let followersData;
+  try {
+    data = await User.findOne({ username: username }).select("-password -following -followers");
+    if (!data) throw new Error("Could not get specified User");
+    const { followers } = await User.findOne({ username: username }).select("followers");
+    followersData = followers;
+  } catch (err) {
+    next(err);
+  }
+  const authFollow = followersData?.includes(req.user.username);
+  const sameUser = req.user.username === username;
+  res.json({ data, authFollow: authFollow, sameUser: sameUser });
 });
 
 module.exports = router;
