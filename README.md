@@ -4,7 +4,11 @@
 
 🐱 Building by React, NodeJS and MongoDB
 
+<<<<<<< HEAD
 🐮 Implemented MUI, Formik, Redux, ExpressJS, Mongoose, and S3 for development
+=======
+🐮 Implemented MUI, Formik, Redux, ExpressJS, Mongoose and S3 for development
+>>>>>>> e94c917512ce3ce65c78f6a79df18fb8355576d4
 
 🙉 Explored Testing Framework - Cypress
 
