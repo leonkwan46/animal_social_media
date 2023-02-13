@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const useFetch = (url, headers, dependency = null) => {
+//arrayofFunc expects set~ of useState
+const useFetch = (url, headers, dependency = "") => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -14,7 +15,9 @@ const useFetch = (url, headers, dependency = null) => {
         .get(url, headers)
         .then((res) => {
           setData(res.data);
+          
           console.log("useFetch called");
+          console.log(res.data);
         })
         .catch((err) => {
           setError(err);

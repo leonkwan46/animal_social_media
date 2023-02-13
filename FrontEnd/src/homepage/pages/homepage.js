@@ -10,9 +10,9 @@ import { io } from "socket.io-client";
 
 const Homepage = () => {
   const socket = io.connect("http://localhost:5000");
+
   const name = localStorage.getItem("name");
   const [refreshFeed, setRefreshFeed] = useState(false);
-
   useEffect(() => {
     socket.emit("newUser", name);
   }, []);

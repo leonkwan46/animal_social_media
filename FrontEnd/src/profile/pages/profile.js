@@ -28,43 +28,35 @@ import TopNav from "../../shared/components/TopNav";
 import "../components/profileEditForm/ProfileEditForm.css";
 
 import axios from "axios";
+import useFetch from "../../shared/hooks/usefetch";
 
 const Profile = () => {
   const username = useParams().id;
   const [openUsers, setOpenUsers] = useState(false);
+  // Handle handle unfollow popup
   const [openUnFollowPopup, setOpenUnFollowPopup] = useState(false);
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+
   const [numOfFollowers, setnumOfFollowers] = useState(0);
   const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
+  
   const [users, setUsers] = useState();
 
+  const { data, loading, error } = useFetch(
+    "http://localhost:5000/profile/" + username,
+    {
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("token")
+      }
+    },
+    username
+  );
+
   useEffect(() => {
-    setLoading(true);
-    const getProfile = async () => {
-      await axios
-        .get("http://localhost:5000/profile/" + username, {
-          headers: {
-            authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then((res) => {
-          setData(res.data);
-          setnumOfFollowers(res.data.data.numOfFollowers);
-          setAuthFollow(res.data.authFollow);
-          setUsers(null);
-        })
-        .catch((err) => {
-          setError(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
-    getProfile();
-  }, [username]);
+    setnumOfFollowers(data?.data.numOfFollowers);
+    setAuthFollow(data?.data.numOfFollowers);
+    setUsers(null);
+  }, [data]);
 
   const getUsers = async (path) => {
     await axios

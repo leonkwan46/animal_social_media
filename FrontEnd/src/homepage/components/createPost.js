@@ -55,16 +55,14 @@ const Post = ({ socket, name, setRefreshFeed }) => {
           }
         )
         .then((res) => {
-          console.log(res.status);
-          console.log(res.data);
           handleOpen("Successfully post your message");
           setValues({ text: "", length: 0, percent: 0 });
-          setRefreshFeed((prev) => !prev);
           socket.emit("createPost", {
             senderName: res.data.name,
             action: "created a post",
             timestamp: res.data.createdAt
           });
+          setRefreshFeed((prev) => !prev);
         })
         .catch((err) => console.log(err));
     } catch (err) {

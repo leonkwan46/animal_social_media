@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Messages = require("../db/messageModel");
-const protected = require("../middleware/authMiddleware");
+const authenticateToken = require("../middleware/authMiddleware");
 
 //get all posts to create feed
-router.get("/", protected, async (req, res, next) => {
+router.get("/", authenticateToken, async (req, res, next) => {
   try {
     const message = await Messages.find();
     // check if password is matched
     if (message) {
-      res.status(200).json(message);
+      res.status(200).json(message.reverse());
     } else {
       res.status(400);
       throw new Error("No Message Found!");
@@ -22,8 +22,14 @@ router.get("/", protected, async (req, res, next) => {
   }
 });
 
+// get your own username
+router.get("/username", authenticateToken, async (req, res) => {
+  const { username } = req.user;
+  res.status(200).json({ username: username });
+});
+
 //create post
-router.post("/", protected, async (req, res, next) => {
+router.post("/", authenticateToken, async (req, res, next) => {
   // Check if text data is there
   if (!req.body.text) {
     res.status(400);
@@ -34,7 +40,7 @@ router.post("/", protected, async (req, res, next) => {
       text: req.body.text,
       id: req.user.id,
       name: req.user.name,
-      username: req.user.username,
+      username: req.user.username
     });
 
     if (message) {
@@ -50,6 +56,15 @@ router.post("/", protected, async (req, res, next) => {
     console.log("====================================");
     next(err);
   }
+});
+
+/**
+ * Delete a post
+ *
+ * @param req.body: messageId, username
+ */
+router.delete("/:messageId", authenticateToken, (req, res, next) => {
+  const { username } = req.body;
 });
 
 module.exports = router;
