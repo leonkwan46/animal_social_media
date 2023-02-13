@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -17,6 +17,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
+import { UserContext } from "../contexts/username";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,6 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // TODO: useContext() to get Username!
 const TopNav = () => {
+  const user = useContext(UserContext);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -129,16 +132,15 @@ const TopNav = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" sx={{ bgcolor: "#000000" }}>
         <Toolbar>
-
-            <IconButton
-              size="large"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-              href="/"
-            >
-              <PetsIcon />
-            </IconButton>
+          <IconButton
+            size="large"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            href="/"
+          >
+            <PetsIcon />
+          </IconButton>
 
           <Typography
             variant="h6"
@@ -169,27 +171,8 @@ const TopNav = () => {
             padding={"5px"}
           />
 
-          {/* search bar */}
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={898198198} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
 
             <IconButton size="large" aria-label="AHHAHAHA" color="inherit">
               <Badge badgeContent={17} color="error">
@@ -197,17 +180,16 @@ const TopNav = () => {
               </Badge>
             </IconButton>
 
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                color="inherit"
-                href={"/profile"}
-              >
-                <AccountCircle />
-              </IconButton>
-
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+              href={`/profile/${user.username}`}
+            >
+              <AccountCircle />
+            </IconButton>
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
