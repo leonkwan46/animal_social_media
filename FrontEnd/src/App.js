@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect,useState,useFetch } from 'react';
 import Homepage from "./homepage/pages/homepage";
 import Login from "./login-register/pages/login";
 import Profile from "./profile/pages/profile";
 import ResetPassword from "./login-register/components/ResetPassword";
 import {SocketContext, socket} from './shared/contexts/context';
 import {UserContext} from './shared/contexts/username'
+import useFetch from "./shared/hooks/usefetch";
+ import "./App.css";
 
 
 const App = () => {
