@@ -61,44 +61,47 @@ app.use(errorHandler);
 //     console.log("http://localhost:5000");
 // });
 
+const socketUser = require("./socket/socketUser")
+const socketEvent = require("./socket/socketEvent")
 
-let onlineUsers = []
+// let onlineUsers = []
 
-const addNewUser = (username,socketId) => {
-    !onlineUsers.some(user=>user.username === username) && onlineUsers.push({username, socketId})}
+// const addNewUser = (username,socketId) => {
+//     !onlineUsers.some(user=>user.username === username) && onlineUsers.push({username, socketId})}
 
-const removeUser = (socketId) => {
-    onlineUsers = onlineUsers.filter(user => user.socketId !== socketId)
-}
+// const removeUser = (socketId) => {
+//     onlineUsers = onlineUsers.filter(user => user.socketId !== socketId)
+// }
 
-const getUser = (username) =>{
-    return onlineUsers.find((user) => user.username === username)
-}
+// const getUser = (username) =>{
+//     return onlineUsers.find((user) => user.username === username)
+// }
 // connect with client
-io.on('connection', (socket) => {
 
-    // take action from client
-    socket.on("newUser",(username)=>{
-        addNewUser(username,socket.id)
-        console.log("gotcha!")
-    })
+const onConnection = (socket) =>{
+    socketUser(io,socket);
+    socketEvent(io,socket);
+}
+// io.on('connection', (socket) => {
+
+//     // // take action from client
+//     // socket.on("newUser",(username)=>{
+//     //     addNewUser(username,socket.id)
+//     //     console.log("gotcha!")
+//     // })
   
-    // client disconnected
-    socket.on('disconnect', () => {
-        removeUser(socket.id)
-    })
+//     // // client disconnected
+//     // socket.on('disconnect', () => {
+//     //     removeUser(socket.id)
+//     })
 
-    socket.on("createPost",({senderName,action,timestamp})=>{
-        // console.log(`I got ${timestamp}!`)
-        io.emit("getPost",{senderName,action,timestamp})
-    })
+//     socket.on("createPost",({senderName,action,timestamp})=>{
+//         // console.log(`I got ${timestamp}!`)
+//         io.emit("getPost",{senderName,action,timestamp})
+//     })
     
 
-    // // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
-    // client.on('sent-message', function (message) {
-    //     io.sockets.emit('new-message', message)
-    // })
-})
+io.on('connection',onConnection);
 
 server.listen(5000,() => {
     console.log("socket.io server is ready")
