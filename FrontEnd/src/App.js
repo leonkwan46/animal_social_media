@@ -1,4 +1,3 @@
-import { useState, useEffect, createContext } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./login-register/pages/login";
@@ -10,7 +9,7 @@ import useFetch from "./shared/hooks/usefetch";
 import "./App.css";
 
 const App = () => {
-  const { data, loading, error } = useFetch("http://localhost:5000/homepage/username", {
+  const { data } = useFetch("http://localhost:5000/homepage/username", {
     headers: {
       authorization: "Bearer " + localStorage.getItem("token")
     }
@@ -23,7 +22,7 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
         </Routes>
       </Router>
     </UserContext.Provider>

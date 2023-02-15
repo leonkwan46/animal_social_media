@@ -31,7 +31,7 @@ import axios from "axios";
 import useFetch from "../../shared/hooks/usefetch";
 
 const Profile = () => {
-  const username = useParams().id;
+  const username = useParams().username;
   const [openUsers, setOpenUsers] = useState(false);
   // Handle handle unfollow popup
   const [openUnFollowPopup, setOpenUnFollowPopup] = useState(false);

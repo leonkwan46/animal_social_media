@@ -22,16 +22,14 @@ const Feed = ({ refreshFeed }) => {
 
   return (
     <div className="post-wrapper">
-      <Box>
-        {loading ? <CircularProgress /> : ""}
-        {!loading && data && data.length > 0 ? (
-          data.map((p) => <Post key={p._id} post={p} />)
-        ) : loading ? (
-          ""
-        ) : (
-          <Typography>There's no post!</Typography>
-        )}
-      </Box>
+      {loading ? <CircularProgress /> : ""}
+      {!loading && data && data.length > 0 ? (
+        data.map((p) => <Post key={p._id} post={p} />)
+      ) : loading ? (
+        ""
+      ) : (
+        <Typography>There's no post!</Typography>
+      )}
       <br />
       <Box>
         {!loading && data && data.length > 0 ? <Typography> - That's all. - </Typography> : <Typography></Typography>}
