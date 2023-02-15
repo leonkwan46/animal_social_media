@@ -6,28 +6,29 @@ import Login from "./pages/login";
 import Test from "./pages/test";
 import Profile from "./pages/profile";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import {io} from 'socket.io-client'
+// import {io} from 'socket.io-client'
+import {socket,SocketContext} from '../src/components/context'
 
 const App = () => {
-  const socket = io.connect("http://localhost:5000")
-  const name = localStorage.getItem('name')
+  // const socket = io.connect("http://localhost:5000")
+  // const name = localStorage.getItem('name')
   
-  useEffect(()=>{
-    socket.emit("newUser", name);
-  },[])
+  
 
     
   return (
+    <SocketContext.Provider value={socket}>
     <Router>
       <Routes>
-        <Route path="/" socket={socket} element={<Homepage />} />
+        <Route path="/"  element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />}  />
-        <Route path="/profile" socket={socket} element={<Profile />} />
-        <Route path="/reset-password"  socket={socket} element={<ResetPassword />} />
-        <Route path="/profile/:id" socket={socket} element={<Profile />}  />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/reset-password"  element={<ResetPassword />} />
+        <Route path="/profile/:id" element={<Profile />}  />
       </Routes>
     </Router>
+    </SocketContext.Provider>
   );
 };
 

@@ -16,11 +16,14 @@ import axios from "axios";
 import { useNavigate } from 'react-router';
 import RegisterButton from '../components/RegisterButton/RegisterButton';
 import { Link } from "react-router-dom";
+import { SocketContext } from "../components/context.js";
+import { useContext } from "react";
 
 
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
+  const socketLogin= useContext(SocketContext);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -35,8 +38,12 @@ const Login = () => {
     .then(res =>{
       
         localStorage.setItem('token',res.data.token);
-        localStorage.setItem('name',res.data.name);
+        // localStorage.setItem('name',res.data.name);
         // alert(JSON.stringify(res));
+        // const username = res.data.name
+        
+          // const token = localStorage.getItem('token')
+          socketLogin.emit("newUser", res.data.token);
         
         navigate('/')
         

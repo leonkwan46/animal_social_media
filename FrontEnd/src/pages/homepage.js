@@ -6,18 +6,21 @@ import NotificationWindow from "../components/notiWindow.js";
 import Feed from "../components/feed&post/Feed.js";
 import { Box, Container } from "@mui/system";
 import "./homepage.css";
-import {io} from 'socket.io-client'
+import { SocketContext } from "../components/context.js";
+import { useContext } from "react";
 
 
 
-const Homepage = (socket) => {
+const Homepage = () => {
 
 // const socket = io.connect("http://localhost:5000")
-const socketHomepage = socket
-const name = localStorage.getItem('name')
+// const socketHomepage = socket
+const socketHomepage = useContext(SocketContext);
+// const name = localStorage.getItem('name')
+const token = localStorage.getItem('token')
   
   // useEffect(()=>{
-  //   socket.emit("newUser", name);
+  //   socketHomepage.emit("newUser", token);
   // },[])
 
 
@@ -26,7 +29,7 @@ const name = localStorage.getItem('name')
       <TopNav />
       <Box className="body-wrapper">
         <Box className="left-side">
-          <Post socket={socketHomepage} name = {name}/>
+          <Post socket={socketHomepage} token = {token}/>
           <Feed />
         </Box>
         <Box className="right-side">

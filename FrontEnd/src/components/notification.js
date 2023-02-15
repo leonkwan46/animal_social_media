@@ -12,13 +12,13 @@ const Notification = (message) =>{
             className = "notification-body"
         >       <Grid item>
                 <Avatar sx= {{bgcolor: '#c6aea1'}} className="avatar-pro" > 
-                {message.message.senderName.charAt(0)}
+                {message.message.sendername.charAt(0)}
                 </Avatar>
                 </Grid>
                 <Grid item maxWidth="sm" className="noti-all">
-                <Typography fontWeight="bold">{message.message.senderName}</Typography>
+                <Typography fontWeight="bold">{message.message.sendername}</Typography>
                 <Typography fontSize={16}> {message.message.action} </Typography>
-                <Typography fontSize={12}> {format(message.message.timestamp)} </Typography>
+                <Typography fontSize={12}> {format(message.message.createdAt)} </Typography>
                 </Grid>
             
         </Grid>
