@@ -10,7 +10,7 @@ import MuiAlert from "@mui/material/Alert";
 import SendIcon from "@mui/icons-material/Send";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { SocketContext } from "./context";
+import { SocketContext } from "../../shared/contexts/context";
 import "./createPost.css";
 import { useContext } from "react";
 

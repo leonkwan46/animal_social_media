@@ -6,7 +6,7 @@ import NotificationWindow from "../components/notiWindow.js";
 import Feed from "../../shared/components/Feed.js";
 import { Box, Container } from "@mui/system";
 import "./homepage.css";
-import { SocketContext } from "../components/context.js";
+import { SocketContext } from "../../shared/contexts/context.js";
 import { useContext } from "react";
 
 
