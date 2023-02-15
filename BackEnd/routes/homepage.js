@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Messages = require("../db/messageModel");
-const protected = require("../middleware/authMiddleware");
+const authenticateToken = require("../middleware/authMiddleware");
 // const UserNotification = require('../db/userNotification');
 const Notifications = require('../db/notificationModel');
 const jwt = require("jsonwebtoken");
@@ -70,7 +70,7 @@ router.post("/", authenticateToken, async (req, res, next) => {
 //   const { username } = req.body;}
   
 //get all posts to create feed
-router.get("/noti", protected, async (req, res, next) => {
+router.get("/noti", authenticateToken, async (req, res, next) => {
   try {
     // console.log(req.body.usertoken)
     // console.log(req.params.usertoken)

@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import RegisterButton from "../components/RegisterButton";
 import { Link } from "react-router-dom";
-import { SocketContext } from "../components/context.js";
+import { SocketContext } from "../../shared/contexts/context";
 import { useContext } from "react";
 
 

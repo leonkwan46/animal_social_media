@@ -9,7 +9,7 @@ import Notification from "./notification";
 import "./notification.css";
 
 const NotificationWindow = ({socket}) => {
-
+    
     const usertoken = localStorage.getItem('token')
     const[notification,setNotification] = useState([])
     const backURL = "http://localhost:5000/homepage/noti";
