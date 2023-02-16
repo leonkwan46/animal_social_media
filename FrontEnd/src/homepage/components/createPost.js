@@ -10,8 +10,9 @@ import MuiAlert from "@mui/material/Alert";
 import SendIcon from "@mui/icons-material/Send";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
+import { SocketContext } from "../../shared/contexts/context";
 import "./createPost.css";
+import { useContext } from "react";
 
 const user = {
   picture: profilePic,
@@ -26,8 +27,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={8} ref={ref} variant="filled" {...props} />;
 });
 
-const Post = ({ socket, name, setRefreshFeed }) => {
+const Post = ({ setRefreshFeed }) => {
   const [open, setOpen] = React.useState(false);
+  const socket = useContext(SocketContext);
 
   const handleOpen = () => {
     setOpen(true);

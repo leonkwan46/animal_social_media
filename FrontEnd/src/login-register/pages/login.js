@@ -10,9 +10,14 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import RegisterButton from "../components/RegisterButton";
 import { Link } from "react-router-dom";
+import { SocketContext } from "../../shared/contexts/context";
+import { useContext } from "react";
 
-const Login = (socket) => {
+
+const Login = () => {
+
   const [showPassword, setShowPassword] = useState(false);
+  const socketLogin= useContext(SocketContext);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -21,13 +26,14 @@ const Login = (socket) => {
   const backURL = "http://localhost:5000/login";
   const navigate = useNavigate();
 
-  const onSubmit = async (values) => {
-    await axios
-      .post(backURL, values)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("name", res.data.name);
-        // alert(JSON.stringify(res));
+  const onSubmit = async (values) =>{
+  
+    await axios.post(backURL,values)
+    .then(res =>{
+      
+        localStorage.setItem('token',res.data.token);
+          socketLogin.emit("newUser", res.data.token);
+        
 
         navigate("/");
       })
