@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Post from "../components/createPost.js";
-import TopNav from "../../shared/components/TopNav";
+import TopNav from "../../shared/components/TopNav/TopNav";
 import NotificationWindow from "../components/notiWindow.js";
 import Feed from "../../shared/components/Feed.js";
 import { Box, Container } from "@mui/system";

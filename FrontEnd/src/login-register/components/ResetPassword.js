@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import TopNav from "../../shared/components/TopNav";
+import TopNav from "../../shared/components/TopNav/TopNav";
 import { resetPasswordValidation } from "../../shared/util/validation";
 import "./ResetPassword.css";
 
