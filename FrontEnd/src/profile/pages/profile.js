@@ -26,11 +26,14 @@ import NotesIcon from "@mui/icons-material/Notes";
 import Button from "@mui/material/Button";
 import TopNav from "../../shared/components/TopNav";
 import "../components/profileEditForm/ProfileEditForm.css";
+import { SocketContext } from "../../shared/contexts/context.js";
+import { useContext } from "react";
 
 import axios from "axios";
 import useFetch from "../../shared/hooks/usefetch";
 
 const Profile = () => {
+  const socket = useContext(SocketContext);
   const username = useParams().id;
   const [openUsers, setOpenUsers] = useState(false);
   // Handle handle unfollow popup
@@ -90,6 +93,16 @@ const Profile = () => {
       .then((res) => {
         setnumOfFollowers(action ? numOfFollowers + 1 : numOfFollowers - 1);
         setAuthFollow(!authFollow);
+        if(!authFollow){
+        socket.emit("following",{
+          senderuser:localStorage.getItem("token"),
+          action: "start to following you",
+          receiver: username
+        })
+      }
+        else{
+
+        }
       })
       .catch((err) => {
         console.log(err);

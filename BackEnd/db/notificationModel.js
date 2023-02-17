@@ -19,6 +19,7 @@ const notificationSchema = mongoose.Schema(
     },
     read_by:{
         type: [String],
+        
       }
    
   },

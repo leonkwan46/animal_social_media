@@ -17,7 +17,7 @@ import { useContext } from "react";
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
-  const socketLogin= useContext(SocketContext);
+  const socket= useContext(SocketContext);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -32,7 +32,7 @@ const Login = () => {
     .then(res =>{
       
         localStorage.setItem('token',res.data.token);
-          socketLogin.emit("newUser", res.data.token);
+          socket.emit("newUser", res.data.token);
         
 
         navigate("/");

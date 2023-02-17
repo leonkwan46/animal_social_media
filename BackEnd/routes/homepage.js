@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 //get all posts to create feed
 router.get("/", authenticateToken, async (req, res, next) => {
   try {
-    const message = await Messages.find();
+    const message = await Messages.find().sort({x:1}).limit(50);
     // check if password is matched
     if (message) {
       res.status(200).json(message.reverse());
@@ -72,18 +72,21 @@ router.post("/", authenticateToken, async (req, res, next) => {
 //get all posts to create feed
 router.get("/noti", authenticateToken, async (req, res, next) => {
   try {
-    // console.log(req.body.usertoken)
-    // console.log(req.params.usertoken)
-    // const decoded = jwt.verify(req.usertoken, process.env.ACCESS_TOKEN_SECRET);
-    // const readerID = decoded.user._id
     const userID = req.user._id
+    console.log(userID)
 
-    const notification = await Notifications.find({read_by:{$ne:userID}});
+    const notification = await Notifications.find({read_by:{$nin:[userID]}});
     // check if password is matched
     if (notification) {
-      res.status(200).json(notification);
-      // await Notifications.findAndModify({query:{read_by:{$ne:userID},update:{$push:{read_by:userID}}}});
-      
+      res.status(200).json(notification)
+      for (const n of notification) {
+        const updateResult = await Notifications.updateOne(
+          { _id: n._id },
+          { $addToSet: { read_by: userID } }
+        )
+        console.log(`Updated notification ${n._id}: ${updateResult}`)}
+        
+
     } else {
       res.status(400);
       throw new Error("No Message Found!");

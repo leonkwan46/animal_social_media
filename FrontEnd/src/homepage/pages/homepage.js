@@ -14,7 +14,7 @@ import { useContext } from "react";
 const Homepage = () => {
   
 
-  const socketHomepage = useContext(SocketContext);
+  const socket = useContext(SocketContext);
   const token = localStorage.getItem('token')
   const [refreshFeed, setRefreshFeed] = useState(false);
   
@@ -24,11 +24,11 @@ const Homepage = () => {
       <TopNav />
       <Box className="body-wrapper">
         <Box className="left-side">
-          <Post socket={socketHomepage} token = {token} setRefreshFeed={setRefreshFeed}/>
+          <Post socket={socket} token = {token} setRefreshFeed={setRefreshFeed}/>
           <Feed setRefreshFeed={setRefreshFeed}/>
         </Box>
         <Box className="right-side">
-          <NotificationWindow socket={socketHomepage}/>
+          <NotificationWindow socket={socket}/>
         </Box>
       </Box>
     </Container>
