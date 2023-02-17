@@ -19,6 +19,7 @@ module.exports = (io,socket) =>{
     const getUser = (username) =>{
         return onlineUsers.find((user) => user.username === username)
     }
+
     socket.on("newUser",(token)=>{
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         const username = decoded.user.name
@@ -70,13 +71,17 @@ module.exports = (io,socket) =>{
                 receivername: req.receiver
             })
             if(notification){
-                var clients = io.of('/').socket;
                 console.log(notification)
                 console.log("followed")
                 console.log(onlineUsers)
-                const recieving = getUser(mmkk)
-                console.log (recieving)
-                // socket.to.emit("success following")
+                const recieving = getUser("req.reciever")
+                if(!recieving){
+                    socket.to(recieving.socketId).emit("successFollowing",{
+                        notification
+                    })
+                }
+                // console.log (recieving.socketId)
+                // // socket.to.emit("success following")
 
 
             }

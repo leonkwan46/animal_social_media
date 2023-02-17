@@ -75,7 +75,9 @@ router.get("/noti", authenticateToken, async (req, res, next) => {
     const userID = req.user._id
     console.log(userID)
 
-    const notification = await Notifications.find({read_by:{$nin:[userID]}});
+    const notification = await Notifications.find({
+      recievername:{$in:["all","req.user.name"]},
+      read_by:{$nin:[userID]}});
     // check if password is matched
     if (notification) {
       res.status(200).json(notification)

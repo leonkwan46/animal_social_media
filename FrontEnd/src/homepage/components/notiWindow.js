@@ -40,6 +40,18 @@ const NotificationWindow = ({socket}) => {
           data: data
         });
       });
+
+      socket.on("successFollowing", data => {
+        console.log("OMG")
+      if(!notificationRef.current.includes(data.notification) && notificationRef.current !== null) {
+        setNotification(prev => [...prev,data.notification]);
+      }
+      socket.emit("completed-notify", {
+        usertoken,
+        data: data
+      });
+    });
+
     }, [notificationRef.current]); // Use the initial state as the dependency
     // Sort the notifications in ascending order by their timestamps
 const sortedNotifications = notification.sort((a, b) => {
