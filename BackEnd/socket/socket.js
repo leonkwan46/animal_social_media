@@ -2,7 +2,8 @@ const Notifications = require('../db/notificationModel')
 const jwt = require("jsonwebtoken");
 const messageModel = require('../db/messageModel');
 // const authenticateToken = require("../middleware/authMiddleware");
-const users = require('../db/users')
+const users = require('../db/users');
+const e = require('express');
 
 module.exports = (io,socket) =>{
     //socket dealing with user
@@ -74,19 +75,24 @@ module.exports = (io,socket) =>{
                 console.log(notification)
                 console.log("followed")
                 console.log(onlineUsers)
-                const recieving = getUser("req.reciever")
-                if(!recieving){
+                try{
+                const recieving = getUser(req.reciever)
+                if(recieving){
+                    console.log(recieving)
                     socket.to(recieving.socketId).emit("successFollowing",{
                         notification
                     })
+                }else {
+                    console.log("cannot get it")
+               
+                }} catch (err) {
+                console.log("====================================");
+                console.log(err.message);
+                console.log("====================================");
                 }
-                // console.log (recieving.socketId)
-                // // socket.to.emit("success following")
-
-
-            }
-    }
-    )
+            
+            }})
+    
 
     // client disconnected
     socket.on('disconnect', () => {

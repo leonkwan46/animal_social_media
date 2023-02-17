@@ -9,10 +9,10 @@ const jwt = require("jsonwebtoken");
 //get all posts to create feed
 router.get("/", authenticateToken, async (req, res, next) => {
   try {
-    const message = await Messages.find().sort({x:1}).limit(50);
+    const message = await Messages.find().sort({createdAt:-1}).limit(50);
     // check if password is matched
     if (message) {
-      res.status(200).json(message.reverse());
+      res.status(200).json(message);
     } else {
       res.status(400);
       throw new Error("No Message Found!");

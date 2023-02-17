@@ -100,9 +100,6 @@ const Profile = () => {
           receiver: username
         })
       }
-        else{
-        
-        }
       })
       .catch((err) => {
         console.log(err);
