@@ -11,7 +11,7 @@
     max-width: initial;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: stretch;
     align-items: center ;
     padding-left: 10%;
     padding-right: 10%;
