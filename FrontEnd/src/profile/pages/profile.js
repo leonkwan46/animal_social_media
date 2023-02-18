@@ -39,7 +39,7 @@ const Profile = () => {
   const [numOfFollowers, setnumOfFollowers] = useState(0);
   const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
-  
+
   const [users, setUsers] = useState();
 
   const { data, loading, error } = useFetch(
@@ -51,7 +51,7 @@ const Profile = () => {
     },
     username
   );
-
+  console.log(data);
   useEffect(() => {
     setnumOfFollowers(data?.data.numOfFollowers);
     setAuthFollow(data?.data.numOfFollowers);

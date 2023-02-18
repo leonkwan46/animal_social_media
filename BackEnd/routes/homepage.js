@@ -3,7 +3,7 @@ const router = express.Router();
 const Messages = require("../db/messageModel");
 const authenticateToken = require("../middleware/authMiddleware");
 // const UserNotification = require('../db/userNotification');
-const Notifications = require('../db/notificationModel');
+const Notifications = require("../db/notificationModel");
 const jwt = require("jsonwebtoken");
 
 //get all posts to create feed
@@ -27,8 +27,9 @@ router.get("/", authenticateToken, async (req, res, next) => {
 
 // get your own username
 router.get("/username", authenticateToken, async (req, res) => {
-  const { username } = req.user;
-  res.status(200).json({ username: username });
+  const { username, profilePic } = req.user;
+  console.log(profilePic);
+  res.status(200).json({ username: username, profilePic: profilePic });
 });
 
 //create post
@@ -68,7 +69,7 @@ router.post("/", authenticateToken, async (req, res, next) => {
 //  */
 // router.delete("/:messageId", authenticateToken, (req, res, next) => {
 //   const { username } = req.body;}
-  
+
 //get all posts to create feed
 router.get("/noti", authenticateToken, async (req, res, next) => {
   try {
@@ -76,14 +77,13 @@ router.get("/noti", authenticateToken, async (req, res, next) => {
     // console.log(req.params.usertoken)
     // const decoded = jwt.verify(req.usertoken, process.env.ACCESS_TOKEN_SECRET);
     // const readerID = decoded.user._id
-    const userID = req.user._id
+    const userID = req.user._id;
 
-    const notification = await Notifications.find({read_by:{$ne:userID}});
+    const notification = await Notifications.find({ read_by: { $ne: userID } });
     // check if password is matched
     if (notification) {
-      res.status(200).json(notification);
+      res.status(200).json(notification.reverse());
       // await Notifications.findAndModify({query:{read_by:{$ne:userID},update:{$push:{read_by:userID}}}});
-      
     } else {
       res.status(400);
       throw new Error("No Message Found!");

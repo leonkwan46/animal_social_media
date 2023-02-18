@@ -9,26 +9,21 @@ import "./homepage.css";
 import { SocketContext } from "../../shared/contexts/context.js";
 import { useContext } from "react";
 
-
-
 const Homepage = () => {
-  
-
   const socketHomepage = useContext(SocketContext);
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   const [refreshFeed, setRefreshFeed] = useState(false);
-  
 
   return (
     <Container disableGutters={true} maxWidth={false} className="homepage">
       <TopNav />
       <Box className="body-wrapper">
         <Box className="left-side">
-          <Post socket={socketHomepage} token = {token} setRefreshFeed={setRefreshFeed}/>
-          <Feed setRefreshFeed={setRefreshFeed}/>
+          <Post socket={socketHomepage} token={token} setRefreshFeed={setRefreshFeed} />
+          <Feed setRefreshFeed={setRefreshFeed} />
         </Box>
         <Box className="right-side">
-          <NotificationWindow socket={socketHomepage}/>
+          <NotificationWindow socket={socketHomepage} refreshFeed={refreshFeed} />
         </Box>
       </Box>
     </Container>
