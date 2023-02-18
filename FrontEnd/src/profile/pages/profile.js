@@ -24,7 +24,7 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import CakeIcon from "@mui/icons-material/Cake";
 import NotesIcon from "@mui/icons-material/Notes";
 import Button from "@mui/material/Button";
-import TopNav from "../../shared/components/TopNav";
+import TopNav from "../../shared/components/TopNav/TopNav";
 import "../components/profileEditForm/ProfileEditForm.css";
 
 import axios from "axios";
