@@ -20,7 +20,7 @@ const Homepage = () => {
       <Box className="body-wrapper">
         <Box className="left-side">
           <Post socket={socketHomepage} token={token} setRefreshFeed={setRefreshFeed} />
-          <Feed setRefreshFeed={setRefreshFeed} />
+          <Feed setRefreshFeed={setRefreshFeed} refreshFeed={refreshFeed} />
         </Box>
         <Box className="right-side">
           <NotificationWindow socket={socketHomepage} refreshFeed={refreshFeed} />

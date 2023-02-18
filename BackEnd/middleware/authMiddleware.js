@@ -10,7 +10,6 @@ const authenticateToken = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     // Assign Data from Auth_Middleware to Backend
     req.user = await User.findById(decoded.user._id).select("-following -followers");
-    console.log(req.user);
     if (!req.user) throw new Error("User is not Exist!");
     next();
   } catch (err) {

@@ -42,15 +42,12 @@ const Profile = () => {
 
   const [users, setUsers] = useState();
 
-  const { data, loading, error } = useFetch(
-    "http://localhost:5000/profile/" + username,
-    {
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("token")
-      }
-    },
-    username
-  );
+  const { data, loading, error } = useFetch("http://localhost:5000/profile/" + username, {
+    headers: {
+      authorization: "Bearer " + localStorage.getItem("token")
+    }
+  });
+  
   console.log(data);
   useEffect(() => {
     setnumOfFollowers(data?.data.numOfFollowers);
@@ -100,7 +97,7 @@ const Profile = () => {
     <Container maxWidth={false} disableGutters>
       <TopNav />
       {loading ? <CircularProgress /> : ""}
-      {loading ? (
+      {loading && !data ? (
         ""
       ) : (
         <Box
