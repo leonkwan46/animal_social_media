@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { TextField, Button, Avatar } from "@mui/material";
@@ -8,6 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { SocketContext } from "../../shared/contexts/context";
 import { UserContext } from "../../shared/contexts/username";
+import CustomSnackbar from "../../shared/components/CustomSnackbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./createPost.css";
 
@@ -20,20 +21,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const Post = ({ setRefreshFeed }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const socket = useContext(SocketContext);
   const userInfo = useContext(UserContext);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   const onSubmit = async (values, { setValues }) => {
     try {
@@ -49,7 +39,7 @@ const Post = ({ setRefreshFeed }) => {
           }
         )
         .then((res) => {
-          handleOpen();
+          setOpen(true);
           setValues({ text: "", length: 0, percent: 0 });
           socket.emit("createPost", {
             senderName: res.data.name,
@@ -122,19 +112,7 @@ const Post = ({ setRefreshFeed }) => {
             >
               Send
             </Button>
-            <Snackbar
-              open={open}
-              autoHideDuration={2500}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center"
-              }}
-            >
-              <Alert onClose={handleClose} severity="info">
-                Your post sent successfully!!
-              </Alert>
-            </Snackbar>
+            <CustomSnackbar open={open} setOpen={setOpen} message="Your post sent successfully!" />
           </div>
         </Form>
       )}

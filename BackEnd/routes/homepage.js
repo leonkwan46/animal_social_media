@@ -67,8 +67,17 @@ router.post("/", authenticateToken, async (req, res, next) => {
 //  *
 //  * @param req.body: messageId, username
 //  */
-// router.delete("/:messageId", authenticateToken, (req, res, next) => {
-//   const { username } = req.body;}
+router.delete("/:messageId", authenticateToken, async (req, res, next) => {
+  const messageId = req.params.messageId;
+  try {
+    if (messageId) {
+      await Messages.deleteOne({ _id: messageId });
+      res.status(200).json("successfully deleted!");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
 
 //get all posts to create feed
 router.get("/noti", authenticateToken, async (req, res, next) => {
