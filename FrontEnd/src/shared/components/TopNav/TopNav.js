@@ -1,66 +1,25 @@
 import React, { useContext, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
   Box,
   Toolbar,
   IconButton,
   Typography,
-  InputBase,
   Badge,
   MenuItem,
   Menu,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
-import { UserContext } from "../contexts/username";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import { UserContext } from "../../contexts/username";
+import { useNavigate } from "react-router-dom";
 
 // TODO: useContext() to get Username!
 const TopNav = () => {
+
+  const nav = useNavigate()
   const user = useContext(UserContext);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
@@ -91,19 +50,11 @@ const TopNav = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
 
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label="show new notifications"
           color="inherit"
         >
           <Badge badgeContent={17} color="error">
@@ -113,7 +64,9 @@ const TopNav = () => {
         <p>Notifications</p>
       </MenuItem>
 
-      <MenuItem>
+      <MenuItem
+      onClick={() => {nav(`/profile/${user.username}`)}}
+      >
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -155,7 +108,7 @@ const TopNav = () => {
 
           <Box
             component="img"
-            src={require("../../assets/images/cat.gif")}
+            src={require("../../../assets/images/cat.gif")}
             alt="cat"
             width={"40px"}
             height={"40px"}
@@ -164,7 +117,7 @@ const TopNav = () => {
 
           <Box
             component="img"
-            src={require("../../assets/images/rotated.gif")}
+            src={require("../../../assets/images/rotated.gif")}
             alt="dog"
             width={"40px"}
             height={"40px"}
