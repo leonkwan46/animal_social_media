@@ -6,8 +6,8 @@ import ResetPassword from "./login-register/components/ResetPassword";
 import {SocketContext, socket} from './shared/contexts/context';
 import {UserContext} from './shared/contexts/username'
 import useFetch from "./shared/hooks/usefetch";
- import "./App.css";
 
+import "./App.css";
 
 const App = () => {
   const { data } = useFetch("http://localhost:5000/homepage/username", {

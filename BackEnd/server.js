@@ -61,44 +61,15 @@ app.use(errorHandler);
 //     console.log("http://localhost:5000");
 // });
 
-const socketUser = require("./socket/socketUser")
-const socketEvent = require("./socket/socketEvent")
+const socketHandler = require("./socket/socket")
 
-// let onlineUsers = []
 
-// const addNewUser = (username,socketId) => {
-//     !onlineUsers.some(user=>user.username === username) && onlineUsers.push({username, socketId})}
-
-// const removeUser = (socketId) => {
-//     onlineUsers = onlineUsers.filter(user => user.socketId !== socketId)
-// }
-
-// const getUser = (username) =>{
-//     return onlineUsers.find((user) => user.username === username)
 // }
 // connect with client
 
 const onConnection = (socket) =>{
-    socketUser(io,socket);
-    socketEvent(io,socket);
+    socketHandler(io,socket);
 }
-// io.on('connection', (socket) => {
-
-//     // // take action from client
-//     // socket.on("newUser",(username)=>{
-//     //     addNewUser(username,socket.id)
-//     //     console.log("gotcha!")
-//     // })
-  
-//     // // client disconnected
-//     // socket.on('disconnect', () => {
-//     //     removeUser(socket.id)
-//     })
-
-//     socket.on("createPost",({senderName,action,timestamp})=>{
-//         // console.log(`I got ${timestamp}!`)
-//         io.emit("getPost",{senderName,action,timestamp})
-//     })
     
 
 io.on('connection',onConnection);
