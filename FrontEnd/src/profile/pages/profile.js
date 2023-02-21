@@ -2,21 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DialogListOfUsers from "../components/listOfUsers";
 import ProfileEditForm from "../components/profileEditForm/ProfileEditForm";
-import {
-  Avatar,
-  Card,
-  CardMedia,
-  Grid,
-  Skeleton,
-  Typography,
-  Box,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  DialogContent,
-  DialogContentText
-} from "@mui/material";
+import AlertPopup from "../../shared/components/AlertPopup/alertPopup";
+import { Avatar, Card, CardMedia, Grid, Skeleton, Typography, Box, CircularProgress } from "@mui/material";
 
 import { Container } from "@mui/system";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -31,15 +18,13 @@ import axios from "axios";
 import useFetch from "../../shared/hooks/usefetch";
 
 const Profile = () => {
-  const username = useParams().id;
+  const username = useParams().username;
   const [openUsers, setOpenUsers] = useState(false);
-  // Handle handle unfollow popup
-  const [openUnFollowPopup, setOpenUnFollowPopup] = useState(false);
 
   const [numOfFollowers, setnumOfFollowers] = useState(0);
-  const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
-  
+  const [isFollowButton, setIsFollowButton] = useState(false);
+
   const [users, setUsers] = useState();
 
   const { data, loading, error } = useFetch(
@@ -54,7 +39,7 @@ const Profile = () => {
 
   useEffect(() => {
     setnumOfFollowers(data?.data.numOfFollowers);
-    setAuthFollow(data?.data.numOfFollowers);
+    setIsFollow(data?.isFollow);
     setUsers(null);
   }, [data]);
 
@@ -75,7 +60,7 @@ const Profile = () => {
 
   const handleFollow = async () => {
     // follow if an action if true, otherwise false.
-    const action = authFollow ? false : true;
+    const action = isFollow ? false : true;
     // Unfollow the user
     await axios
       .post(
@@ -89,7 +74,7 @@ const Profile = () => {
       )
       .then((res) => {
         setnumOfFollowers(action ? numOfFollowers + 1 : numOfFollowers - 1);
-        setAuthFollow(!authFollow);
+        setIsFollow(!isFollow);
       })
       .catch((err) => {
         console.log(err);
@@ -100,7 +85,7 @@ const Profile = () => {
     <Container maxWidth={false} disableGutters>
       <TopNav />
       {loading ? <CircularProgress /> : ""}
-      {loading ? (
+      {loading && !data ? (
         ""
       ) : (
         <Box
@@ -175,7 +160,7 @@ const Profile = () => {
                       <Box container="true" direction="row">
                         <button
                           onClick={() => {
-                            setIsFollow(false);
+                            isFollowButton(false);
                             getUsers("following");
                             setOpenUsers(true);
                           }}
@@ -184,7 +169,7 @@ const Profile = () => {
                         </button>
                         <button
                           onClick={() => {
-                            setIsFollow(true);
+                            isFollowButton(true);
                             getUsers("followers");
                             setOpenUsers(true);
                           }}
@@ -194,7 +179,7 @@ const Profile = () => {
                         <DialogListOfUsers
                           open={openUsers}
                           setOpen={setOpenUsers}
-                          followerOrFollowing={isFollow ? "Followers" : "Following"}
+                          followerOrFollowing={isFollowButton ? "Followers" : "Following"}
                           username={username}
                           name={data.data.name}
                           users={users}
@@ -207,54 +192,16 @@ const Profile = () => {
                     ""
                   ) : (
                     <Box>
-                      {authFollow ? (
-                        <Box>
-                          <Button
-                            disabled={false}
-                            size="small"
-                            variant="outlined"
-                            onClick={() => {
-                              setOpenUnFollowPopup(true);
-                            }}
-                          >
-                            Following
-                          </Button>
-                          <Dialog
-                            open={openUnFollowPopup}
-                            onClose={() => {
-                              setOpenUnFollowPopup(false);
-                            }}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <DialogTitle id="alert-dialog-title">Unfollow {username}?</DialogTitle>
-                            <DialogContent>
-                              <DialogContentText id="alert-dialog-description">
-                                Posts from this user will no longer be shown in your homepage.
-                              </DialogContentText>
-                              <DialogActions>
-                                <Button
-                                  onClick={() => {
-                                    handleFollow();
-                                    setOpenUnFollowPopup(false);
-                                  }}
-                                >
-                                  Unfollow
-                                </Button>
-                                <Button
-                                  onClick={() => {
-                                    setOpenUnFollowPopup(false);
-                                  }}
-                                >
-                                  Cancel
-                                </Button>
-                              </DialogActions>
-                            </DialogContent>
-                          </Dialog>
-                        </Box>
+                      {isFollow ? (
+                        <AlertPopup
+                          initialButtonText="Following"
+                          title={`Unfollow ${username}?`}
+                          description={`Are you sure you want to unfollow this user ${username}?`}
+                          buttonLeftText="Unfollow"
+                          handleLeftAction={handleFollow}
+                        />
                       ) : (
                         <Button
-                          disabled={false}
                           size="small"
                           variant="contained"
                           onClick={() => {

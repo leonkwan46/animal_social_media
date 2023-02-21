@@ -15,9 +15,6 @@ const useFetch = (url, headers, dependency = "") => {
         .get(url, headers)
         .then((res) => {
           setData(res.data);
-          
-          console.log("useFetch called");
-          console.log(res.data);
         })
         .catch((err) => {
           setError(err);

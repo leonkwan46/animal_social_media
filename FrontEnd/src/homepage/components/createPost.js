@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import { Formik, Form } from "formik";
-
+import React, { useContext, useState } from "react";
 import axios from "axios";
-
-import profilePic from "../../assets/images/charo.jpg";
+import { Formik, Form } from "formik";
 import { TextField, Button, Avatar } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import SendIcon from "@mui/icons-material/Send";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import { SocketContext } from "../../shared/contexts/context";
+import { UserContext } from "../../shared/contexts/username";
+import CustomSnackbar from "../../shared/components/CustomSnackbar";
+import "react-circular-progressbar/dist/styles.css";
 import "./createPost.css";
-import { useContext } from "react";
-
-const user = {
-  picture: profilePic,
-  alt: "black-hand"
-};
 
 const maxLength = 280;
 
@@ -28,20 +21,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const Post = ({ setRefreshFeed }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const socket = useContext(SocketContext);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
+  const userInfo = useContext(UserContext);
 
   const onSubmit = async (values, { setValues }) => {
     try {
@@ -57,7 +39,7 @@ const Post = ({ setRefreshFeed }) => {
           }
         )
         .then((res) => {
-          handleOpen("Successfully post your message");
+          setOpen(true);
           setValues({ text: "", length: 0, percent: 0 });
           socket.emit("createPost", {
             senderName: res.data.name,
@@ -74,10 +56,14 @@ const Post = ({ setRefreshFeed }) => {
 
   return (
     <Formik onSubmit={onSubmit} initialValues={{ text: "", length: 0, percent: 0 }}>
-      {({ values, handleChange, handleSubmit }) => (
+      {({ values, handleChange }) => (
         <Form className="post-wrapper">
           <div className="post-upper">
-            <Avatar src={user.picture} alt={user.alt} className="profile-pic-for-post" />
+            <Avatar
+              src={userInfo.profilePic ? userInfo.profilePic : null}
+              alt={userInfo.username}
+              className="profile-pic-for-post"
+            />
             <TextField
               value={values.text}
               onChange={(e) => {
@@ -126,19 +112,7 @@ const Post = ({ setRefreshFeed }) => {
             >
               Send
             </Button>
-            <Snackbar
-              open={open}
-              autoHideDuration={2500}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center"
-              }}
-            >
-              <Alert onClose={handleClose} severity="info">
-                This is a success message!
-              </Alert>
-            </Snackbar>
+            <CustomSnackbar open={open} setOpen={setOpen} message="Your post sent successfully!" />
           </div>
         </Form>
       )}
