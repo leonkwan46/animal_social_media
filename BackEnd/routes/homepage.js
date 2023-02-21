@@ -65,13 +65,13 @@ router.post("/", authenticateToken, async (req, res, next) => {
 // /**
 //  * Delete a post
 //  *
-//  * @param req.body: messageId, username
+//  * @param req.body: postId, username
 //  */
-router.delete("/:messageId", authenticateToken, async (req, res, next) => {
-  const messageId = req.params.messageId;
+router.delete("/:postId", authenticateToken, async (req, res, next) => {
+  const postId = req.params.postId;
   try {
-    if (messageId) {
-      await Messages.deleteOne({ _id: messageId });
+    if (postId) {
+      await Messages.deleteOne({ _id: postId });
       res.status(200).json("successfully deleted!");
     }
   } catch (err) {

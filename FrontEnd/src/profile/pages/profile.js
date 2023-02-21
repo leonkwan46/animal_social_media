@@ -22,8 +22,8 @@ const Profile = () => {
   const [openUsers, setOpenUsers] = useState(false);
 
   const [numOfFollowers, setnumOfFollowers] = useState(0);
-  const [authFollow, setAuthFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
+  const [isFollowButton, setIsFollowButton] = useState(false);
 
   const [users, setUsers] = useState();
 
@@ -39,7 +39,7 @@ const Profile = () => {
 
   useEffect(() => {
     setnumOfFollowers(data?.data.numOfFollowers);
-    setAuthFollow(data?.authFollow);
+    setIsFollow(data?.isFollow);
     setUsers(null);
   }, [data]);
 
@@ -60,7 +60,7 @@ const Profile = () => {
 
   const handleFollow = async () => {
     // follow if an action if true, otherwise false.
-    const action = authFollow ? false : true;
+    const action = isFollow ? false : true;
     // Unfollow the user
     await axios
       .post(
@@ -74,7 +74,7 @@ const Profile = () => {
       )
       .then((res) => {
         setnumOfFollowers(action ? numOfFollowers + 1 : numOfFollowers - 1);
-        setAuthFollow(!authFollow);
+        setIsFollow(!isFollow);
       })
       .catch((err) => {
         console.log(err);
@@ -160,7 +160,7 @@ const Profile = () => {
                       <Box container="true" direction="row">
                         <button
                           onClick={() => {
-                            setIsFollow(false);
+                            isFollowButton(false);
                             getUsers("following");
                             setOpenUsers(true);
                           }}
@@ -169,7 +169,7 @@ const Profile = () => {
                         </button>
                         <button
                           onClick={() => {
-                            setIsFollow(true);
+                            isFollowButton(true);
                             getUsers("followers");
                             setOpenUsers(true);
                           }}
@@ -179,7 +179,7 @@ const Profile = () => {
                         <DialogListOfUsers
                           open={openUsers}
                           setOpen={setOpenUsers}
-                          followerOrFollowing={isFollow ? "Followers" : "Following"}
+                          followerOrFollowing={isFollowButton ? "Followers" : "Following"}
                           username={username}
                           name={data.data.name}
                           users={users}
@@ -192,7 +192,7 @@ const Profile = () => {
                     ""
                   ) : (
                     <Box>
-                      {authFollow ? (
+                      {isFollow ? (
                         <AlertPopup
                           initialButtonText="Following"
                           title={`Unfollow ${username}?`}

@@ -14,7 +14,7 @@ const Post = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const userInfo = useContext(UserContext);
-  const isAuth = userInfo.username === props.post.username;
+  const isYourPost = userInfo.username === props.post.username;
 
   const handleDelete = async () => {
     try {
@@ -68,7 +68,7 @@ const Post = (props) => {
               <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                 <MoreVertIcon />
               </IconButton>
-              {isAuth ? (
+              {isYourPost ? (
                 <Popover
                   onClose={() => {
                     setAnchorEl(null);
